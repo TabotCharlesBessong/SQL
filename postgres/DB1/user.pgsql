@@ -4,7 +4,7 @@
 --   address TEXT);
 
 
--- INSERT INTO users(userId, username , address) VALUES (8,'Atem Randy','Tiko')
+INSERT INTO users(userId, username , address) VALUES (9,'Tambe Salome','Moliko')
 
 
-SELECT address , username  FROM users;
+-- SELECT address , username  FROM users;
