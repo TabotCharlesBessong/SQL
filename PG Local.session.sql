@@ -13,4 +13,23 @@ VALUES
   ('Christopher Froome', 'christ.froome@yahoo.com');
 
 CREATE TABLE
-  weather ()
+  weather (
+    city VARCHAR(80),
+    temp_lo int,
+    temp_hi int,
+    date_day date
+  );
+
+DROP TABLE weather;
+
+CREATE TABLE cities (
+ name varchar(80),
+ location point
+);
+
+INSERT INTO weather VALUES ('San Francisco', 46, 50,
+ '1994-11-27');
+
+INSERT INTO cities VALUES ('San Francisco', '(-194.0, 53.0)');
+
+SELECT * from weather;
