@@ -21,6 +21,12 @@
 -- end;
 -- $$ language plpgsql;
 
-SELECT * from employees;
+-- SELECT * from employees;
+
+-- EXPLAIN ANALYZE SELECT name FROM employees WHERE id = 1000;
+
+-- EXPLAIN ANALYZE SELECT id FROM employees WHERE name = 'Zs';
 
 -- insert into employees(name)(select random_string(10) from generate_series(0, 1000000));
+
+-- CREATE INDEX employees_name ON employees(name);
