@@ -21,6 +21,17 @@
       "username": "postgres",
       "password": "Charles#123",
       "connectionTimeout": 30
+    },
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "shardingDB",
+      "database": "sharding",
+      "username": "postgres",
+      "password": "Charles#123",
+      "connectionTimeout": 30
     }
   ]
 }
