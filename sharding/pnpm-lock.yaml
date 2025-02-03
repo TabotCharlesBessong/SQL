@@ -20,6 +20,9 @@ importers:
       express:
         specifier: ^4.21.2
         version: 4.21.2
+      hashring:
+        specifier: ^3.2.0
+        version: 3.2.0
       nodemon:
         specifier: ^3.1.9
         version: 3.1.9
@@ -76,6 +79,9 @@ packages:
 
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+
+  connection-parse@0.0.7:
+    resolution: {integrity: sha512-bTTG28diWg7R7/+qE5NZumwPbCiJOT8uPdZYu674brDjBWQctbaQbYlDKhalS+4i5HxIx+G8dZsnBHKzWpp01A==}
 
   consistent-hash@1.2.2:
     resolution: {integrity: sha512-xKAVji9aC80uN/h5u4XXwJ8otOh/D/cm8aryKa7+I0qwoBwxYOYkTiyvgwjUBRn+7CRVEvn/DvJtX1YsEugr0w==}
@@ -213,6 +219,9 @@ packages:
   has-symbols@1.1.0:
     resolution: {integrity: sha512-1cDNdwJ2Jaohmb3sg4OmKaMBwuC48sYni5HUw2DvsC8LjGTLK9h+eb1X6RyuOHe4hT0ULCW68iomhjUoKUqlPQ==}
     engines: {node: '>= 0.4'}
+
+  hashring@3.2.0:
+    resolution: {integrity: sha512-xCMovURClsQZ+TR30icCZj+34Fq1hs0y6YCASD6ZqdRfYRybb5Iadws2WS+w09mGM/kf9xyA5FCdJQGcgcraSA==}
 
   hasown@2.0.2:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
@@ -432,6 +441,9 @@ packages:
     resolution: {integrity: sha512-ZX99e6tRweoUXqR+VBrslhda51Nh5MTQwou5tnUDgbtyM0dBgmhEDtWGP/xbKn6hqfPRHujUNwz5fy/wbbhnpw==}
     engines: {node: '>= 0.4'}
 
+  simple-lru-cache@0.0.2:
+    resolution: {integrity: sha512-uEv/AFO0ADI7d99OHDmh1QfYzQk/izT1vCmu/riQfh7qjBVUUgRT87E5s5h7CxWCA/+YoZerykpEthzVrW3LIw==}
+
   simple-update-notifier@2.0.0:
     resolution: {integrity: sha512-a2B9Y0KlNXl9u/vsW6sTIu9vGEpfKu2wRV6l1H3XEas/0gUIzGzBoP/IouTcUQbm9JWZLH3COxyn03TYlFax6w==}
     engines: {node: '>=10'}
@@ -552,6 +564,8 @@ snapshots:
       fsevents: 2.3.3
 
   concat-map@0.0.1: {}
+
+  connection-parse@0.0.7: {}
 
   consistent-hash@1.2.2: {}
 
@@ -695,6 +709,11 @@ snapshots:
   has-flag@3.0.0: {}
 
   has-symbols@1.1.0: {}
+
+  hashring@3.2.0:
+    dependencies:
+      connection-parse: 0.0.7
+      simple-lru-cache: 0.0.2
 
   hasown@2.0.2:
     dependencies:
@@ -914,6 +933,8 @@ snapshots:
       side-channel-list: 1.0.0
       side-channel-map: 1.0.1
       side-channel-weakmap: 1.0.2
+
+  simple-lru-cache@0.0.2: {}
 
   simple-update-notifier@2.0.0:
     dependencies:

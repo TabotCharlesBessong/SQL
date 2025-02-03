@@ -1,12 +1,13 @@
 const express = require("express");
 const { Client } = require("pg");
 require("dotenv").config();
-const ConsistentHash = require("consistent-hash");
+// const ConsistentHash = require("consistent-hash");
+const HashRing = require("hashring")
 const crypto = require("crypto");
 
 const port = process.env.PORT || 5000;
 
-const hashRing = new ConsistentHash();
+const hashRing = new HashRing();
 hashRing.add("shard1");
 hashRing.add("shard2");
 hashRing.add("shard3");
@@ -46,6 +47,24 @@ const connect = async () => {
 
 app.get("/", (req, res) => {
   res.send("Hello from Charles's Node.js server!");
+})
+
+app.get("/:urlid", async (req, res) => {
+  // res.send("Hello from Charles's Node.js server!");
+  const urlId = req.params.urlid;
+  const server = hashRing.get(urlId)
+  const result = await clients[server].query("SELECT * FROM URL_TABLE WHERE URL_ID = $1", [urlId]);
+  // res.send(result);
+  if (result.rowCount > 0){
+    res.send({
+      "id":result.rows[0].id,
+      "urlId": urlId,
+      "url":result.rows[0].url,
+      "server":server
+    });
+  }else{
+    res.send("The server returned nothing. Please try again")
+  }
 });
 
 app.post("/", async (req, res) => {
