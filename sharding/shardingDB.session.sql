@@ -1,0 +1,5 @@
+-- CREATE TABLE URL_TABLE (id serial PRIMARY KEY NOT NULL, URL text, URL_ID VARCHAR(5)) ;
+
+-- SELECT * FROM URL_TABLE;
+
+-- DROP TABLE url_table;
