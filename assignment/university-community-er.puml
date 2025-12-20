@@ -1,0 +1,174 @@
+@startuml University Community ER Diagram
+!theme plain
+skinparam linetype ortho
+skinparam roundcorner 20
+skinparam shadowing false
+
+' ============================================
+' ENTITIES
+' ============================================
+
+entity "People" as People {
+  * **nic** : VARCHAR <<PK>>
+  --
+  dob : DATE
+  age : INTEGER
+  addr : VARCHAR
+  pname : VARCHAR
+}
+
+entity "Qualification" as Qualification {
+  * **nic** : VARCHAR <<FK>>
+  * **qual_name** : VARCHAR
+  --
+}
+
+entity "Employees" as Employees {
+  * **eid** : VARCHAR <<PK>>
+  * **nic** : VARCHAR <<FK>>
+  --
+}
+
+entity "Students" as Students {
+  * **smat** : VARCHAR <<PK>>
+  * **nic** : VARCHAR <<FK>>
+  --
+}
+
+entity "CivilServants" as CServs {
+  * **eid** : VARCHAR <<FK>>
+  * **nmat** : VARCHAR <<PK>>
+  * **ind** : VARCHAR <<FK>>
+  --
+}
+
+entity "ContractWorkers" as CWrks {
+  * **eid** : VARCHAR <<FK>>
+  * **c-cat** : VARCHAR <<FK>>
+  --
+}
+
+entity "TemporaryEmployees" as Temps {
+  * **eid** : VARCHAR <<FK>>
+  hours : INTEGER
+  tsal : DECIMAL <<derived>>
+  --
+}
+
+entity "IndexCategory" as IndexCategory {
+  * **ind** : VARCHAR <<PK>>
+  --
+  csal : DECIMAL
+}
+
+entity "ContractCategory" as ContractCategory {
+  * **c-cat** : VARCHAR <<PK>>
+  --
+  con-sal : DECIMAL
+}
+
+entity "RateCategory" as RateCategory {
+  * **t-cat** : VARCHAR <<PK>>
+  --
+  sal-rate : DECIMAL
+}
+
+entity "AcademicDepartment" as ADept {
+  * **adid** : VARCHAR <<PK>>
+  --
+  aname : VARCHAR
+}
+
+entity "WorkDepartment" as WDept {
+  * **wdid** : VARCHAR <<PK>>
+  --
+  wname : VARCHAR
+}
+
+entity "Programme" as Progs {
+  * **pid** : VARCHAR <<PK>>
+  --
+  pname : VARCHAR
+}
+
+entity "Course" as Courses {
+  * **cid** : VARCHAR <<PK>>
+  --
+  ctitle : VARCHAR
+  cval : INTEGER
+}
+
+entity "Semester" as Semesters {
+  * **sem** : VARCHAR <<PK>>
+  --
+  sname : VARCHAR
+}
+
+entity "Enrollment" as Enrollment {
+  * **smat** : VARCHAR <<FK>>
+  * **sem** : VARCHAR <<FK>>
+  * **cid** : VARCHAR <<FK>>
+  --
+}
+
+' ============================================
+' RELATIONSHIPS
+' ============================================
+
+' Generalization/Specialization: People -> Employees, Students (Overlapping)
+People ||--o{ Employees : "is_a (overlapping)"
+People ||--o{ Students : "is_a (overlapping)"
+
+' Generalization/Specialization: Employees -> CServs, CWrks, Temps (Disjoint, Total)
+Employees ||--o{ CServs : "is_a (disjoint)"
+Employees ||--o{ CWrks : "is_a (disjoint)"
+Employees ||--o{ Temps : "is_a (disjoint)"
+
+' Multi-valued attribute: People -> Qualification
+People ||--o{ Qualification : "has"
+
+' Employee categorization relationships
+CServs }o--|| IndexCategory : "belongs_to"
+CWrks }o--|| ContractCategory : "belongs_to"
+Temps }o--|| RateCategory : "belongs_to"
+
+' Employee - Work Department (1:N)
+Employees }o--|| WDept : "belongs_to\n(1,1) to (1,N)"
+
+' Student - Academic Department (1:N)
+Students }o--|| ADept : "belongs_to\n(1,1) to (1,N)"
+
+' Student - Programme (1:N)
+Students }o--|| Progs : "enrolled_in\n(1,1) to (1,N)"
+
+' Student - Course - Semester (M:N through Enrollment)
+Students ||--o{ Enrollment : "registers"
+Semesters ||--o{ Enrollment : "offered_in"
+Courses ||--o{ Enrollment : "enrolled_in"
+
+note right of People
+  Overlapping specialization:
+  Some people can be both
+  employees and students
+end note
+
+note right of Employees
+  Disjoint, total specialization:
+  Every employee is exactly one of:
+  - Civil Servant
+  - Contract Worker
+  - Temporary Employee
+end note
+
+note right of Temps
+  tsal = hours * sal-rate
+  (derived from RateCategory)
+end note
+
+note right of Qualification
+  Multi-valued attribute
+  converted to separate entity
+end note
+
+@enduml
+
