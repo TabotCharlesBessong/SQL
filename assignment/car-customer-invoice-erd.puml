@@ -1,0 +1,71 @@
+@startuml Car-Customer-Employee-Invoice ER Diagram
+!theme plain
+skinparam linetype ortho
+skinparam roundcorner 20
+skinparam shadowing falseuni
+
+entity "CAR" as Car {
+  * **Car_ID** : VARCHAR <<PK>>
+  --
+  Serial_Number : VARCHAR
+  Model_No : VARCHAR
+  Model : VARCHAR
+  Color : VARCHAR
+  Year : INTEGER
+}
+
+entity "CUSTOMER" as Customer {
+  * **CustomerID** : VARCHAR <<PK>>
+  --
+  Name : VARCHAR
+  PhoneNumber : VARCHAR
+  Address : VARCHAR
+  Country : VARCHAR
+  City : VARCHAR
+}
+
+entity "EMPLOYEE" as Employee {
+  * **EmpID** : VARCHAR <<PK>>
+  --
+  Name : VARCHAR
+  Address : VARCHAR
+  Qualification : VARCHAR
+}
+
+entity "INVOICE" as Invoice {
+  * **InvoiceID** : VARCHAR <<PK>>
+  --
+  Date : DATE
+}
+
+' M:N Relationship: CAR has CUSTOMER
+' A car can be associated with zero or more customers
+' A customer can be associated with one or more cars
+Car }o--o{ Customer : "has\n(0..N : 1..N)"
+
+' M:N Relationship: CAR Sell EMPLOYEE
+' Many cars can be sold by many employees
+Car }o--o{ Employee : "Sell\n(1..N : 1..N)"
+
+' M:N Relationship: CUSTOMER has INVOICE
+' Many customers can have many invoices
+' Many invoices can belong to many customers
+Customer }o--o{ Invoice : "has\n(1..N : 1..N)"
+
+' M:N Relationship: EMPLOYEE has INVOICE
+' Many employees can be associated with many invoices
+' Many invoices can be associated with many employees
+Employee }o--o{ Invoice : "has\n(1..N : 1..N)"
+
+note right of Car
+  All relationships are M:N
+  (many-to-many)
+end note
+
+note right of Employee
+  Qualification attribute
+  highlighted in original diagram
+end note
+
+@enduml
+
