@@ -1,0 +1,49 @@
+@startuml Employee-Factory System (Crow's Feet Notation)
+!theme plain
+skinparam linetype ortho
+skinparam roundcorner 20
+skinparam shadowing false
+
+entity "employee" as Employee {
+  * **ID** : VARCHAR <<PK>>
+  --
+  name : VARCHAR
+  position : VARCHAR
+  pay_rate : DECIMAL
+  pay_type : VARCHAR
+  supervisor_ID : VARCHAR <<FK>>
+  factory_city : VARCHAR <<FK>>
+  manager_ID : VARCHAR <<FK>>
+}
+
+entity "factory" as Factory {
+  * **city** : VARCHAR <<PK>>
+  --
+  throughput : DECIMAL <<derived>>
+}
+
+' Recursive relationship: Employee supervises Employee (1:N)
+Employee ||--o{ Employee : "supervises\n(supervisor_ID)"
+
+' Employee works at Factory (N:1)
+Employee }o--|| Factory : "works_at\n(N:1)"
+
+' Employee manages Factory (1:1)
+Employee ||--|| Factory : "manages\n(manager_ID)"
+
+note right of Employee
+  supervisor_ID references
+  Employee.ID (self-referencing)
+end note
+
+note right of Factory
+  throughput is a derived attribute
+end note
+
+note bottom of Employee
+  manager_ID references Employee.ID
+  and Factory.city (1:1 relationship)
+end note
+
+@enduml
+
