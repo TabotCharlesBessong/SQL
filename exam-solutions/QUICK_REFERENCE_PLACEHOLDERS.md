@@ -159,3 +159,7 @@ This document provides quick reference answers for all placeholder letters (A, B
 - **Circle:** Area = π × r²
 - **Sector:** Area = 0.5 × r² × θ (θ in radians)
 
+
+
+
+

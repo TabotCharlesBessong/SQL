@@ -1,8 +1,15 @@
-# EXAM SOLUTIONS - IST603: Object-Oriented Programming with Java and Python
+# EXAM SOLUTIONS
 
 **University:** University of Buea  
 **Faculty:** Science  
 **Department:** Computer Science  
+
+This directory contains comprehensive solutions for multiple courses.
+
+---
+
+## IST603: Object-Oriented Programming with Java and Python
+
 **Course:** IST603 - Object-Oriented Programming with Java and Python  
 **Examination:** First Semester Resit Examination 2024/2025
 
@@ -100,7 +107,32 @@ Shape (abstract)
 
 ---
 
-## Notes
+## IST605: Human Information Processing
+
+**Course:** IST605 - Human Information Processing  
+**Examination:** CA Test, January 2025 (90 minutes)
+
+### Solution Files
+
+- **IST605_QUESTION_1_MCQS.md** - Multiple choice questions (13 marks)
+- **IST605_QUESTION_2_MEMORY_STAGES.md** - Three stages of memory (6 marks)
+- **IST605_QUESTION_3_OBJECT_RECOGNITION.md** - Object recognition theories (6 marks)
+- **IST605_QUESTION_4_FREE_RECALL.md** - Free recall task analysis (6 marks)
+- **IST605_README.md** - Detailed overview of IST605 solutions
+- **IST605_EXAM_SUMMARY.md** - Quick reference summary
+
+### Topics Covered
+
+- Perception and Sensation
+- Memory Systems (Sensory, STM, LTM)
+- Serial Position Effects (Primacy and Recency)
+- Object Recognition Theories
+- Gestalt Principles
+- Working Memory Components
+
+---
+
+## IST603 Notes
 
 1. All solutions follow object-oriented programming principles
 2. Abstract classes use abstract methods where appropriate
@@ -112,9 +144,19 @@ Shape (abstract)
 
 ## Study Tips
 
+### IST603 (Object-Oriented Programming)
 1. Review the inheritance hierarchy to understand relationships
 2. Practice implementing abstract classes and methods
 3. Understand polymorphism and method overriding
 4. Review exception handling in Java
 5. Compare Java and Python implementations to see syntax differences
+
+### IST605 (Human Information Processing)
+1. Understand three stages of memory (duration, capacity, function)
+2. Know serial position effects (primacy vs. recency)
+3. Understand how delay affects recency but not primacy
+4. Know three object recognition theories (template, feature, structural)
+5. Understand Gestalt principles (proximity, closure, similarity)
+6. Know memory functions (encoding, storage, retrieval)
+7. Understand working memory components (phonological loop, visuospatial sketchpad, etc.)
 
