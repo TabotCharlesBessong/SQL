@@ -101,3 +101,7 @@ Sector: radius=6.0, angle=1.0471975511965976, area=18.84955592153876
 4. **Array Declaration**: `Shape[] shapes = new Shape[6];` creates an array that can hold Shape references.
 5. **For-Each Loop**: The enhanced for loop (`for (Shape shape : shapes)`) is preferred in modern Java, but traditional for loop is also acceptable.
 
+
+
+
+
