@@ -147,160 +147,384 @@ A **decision tree** is a graphical representation of decision-making logic that 
 
 The decision tree starts with the root decision point (order type) and branches out based on subsequent decisions, ending with leaf nodes representing final outcomes.
 
-**PlantUML Decision Tree Code:**
+**PlantUML Decision Tree Code (Activity Diagram Format):**
 
 ```plantuml
-@startmindmap
-* Customer Arrives
-** Order Type?
-*** Eat Onsite
-**** Seating Available?
-***** Yes
-****** Order Food
-****** Payment Method?
-******* Cash
-******** Receive Food
-******** Eat at Restaurant
-******** Pay Bill
-******** Leave Restaurant
-******* Card
-******** Receive Food
-******** Eat at Restaurant
-******** Pay Bill
-******** Leave Restaurant
-***** No
-****** Wait for Table
-****** Seating Available?
-******* Yes
-******** Order Food
-******** Payment Method?
-********* Cash
-********** Receive Food
-********** Eat at Restaurant
-********** Pay Bill
-********** Leave Restaurant
-********* Card
-********** Receive Food
-********** Eat at Restaurant
-********** Pay Bill
-********** Leave Restaurant
-******* No
-******** Leave Restaurant
-*** Take Away
-**** Order Food
-**** Payment Method?
-***** Cash
-****** Prepare Order
-****** Order Ready?
-******* Yes
-******** Receive Order
-******** Leave Restaurant
-******* No
-******** Wait
-******** Order Ready?
-********* Yes
-********** Receive Order
-********** Leave Restaurant
-********* No
-********** Wait More
-***** Card
-****** Prepare Order
-****** Order Ready?
-******* Yes
-******** Receive Order
-******** Leave Restaurant
-******* No
-******** Wait
-******** Order Ready?
-********* Yes
-********** Receive Order
-********** Leave Restaurant
-********* No
-********** Wait More
-*** Both (Eat Onsite + Take Away)
-**** Seating Available?
-***** Yes
-****** Order Onsite Items
-****** Order Takeaway Items
-****** Payment Method?
-******* Cash
-******** Receive Onsite Food
-******** Eat Onsite Portion
-******** Pay Bill
-******** Wait for Takeaway Order
-******** Takeaway Ready?
-********* Yes
-********** Receive Takeaway Order
-********** Leave Restaurant
-********* No
-********** Wait
-********** Takeaway Ready?
-*********** Yes
-************ Receive Takeaway Order
-************ Leave Restaurant
-*********** No
-************ Wait More
-******* Card
-******** Receive Onsite Food
-******** Eat Onsite Portion
-******** Pay Bill
-******** Wait for Takeaway Order
-******** Takeaway Ready?
-********* Yes
-********** Receive Takeaway Order
-********** Leave Restaurant
-********* No
-********** Wait
-********** Takeaway Ready?
-*********** Yes
-************ Receive Takeaway Order
-************ Leave Restaurant
-*********** No
-************ Wait More
-***** No
-****** Wait for Table
-****** Seating Available?
-******* Yes
-******** Order Onsite Items
-******** Order Takeaway Items
-******** Payment Method?
-********* Cash
-********** Receive Onsite Food
-********** Eat Onsite Portion
-********** Pay Bill
-********** Wait for Takeaway Order
-********** Takeaway Ready?
-*********** Yes
-************ Receive Takeaway Order
-************ Leave Restaurant
-*********** No
-************ Wait
-************ Takeaway Ready?
-************* Yes
-************** Receive Takeaway Order
-************** Leave Restaurant
-************* No
-************** Wait More
-********* Card
-********** Receive Onsite Food
-********** Eat Onsite Portion
-********** Pay Bill
-********** Wait for Takeaway Order
-********** Takeaway Ready?
-*********** Yes
-************ Receive Takeaway Order
-************ Leave Restaurant
-*********** No
-************ Wait
-************ Takeaway Ready?
-************* Yes
-************** Receive Takeaway Order
-************** Leave Restaurant
-************* No
-************** Wait More
-******* No
-******** Leave Restaurant
-@endmindmap
+@startuml Decision_Tree_Restaurant
+start
+:Customer Arrives;
+:Select Order Type;
+
+if (Order Type?) then (Eat Onsite)
+  if (Seating Available?) then (Yes)
+    :Order Food;
+    if (Payment Method?) then (Cash)
+      :Receive Food;
+      :Eat at Restaurant;
+      :Pay Bill;
+      :Leave Restaurant;
+      stop
+    else (Card)
+      :Receive Food;
+      :Eat at Restaurant;
+      :Pay Bill;
+      :Leave Restaurant;
+      stop
+    endif
+  else (No)
+    :Wait for Table;
+    if (Seating Available?) then (Yes)
+      :Order Food;
+      if (Payment Method?) then (Cash)
+        :Receive Food;
+        :Eat at Restaurant;
+        :Pay Bill;
+        :Leave Restaurant;
+        stop
+      else (Card)
+        :Receive Food;
+        :Eat at Restaurant;
+        :Pay Bill;
+        :Leave Restaurant;
+        stop
+      endif
+    else (No)
+      :Leave Restaurant;
+      stop
+    endif
+  endif
+elseif (Take Away?) then (Take Away)
+  :Order Food;
+  if (Payment Method?) then (Cash)
+    :Prepare Order;
+    if (Order Ready?) then (Yes)
+      :Receive Order;
+      :Leave Restaurant;
+      stop
+    else (No)
+      :Wait;
+      if (Order Ready?) then (Yes)
+        :Receive Order;
+        :Leave Restaurant;
+        stop
+      else (No)
+        :Wait More;
+        stop
+      endif
+    endif
+  else (Card)
+    :Prepare Order;
+    if (Order Ready?) then (Yes)
+      :Receive Order;
+      :Leave Restaurant;
+      stop
+    else (No)
+      :Wait;
+      if (Order Ready?) then (Yes)
+        :Receive Order;
+        :Leave Restaurant;
+        stop
+      else (No)
+        :Wait More;
+        stop
+      endif
+    endif
+  endif
+else (Both: Eat Onsite + Take Away)
+  if (Seating Available?) then (Yes)
+    :Order Onsite Items;
+    :Order Takeaway Items;
+    if (Payment Method?) then (Cash)
+      :Receive Onsite Food;
+      :Eat Onsite Portion;
+      :Pay Bill;
+      :Wait for Takeaway Order;
+      if (Takeaway Ready?) then (Yes)
+        :Receive Takeaway Order;
+        :Leave Restaurant;
+        stop
+      else (No)
+        :Wait;
+        if (Takeaway Ready?) then (Yes)
+          :Receive Takeaway Order;
+          :Leave Restaurant;
+          stop
+        else (No)
+          :Wait More;
+          stop
+        endif
+      endif
+    else (Card)
+      :Receive Onsite Food;
+      :Eat Onsite Portion;
+      :Pay Bill;
+      :Wait for Takeaway Order;
+      if (Takeaway Ready?) then (Yes)
+        :Receive Takeaway Order;
+        :Leave Restaurant;
+        stop
+      else (No)
+        :Wait;
+        if (Takeaway Ready?) then (Yes)
+          :Receive Takeaway Order;
+          :Leave Restaurant;
+          stop
+        else (No)
+          :Wait More;
+          stop
+        endif
+      endif
+    endif
+  else (No)
+    :Wait for Table;
+    if (Seating Available?) then (Yes)
+      :Order Onsite Items;
+      :Order Takeaway Items;
+      if (Payment Method?) then (Cash)
+        :Receive Onsite Food;
+        :Eat Onsite Portion;
+        :Pay Bill;
+        :Wait for Takeaway Order;
+        if (Takeaway Ready?) then (Yes)
+          :Receive Takeaway Order;
+          :Leave Restaurant;
+          stop
+        else (No)
+          :Wait;
+          if (Takeaway Ready?) then (Yes)
+            :Receive Takeaway Order;
+            :Leave Restaurant;
+            stop
+          else (No)
+            :Wait More;
+            stop
+          endif
+        endif
+      else (Card)
+        :Receive Onsite Food;
+        :Eat Onsite Portion;
+        :Pay Bill;
+        :Wait for Takeaway Order;
+        if (Takeaway Ready?) then (Yes)
+          :Receive Takeaway Order;
+          :Leave Restaurant;
+          stop
+        else (No)
+          :Wait;
+          if (Takeaway Ready?) then (Yes)
+            :Receive Takeaway Order;
+            :Leave Restaurant;
+            stop
+          else (No)
+            :Wait More;
+            stop
+          endif
+        endif
+      endif
+    else (No)
+      :Leave Restaurant;
+      stop
+    endif
+  endif
+endif
+stop
+@enduml
+```
+
+**Alternative: Simplified Decision Tree (Text-based Structure):**
+
+For a more traditional decision tree visualization, here's a cleaner representation:
+
+```plantuml
+@startuml Decision_Tree_Simplified
+skinparam activity {
+  BackgroundColor #E8F4F8
+  BorderColor #0066CC
+}
+
+start
+:Customer Arrives;
+
+partition "Decision: Order Type" {
+  if (Order Type?) then (Eat Onsite)
+    partition "Decision: Seating" {
+      if (Seating Available?) then (Yes)
+        :Order Food;
+        partition "Decision: Payment" {
+          if (Payment Method?) then (Cash)
+            :Receive Food;
+            :Eat at Restaurant;
+            :Pay Bill;
+            :Leave Restaurant;
+            stop
+          else (Card)
+            :Receive Food;
+            :Eat at Restaurant;
+            :Pay Bill;
+            :Leave Restaurant;
+            stop
+          endif
+        }
+      else (No)
+        :Wait for Table;
+        if (Table Available?) then (Yes)
+          :Order Food;
+          if (Payment Method?) then (Cash)
+            :Receive Food;
+            :Eat at Restaurant;
+            :Pay Bill;
+            :Leave Restaurant;
+            stop
+          else (Card)
+            :Receive Food;
+            :Eat at Restaurant;
+            :Pay Bill;
+            :Leave Restaurant;
+            stop
+          endif
+        else (No)
+          :Leave Restaurant;
+          stop
+        endif
+      endif
+    }
+  elseif (Take Away?) then (Take Away)
+    :Order Food;
+    if (Payment Method?) then (Cash)
+      :Prepare Order;
+      if (Order Ready?) then (Yes)
+        :Receive Order;
+        :Leave Restaurant;
+        stop
+      else (No)
+        :Wait;
+        if (Order Ready?) then (Yes)
+          :Receive Order;
+          :Leave Restaurant;
+          stop
+        else (No)
+          :Wait More;
+          stop
+        endif
+      endif
+    else (Card)
+      :Prepare Order;
+      if (Order Ready?) then (Yes)
+        :Receive Order;
+        :Leave Restaurant;
+        stop
+      else (No)
+        :Wait;
+        if (Order Ready?) then (Yes)
+          :Receive Order;
+          :Leave Restaurant;
+          stop
+        else (No)
+          :Wait More;
+          stop
+        endif
+      endif
+    endif
+  else (Both)
+    if (Seating Available?) then (Yes)
+      :Order Onsite Items;
+      :Order Takeaway Items;
+      if (Payment Method?) then (Cash)
+        :Receive Onsite Food;
+        :Eat Onsite Portion;
+        :Pay Bill;
+        :Wait for Takeaway;
+        if (Takeaway Ready?) then (Yes)
+          :Receive Takeaway;
+          :Leave Restaurant;
+          stop
+        else (No)
+          :Wait;
+          if (Takeaway Ready?) then (Yes)
+            :Receive Takeaway;
+            :Leave Restaurant;
+            stop
+          else (No)
+            :Wait More;
+            stop
+          endif
+        endif
+      else (Card)
+        :Receive Onsite Food;
+        :Eat Onsite Portion;
+        :Pay Bill;
+        :Wait for Takeaway;
+        if (Takeaway Ready?) then (Yes)
+          :Receive Takeaway;
+          :Leave Restaurant;
+          stop
+        else (No)
+          :Wait;
+          if (Takeaway Ready?) then (Yes)
+            :Receive Takeaway;
+            :Leave Restaurant;
+            stop
+          else (No)
+            :Wait More;
+            stop
+          endif
+        endif
+      endif
+    else (No)
+      :Wait for Table;
+      if (Table Available?) then (Yes)
+        :Order Onsite Items;
+        :Order Takeaway Items;
+        if (Payment Method?) then (Cash)
+          :Receive Onsite Food;
+          :Eat Onsite Portion;
+          :Pay Bill;
+          :Wait for Takeaway;
+          if (Takeaway Ready?) then (Yes)
+            :Receive Takeaway;
+            :Leave Restaurant;
+            stop
+          else (No)
+            :Wait;
+            if (Takeaway Ready?) then (Yes)
+              :Receive Takeaway;
+              :Leave Restaurant;
+              stop
+            else (No)
+              :Wait More;
+              stop
+            endif
+          endif
+        else (Card)
+          :Receive Onsite Food;
+          :Eat Onsite Portion;
+          :Pay Bill;
+          :Wait for Takeaway;
+          if (Takeaway Ready?) then (Yes)
+            :Receive Takeaway;
+            :Leave Restaurant;
+            stop
+          else (No)
+            :Wait;
+            if (Takeaway Ready?) then (Yes)
+              :Receive Takeaway;
+              :Leave Restaurant;
+              stop
+            else (No)
+              :Wait More;
+              stop
+            endif
+          endif
+        endif
+      else (No)
+        :Leave Restaurant;
+        stop
+      endif
+    endif
+  endif
+}
+stop
+@enduml
 ```
 
 **Alternative Simplified Decision Tree (Text Format):**
