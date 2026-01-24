@@ -675,179 +675,9 @@ You can use this code in any PlantUML editor (like [plantuml.com](https://www.pl
 ```plantuml
 @startuml Manufacturing_ER_Diagram_Chen
 
-!define ENTITY class
-!define RELATIONSHIP diamond
+' Chen notation style using entity syntax (NO MIXING ERRORS!)
+skinparam linetype ortho
 
-' Styling
-skinparam class {
-    BackgroundColor<<entity>> LightYellow
-    BorderColor<<entity>> Black
-    BackgroundColor<<relationship>> LightBlue
-    BorderColor<<relationship>> Black
-    BackgroundColor<<weak>> Wheat
-    BorderColor<<weak>> Black
-}
-
-skinparam note {
-    BackgroundColor LightGreen
-    BorderColor DarkGreen
-}
-
-' Entities
-class "Lot" <<entity>> {
-    **LotNumber** (PK)
-    --
-    CreateDate
-    Cost_Of_Materials
-}
-
-class "Production_Units" <<entity>> {
-    **serial#** (PK)
-    --
-    exactWeight
-    ProductType
-    qualityTest?
-    ProductDesc
-}
-
-class "Raw_Materials" <<entity>> {
-    **material_ID** (PK)
-    --
-    type
-    UniCost
-}
-
-' Relationships
-diamond "Includes" <<relationship>> {
-}
-
-diamond "Created_From" <<relationship>> {
-    Units (quantity)
-}
-
-' Connections with cardinality
-' Includes: 1:N relationship
-Lot "1" -- "Includes" : "partial\n(single line)"
-"Includes" -- "N" Production_Units : "total\n(double line)"
-
-' Created From: M:N relationship
-Lot "M" == "Created_From" : "total\n(double line)"
-"Created_From" -- "N" Raw_Materials : "partial\n(single line)"
-
-note right of "Includes"
-    1:N Relationship
-    Production Unit must
-    belong to exactly one Lot
-end note
-
-note bottom of "Created_From"
-    M:N Relationship
-    Lot must be created from
-    at least one Raw Material
-    
-    Relationship attribute:
-    Units (quantity used)
-end note
-
-legend right
-    **Legend:**
-    Single line (--): Partial participation
-    Double line (==): Total participation
-    Diamond: Relationship
-    Rectangle: Entity
-    **Underlined**: Primary Key
-endlegend
-
-@enduml
-```
-
-### PlantUML Code for Relational Model (Database Schema)
-
-```plantuml
-@startuml Manufacturing_Relational_Model
-
-skinparam class {
-    BackgroundColor<<table>> AliceBlue
-    BorderColor<<table>> Navy
-    BackgroundColor<<junction>> LightGreen
-    BorderColor<<junction>> DarkGreen
-}
-
-' Tables
-class "Lot" <<table>> {
-    + LotNumber : VARCHAR(20) <<PK>>
-    --
-    CreateDate : DATE
-    Cost_Of_Materials : DECIMAL(12,2)
-}
-
-class "Production_Units" <<table>> {
-    + serial_number : VARCHAR(30) <<PK>>
-    --
-    exactWeight : DECIMAL(10,3)
-    ProductType : VARCHAR(50)
-    qualityTest : BOOLEAN
-    ProductDesc : VARCHAR(200)
-    # LotNumber : VARCHAR(20) <<FK>>
-}
-
-class "Raw_Materials" <<table>> {
-    + material_ID : VARCHAR(20) <<PK>>
-    --
-    type : VARCHAR(50)
-    UniCost : DECIMAL(10,2)
-}
-
-class "Lot_Materials" <<junction>> {
-    + LotNumber : VARCHAR(20) <<PK,FK>>
-    + material_ID : VARCHAR(20) <<PK,FK>>
-    --
-    Units : DECIMAL(10,2)
-}
-
-' Relationships with cardinality
-Lot "1" -- "0..*" Production_Units : "Includes"
-Lot "1" -- "0..*" Lot_Materials : "Created From"
-Raw_Materials "1" -- "0..*" Lot_Materials : "Used In"
-
-note right of Production_Units
-    Foreign Key:
-    LotNumber → Lot(LotNumber)
-    ON DELETE CASCADE
-    
-    Each production unit
-    belongs to exactly one lot
-end note
-
-note bottom of Lot_Materials
-    Junction Table for M:N
-    
-    Foreign Keys:
-    • LotNumber → Lot(LotNumber)
-    • material_ID → Raw_Materials(material_ID)
-    
-    Composite Primary Key:
-    (LotNumber, material_ID)
-end note
-
-legend right
-    **Symbols:**
-    + : Primary Key (PK)
-    # : Foreign Key (FK)
-    --: Separator
-    Blue: Regular table
-    Green: Junction table
-endlegend
-
-@enduml
-```
-
-### PlantUML Code for Enhanced ER Diagram (Alternative Style)
-
-```plantuml
-@startuml Manufacturing_Enhanced_ER
-
-' Using entity-relationship diagram syntax
 entity "Lot" {
     * LotNumber <<PK>>
     --
@@ -871,26 +701,230 @@ entity "Raw_Materials" {
     UniCost
 }
 
-' Relationships
-Lot ||--o{ Production_Units : "Includes\n(1:N)"
-Lot }o--o{ Raw_Materials : "Created_From\n(M:N)\n[Units]"
+entity "Includes\n{Relationship}" as Includes {
+    1:N
+}
 
-note bottom of Lot
+entity "Created_From\n{Relationship}\n[Units: quantity]" as Created_From {
+    M:N
+}
+
+' Relationships with participation constraints
+' Includes: 1:N (Lot to Production_Units)
+Lot ||--|| Includes : "1\npartial"
+Includes ||--o{ Production_Units : "N\ntotal"
+
+' Created From: M:N (Lot to Raw_Materials)
+Lot ||--o{ Created_From : "M\ntotal"
+Created_From }o--|| Raw_Materials : "N\npartial"
+
+note right of Includes
+    **1:N Relationship**
+    
+    • Production Unit MUST
+      belong to exactly one Lot
+    • Total participation from
+      Production_Units side
+end note
+
+note bottom of Created_From
+    **M:N Relationship**
+    
+    • Lot MUST be created from
+      at least one Raw Material
+    • Total participation from
+      Lot side
+    • Relationship attribute:
+      **Units** (quantity used)
+end note
+
+legend right
+    **Chen Notation Legend:**
+    
+    Rectangle = Entity
+    * = Primary Key (PK)
+    
+    **Participation:**
+    ||--|| : Mandatory (total)
+    }o--|| : Optional → Mandatory
+    ||--o{ : Mandatory → Optional
+    }o--o{ : Optional both sides
+    
+    **Cardinality:**
+    1:N = One-to-Many
+    M:N = Many-to-Many
+endlegend
+
+@enduml
+```
+
+### PlantUML Code for Relational Model (Database Schema)
+
+```plantuml
+@startuml Manufacturing_Relational_Model
+
+' Clean entity syntax for relational model
+skinparam linetype ortho
+
+entity "Lot" {
+    * LotNumber : VARCHAR(20) <<PK>>
+    --
+    CreateDate : DATE
+    Cost_Of_Materials : DECIMAL(12,2)
+}
+
+entity "Production_Units" {
+    * serial_number : VARCHAR(30) <<PK>>
+    --
+    exactWeight : DECIMAL(10,3)
+    ProductType : VARCHAR(50)
+    qualityTest : BOOLEAN
+    ProductDesc : VARCHAR(200)
+    # LotNumber : VARCHAR(20) <<FK>>
+}
+
+entity "Raw_Materials" {
+    * material_ID : VARCHAR(20) <<PK>>
+    --
+    type : VARCHAR(50)
+    UniCost : DECIMAL(10,2)
+}
+
+entity "Lot_Materials\n{Junction Table}" {
+    * LotNumber : VARCHAR(20) <<PK,FK>>
+    * material_ID : VARCHAR(20) <<PK,FK>>
+    --
+    Units : DECIMAL(10,2)
+}
+
+' Relationships with cardinality
+Lot ||--o{ Production_Units : "Includes"
+Lot ||--o{ Lot_Materials : "Created From"
+Raw_Materials ||--o{ Lot_Materials : "Used In"
+
+note right of Production_Units
+    **Foreign Key:**
+    LotNumber → Lot(LotNumber)
+    ON DELETE CASCADE
+    
+    Each production unit
+    belongs to exactly one lot
+end note
+
+note bottom of Lot_Materials
+    **Junction Table for M:N**
+    
+    Foreign Keys:
+    • LotNumber → Lot(LotNumber)
+    • material_ID → Raw_Materials(material_ID)
+    
+    Composite Primary Key:
+    (LotNumber, material_ID)
+    
+    Relationship Attribute:
+    • Units (quantity)
+end note
+
+legend right
+    **Relational Schema Symbols:**
+    
+    * = Primary Key (PK)
+    # = Foreign Key (FK)
+    -- = Separator
+    
+    **Relationships:**
+    ||--o{ = One-to-Many
+    (One mandatory, Many optional)
+endlegend
+
+@enduml
+```
+
+### PlantUML Code for Enhanced ER Diagram (Alternative Clean Style)
+
+```plantuml
+@startuml Manufacturing_Enhanced_ER
+
+' Enhanced ER using clean entity-relationship syntax
+skinparam linetype ortho
+
+entity "Lot" {
+    * LotNumber <<PK>>
+    --
+    CreateDate
+    Cost_Of_Materials
+}
+
+entity "Production_Units" {
+    * serial# <<PK>>
+    --
+    exactWeight
+    ProductType
+    qualityTest?
+    ProductDesc
+    # LotNumber <<FK>>
+}
+
+entity "Raw_Materials" {
+    * material_ID <<PK>>
+    --
+    type
+    UniCost
+}
+
+entity "Lot_Materials" {
+    * LotNumber <<PK,FK>>
+    * material_ID <<PK,FK>>
+    --
+    Units : DECIMAL(10,2)
+}
+
+' Relationships with proper cardinality
+Lot ||--o{ Production_Units : "Includes (1:N)"
+Lot ||--o{ Lot_Materials : "Created_From (M:N)"
+Raw_Materials ||--o{ Lot_Materials : ""
+
+note right of Lot
     **Lot** is created from
     multiple Raw Materials
     
-    Total participation in
-    "Created From" relationship
+    • Total participation in
+      "Created From" relationship
+    • Each lot must use at
+      least one raw material
 end note
 
-note bottom of Production_Units
+note right of Production_Units
     Each **Production Unit**
     must belong to exactly
     one Lot
     
-    Total participation in
-    "Includes" relationship
+    • Total participation in
+      "Includes" relationship
+    • Contains FK: LotNumber
 end note
+
+note bottom of Lot_Materials
+    **Junction Table**
+    for M:N relationship
+    
+    • Composite PK:
+      (LotNumber, material_ID)
+    • Relationship attribute:
+      Units (quantity)
+end note
+
+legend right
+    **ER Diagram Symbols:**
+    
+    * = Primary Key
+    # = Foreign Key
+    ||--o{ = One-to-Many
+    
+    **Participation:**
+    || = Mandatory (total)
+    o{ = Optional (partial)
+endlegend
 
 @enduml
 ```
