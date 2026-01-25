@@ -1,18 +1,36 @@
-# IST601 CA Test on ER Diagramming - January 2025
-## University of Buea - Database Management
-**First Semester 2024-2025**
+# IST601 - Database Management Exam Solutions
+## University of Buea
+
+This repository contains complete solutions for IST601 Database Management exams and CA tests, covering Entity-Relationship modeling, notation systems, and database design principles.
 
 ---
 
-## Exam Overview
+## Available Tests
 
-This repository contains complete solutions to the IST601 CA Test on ER Diagramming, covering Entity-Relationship modeling, notation systems, and database design principles.
+### 1. CA Test on ER Diagramming - January 2026
+**File:** [CA-Test-Jan-2026-ER-Diagramming.md](CA-Test-Jan-2026-ER-Diagramming.md)  
+**Semester:** First Semester 2025-2026  
+**Total Marks: 30**
 
+**Topics Covered:**
+- ER Diagramming MCQ questions (Chen notation, weak entities, derived attributes)
+- Definitions (weak entity, composite attribute, cardinality, degree)
+- Crow's Foot notation interpretation
+- ER diagram design (Retail Store, Employees and Dependents)
+- Strong vs Weak entity identification
+- MySQL Workbench notation (solid vs dashed lines)
+- Relational model conversion
+
+---
+
+### 2. CA Test on ER Diagramming - January 2025
+**Files:** [Question-1.md](Question-1.md), [Question-2.md](Question-2.md), [Question-3.md](Question-3.md)  
+**Semester:** First Semester 2024-2025  
 **Total Marks: 30**
 
 ---
 
-## Questions and Solutions
+## January 2025 Test - Questions and Solutions
 
 ### Question 1: BANK Database ER Diagram (10 marks)
 **File:** [Question-1.md](Question-1.md)
@@ -195,8 +213,9 @@ For questions, corrections, or improvements, please refer to the course instruct
 
 **Course:** IST601 - Database Management  
 **Institution:** University of Buea  
-**Semester:** First Semester 2024-2025  
-**Exam Date:** January 2025
+**Semesters:** 
+- First Semester 2024-2025 (January 2025 Test)
+- First Semester 2025-2026 (January 2026 CA Test)
 
 ---
 
