@@ -1,26 +1,49 @@
-# DSC 603 - Data Mining
-## Exam Answers - First Semester Examination 2022/2023
+# DSC603 - Data Mining Exam Solutions
+## University of Buea
 
-**University of Buea, Faculty of Science**  
-**Department: Computer Science**  
-**Course Code: DSC 603**  
-**Course Title: Data Mining**  
-**Date: Thursday 05/01/2023**  
-**Time: 13:00 - 14:30 (1h30)**  
-**Instructor: Dr M. NYAMSI**  
-**Venue: D005 - FS**
+This repository contains complete solutions for DSC603 Data Mining exams and CA tests, covering data pre-processing, frequent pattern mining, data warehousing, and data mining concepts.
 
 ---
 
-## File Structure
+## Available Tests
 
-This folder contains detailed answers to all exam questions, with each question in its own file:
+### 1. CA Test - January 2026
+**File:** [CA-Test-Jan-2026-Data-Mining.md](CA-Test-Jan-2026-Data-Mining.md)  
+**Test Type:** Continuous Assessment (CA)  
+**Total Marks: 30**
 
+**Part A: Data Pre-processing and Frequent Pattern Mining (15 marks)**
+- **Question 1:** Data Pre-processing (8 marks)
+  - Equal-frequency binning and smoothing by bin boundaries
+  - Equal-width binning and histogram
+  - Min-max normalization
+- **Question 2:** Frequent Pattern Mining (6 marks)
+  - Apriori algorithm steps
+  - Strong association rules
+
+**Part B: Data Warehousing and Data Mining Concepts (15 marks)**
+- **Question 3:** Data Warehouse Concepts (8 marks)
+  - Data warehouse definition and differences from databases
+  - Data mining system architecture
+  - Data warehouse components
+- **Question 4:** Data Warehouse Schema and Cuboids (7 marks)
+  - Constellation schema diagram
+  - Cuboid lattice representation
+
+---
+
+### 2. First Semester Examination 2022/2023
+**Files:** [Question-1.md](Question-1.md), [Question-2.md](Question-2.md), [Question-3.md](Question-3.md)  
+**Date:** Thursday 05/01/2023  
+**Time: 13:00 - 14:30 (1h30)**  
+**Instructor: Dr M. NYAMSI**  
+**Venue: D005 - FS**  
+**Total: 45 marks**
+
+**Questions:**
 - **Question-1.md** - Data Similarity Calculations (15 marks - Compulsory)
 - **Question-2.md** - Data Warehousing: Star Schema and OLAP (15 marks - Elective)
 - **Question-3.md** - Data Cube Concepts: Aggregate Cells and Iceberg Cubes (15 marks - Elective)
-
-**Total: 45 marks**
 
 ---
 
