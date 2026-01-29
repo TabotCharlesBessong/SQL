@@ -1,0 +1,128 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{setspace}
+
+% Define blue color for borders
+\definecolor{ubblue}{RGB}{0,51,102}
+
+% Remove page numbers
+\pagestyle{empty}
+
+\begin{document}
+
+% Create the blue double-line border
+\begin{tikzpicture}[remember picture, overlay]
+    % Outer border
+    \draw[ubblue, line width=2pt] 
+        ([xshift=0.3in,yshift=-0.3in]current page.north west) 
+        rectangle 
+        ([xshift=-0.3in,yshift=0.3in]current page.south east);
+    
+    % Inner border
+    \draw[ubblue, line width=1pt] 
+        ([xshift=0.4in,yshift=-0.4in]current page.north west) 
+        rectangle 
+        ([xshift=-0.4in,yshift=0.4in]current page.south east);
+\end{tikzpicture}
+
+% Header section
+\begin{minipage}[t]{0.45\textwidth}
+    \vspace{0.2in}
+    \small
+    \textbf{UNIVERSITY OF BUEA P.O}\\
+    Box 63,\\
+    Buea, South West Region\\
+    \textbf{CAMEROON}\\
+    TEL: (237) 3332 21 34/3332 26 90
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+    \vspace{0.2in}
+    \raggedleft
+    \small
+    \textbf{REPUBLIC OF CAMEROON}\\
+    \textbf{PEACE-WORK-FATHERLAND}
+\end{minipage}
+
+% Logo section (centered)
+\vspace{0.1in}
+\begin{center}
+    \includegraphics[width=2.5cm]{ubi.png}
+\end{center}
+
+\vspace{0.3in}
+
+% Faculty and Department
+\begin{center}
+    \textbf{\Large FACULTY OF ENGINEERING AND TECHNOLOGY}\\[0.2in]
+    \textbf{\Large DEPARTMENT OF COMPUTER ENGINEERING}
+\end{center}
+
+\vspace{0.4in}
+
+% Title wrapped in scroll banner
+\vspace{0.2in}
+\begin{center}
+    \begin{tikzpicture}
+        % Include the scroll banner image as background
+        \node[anchor=center, inner sep=0] at (0,0) 
+            % {\includegraphics[width=0.92\textwidth]{title-scroll.png}};
+        
+        % Overlay the title text on top of the scroll (large, bold, professional formatting)
+        \node[font=\fontsize{24}{30}\selectfont\bfseries, 
+              text width=7.2in, align=center, text=black, 
+              anchor=center, inner sep=0] 
+            at (0,0) {\mbox{DESIGN AND IMPLEMENTATION OF A}\\[0.25cm]\mbox{SECURED TELEMEDICINE PLATFORM}};
+    \end{tikzpicture}
+\end{center}
+
+\vspace{0.3in}
+
+% Contextual statement
+\begin{center}
+    \textit{A dissertation submitted to the Department of Computer Engineering, Faculty of Engineering and Technology, University of Buea, in Partial Fulfillment of the Requirements for the Award of the Bachelor of Engineering (B.Eng.) Degree in Computer Engineering}
+\end{center}
+
+\vspace{0.6in}
+
+% Author section
+\begin{center}
+    \textbf{By:}\\[0.15in]
+    \textbf{\Large TABOT CHARLES BESSONG} \hspace{1in} \textbf{FE20A106}
+\end{center}
+
+\vspace{0.3in}
+
+% Option
+\begin{center}
+    \textbf{Option:} Software Engineering
+\end{center}
+
+\vspace{0.4in}
+
+% Supervisors
+\begin{center}
+    \textbf{Supervisors:}\\[0.2in]
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        Dr Kengnou Nicole
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        Elie Fute T., Associate Professor
+    \end{minipage}
+\end{center}
+
+\vspace{0.5in}
+
+% Academic Year
+\begin{center}
+    \textbf{Academic Year: 2023/2024}
+\end{center}
+
+\end{document}
