@@ -1,0 +1,45 @@
+@startuml Level 2 DFD - Borrowing (Process 4.0)
+
+skinparam maxwidth 1600
+skinparam maxheight 1100
+skinparam dpi 300
+scale max 1600x1100
+
+title Level 2 Data Flow Diagram - Borrowing (Process 4.0)
+
+rectangle "User" as User
+rectangle "Staff" as Staff
+
+rectangle "D1\nUsers" as D1
+rectangle "D2\nResources" as D2
+rectangle "D3\nTransactions" as D3
+
+rectangle "4.1\nRequest" as P41
+rectangle "4.2\nValidation" as P42
+rectangle "4.3\nRecord loan" as P43
+rectangle "4.4\nRecall" as P44
+
+User --> P41 : Resource, user id
+Staff --> P41 : Resource, user id
+P41 --> P42 : Request
+P41 --> D2 : read
+P41 --> D1 : read
+
+P42 --> User : Availability
+P42 --> Staff : Availability
+P42 --> P43 : Valid request
+P42 --> D2 : read
+P42 --> D3 : read
+
+P43 --> User : Due date
+P43 --> Staff : Loan record
+P43 --> D3 : write
+P43 --> D2 : read/write
+P43 --> D1 : read
+
+P44 --> User : Recall notice
+P44 --> Staff : Recall list
+P44 --> D3 : read/write
+P44 --> D2 : read
+
+@enduml
