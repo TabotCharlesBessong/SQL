@@ -1,0 +1,69 @@
+@startuml Level 1 DFD - Library Management System
+
+skinparam maxwidth 1600
+skinparam maxheight 1100
+skinparam dpi 300
+scale max 1600x1100
+
+title Level 1 Data Flow Diagram - Library Management System
+
+' External entities
+rectangle "User" as User
+rectangle "Staff" as Staff
+rectangle "Supplier" as Supplier
+
+' Data stores (Dn = open-ended rectangle style)
+rectangle "D1\nUsers" as D1
+rectangle "D2\nResources" as D2
+rectangle "D3\nTransactions" as D3
+rectangle "D4\nOrders" as D4
+
+' Processes
+rectangle "1.0\nUser Management" as P1
+rectangle "2.0\nResource Management" as P2
+rectangle "3.0\nAcquisition" as P3
+rectangle "4.0\nBorrowing" as P4
+rectangle "5.0\nReturning" as P5
+rectangle "6.0\nSystem Admin" as P6
+
+User --> P1 : Registration
+Staff --> P1 : Registration
+P1 --> User : Account info
+P1 --> Staff : Account info
+P1 --> D1 : read/write
+
+Staff --> P2 : Resource registration
+P2 --> Staff : Catalog info
+P2 --> D2 : read/write
+
+Staff --> P3 : Acquisition request
+P3 --> Supplier : Order
+Supplier --> P3 : Delivery
+P3 --> Staff : Order status
+P3 --> D4 : read/write
+P3 --> D2 : read/write
+
+User --> P4 : Borrow request
+Staff --> P4 : Borrow request
+P4 --> User : Resource, due date
+P4 --> Staff : Loan status
+P4 --> D3 : read/write
+P4 --> D2 : read
+P4 --> D1 : read
+
+User --> P5 : Return
+Staff --> P5 : Return
+P5 --> User : Confirmation
+P5 --> Staff : Confirmation
+P5 --> D3 : read/write
+P5 --> D2 : read/write
+P5 --> D1 : read
+
+Staff --> P6 : Admin request
+P6 --> Staff : Status, reports
+P6 --> D1 : read/write
+P6 --> D2 : read
+P6 --> D3 : read
+P6 --> D4 : read
+
+@enduml
