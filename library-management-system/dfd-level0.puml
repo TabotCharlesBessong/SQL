@@ -1,0 +1,28 @@
+@startuml Level 0 DFD - Library Management System (Context Diagram)
+
+skinparam maxwidth 1600
+skinparam maxheight 1100
+skinparam dpi 300
+scale max 1600x1100
+
+title Level 0 Data Flow Diagram - Library Management System (Context Diagram)\n(Gane-Sarson style: squares = external entities, one box = process)
+
+' External entities (squares)
+rectangle "User" as User
+rectangle "Staff" as Staff
+rectangle "Supplier" as Supplier
+
+' Single process
+rectangle "0.0\nLibrary\nManagement System" as System
+
+' Data flows
+User --> System : Registration, borrow request
+System --> User : Account info, resource, confirmations
+
+Staff --> System : Acquisition, admin, operations
+System --> Staff : Orders, reports, status
+
+Supplier --> System : Delivery, reception
+System --> Supplier : Order
+
+@enduml
