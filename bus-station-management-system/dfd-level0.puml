@@ -1,0 +1,48 @@
+@startuml Level 0 DFD - Bus Station Management System (Context Diagram)
+
+' NOTE: Gane-Sarson Level 0 has EXTERNAL ENTITIES (squares) + ONE PROCESS (rounded rect).
+' PlantUML: we use plain rectangles for both; roundcorner would make everything rounded
+' (external entities would look like processes), so we keep square corners.
+
+skinparam maxwidth 1600
+skinparam maxheight 1100
+skinparam dpi 300
+scale max 1600x1100
+
+title Level 0 Data Flow Diagram - Bus Station Management System (Context Diagram)\n(Gane-Sarson style: squares = external entities, one box = process)
+
+' External entities (Gane-Sarson: squares — sources/sinks of data, NOT processes)
+rectangle "Passenger" as Passenger
+rectangle "Staff" as Staff
+rectangle "Payment Gateway" as PaymentGateway
+rectangle "GPS Service" as GPSService
+rectangle "Communication Service" as CommService
+rectangle "Management" as Management
+rectangle "Maintenance Provider" as MaintenanceProvider
+
+' Single process (Gane-Sarson: rounded rectangle = the system as one process)
+rectangle "0.0\nBus Station\nManagement System" as System
+
+' Data flows
+Passenger --> System : Booking requests
+System --> Passenger : Tickets, confirmations
+
+Staff --> System : Operations input
+System --> Staff : Booking and trip information
+
+PaymentGateway --> System : Payment status
+System --> PaymentGateway : Payment requests
+
+GPSService --> System : Location data
+System --> GPSService : Tracking requests
+
+CommService --> System : Delivery status
+System --> CommService : Notification requests
+
+Management --> System : Report and policy requests
+System --> Management : Reports, analytics
+
+MaintenanceProvider --> System : Maintenance reports
+System --> MaintenanceProvider : Maintenance schedule
+
+@enduml
