@@ -9,6 +9,7 @@ title Level 1 Data Flow Diagram - Library Management System
 
 ' External entities
 rectangle "User" as User
+rectangle "Admin" as Admin
 rectangle "Staff" as Staff
 rectangle "Supplier" as Supplier
 
@@ -59,8 +60,8 @@ P5 --> D3 : read/write
 P5 --> D2 : read/write
 P5 --> D1 : read
 
-Staff --> P6 : Admin request
-P6 --> Staff : Status, reports
+Admin --> P6 : Admin request
+P6 --> Admin : Status, reports
 P6 --> D1 : read/write
 P6 --> D2 : read
 P6 --> D3 : read

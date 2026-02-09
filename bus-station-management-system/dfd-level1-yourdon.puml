@@ -1,0 +1,89 @@
+@startuml Level 1 DFD - Bus Station Management System (Yourdon Notation)
+
+skinparam maxwidth 1600
+skinparam maxheight 1100
+skinparam dpi 300
+scale max 1600x1100
+
+title Level 1 Data Flow Diagram - Bus Station Management System (Yourdon Notation)
+
+' External entities (rectangles)
+rectangle "Passenger" as Passenger
+rectangle "Staff" as Staff
+rectangle "Payment Gateway" as PaymentGateway
+rectangle "GPS Service" as GPSService
+rectangle "Communication Service" as CommService
+rectangle "Management" as Management
+rectangle "Maintenance Provider" as MaintenanceProvider
+
+' Data stores (open rectangle on right side - Yourdon notation)
+' Note: Using rectangle with right side open style
+rectangle "D1\nPassenger" as D1 #LightBlue
+rectangle "D2\nStaff" as D2 #LightBlue
+rectangle "D3\nBooking" as D3 #LightBlue
+rectangle "D4\nPayment" as D4 #LightBlue
+rectangle "D5\nTrip" as D5 #LightBlue
+rectangle "D6\nBus" as D6 #LightBlue
+rectangle "D7\nRoute" as D7 #LightBlue
+rectangle "D8\nReport" as D8 #LightBlue
+
+' Processes (circles - Yourdon notation)
+circle "1.0\nUser Management" as P1
+circle "2.0\nBooking Management" as P2
+circle "3.0\nPayment Processing" as P3
+circle "4.0\nTrip Management" as P4
+circle "5.0\nBus and Route" as P5
+circle "6.0\nReporting" as P6
+
+Passenger --> P1 : User data
+Staff --> P1 : User data
+P1 --> Passenger : Account info
+P1 --> Staff : Account info
+P1 --> D1 : read/write
+P1 --> D2 : read/write
+
+Passenger --> P2 : Booking request
+Staff --> P2 : Booking request
+P2 --> Passenger : Ticket, status
+P2 --> Staff : Booking status
+P2 --> D3 : read/write
+P2 --> D5 : read
+P2 --> D1 : read
+P2 --> P3 : Payment request
+P3 --> P2 : Payment status
+
+P3 --> PaymentGateway : Payment request
+PaymentGateway --> P3 : Payment status
+P3 --> Passenger : Receipt
+P3 --> D4 : read/write
+P3 --> D3 : read/write
+
+Staff --> P4 : Trip request
+GPSService --> P4 : Location data
+P4 --> Staff : Trip details
+P4 --> Passenger : Trip info
+P4 --> CommService : Notifications
+P4 --> D5 : read/write
+P4 --> D6 : read
+P4 --> D7 : read
+P4 --> D2 : read
+
+Staff --> P5 : Bus, route request
+MaintenanceProvider --> P5 : Maintenance report
+P5 --> Staff : Bus, route info
+P5 --> Passenger : Route info
+P5 --> MaintenanceProvider : Schedule
+P5 --> D6 : read/write
+P5 --> D7 : read/write
+
+Staff --> P6 : Report request
+Management --> P6 : Report request
+P6 --> Staff : Reports
+P6 --> Management : Reports
+P6 --> D8 : read/write
+P6 --> D3 : read
+P6 --> D4 : read
+P6 --> D5 : read
+P6 --> D6 : read
+
+@enduml

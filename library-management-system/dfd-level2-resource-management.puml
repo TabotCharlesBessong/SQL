@@ -1,0 +1,42 @@
+@startuml Level 2 DFD - Resource Management (Process 2.0)
+
+skinparam maxwidth 1600
+skinparam maxheight 1100
+skinparam dpi 300
+scale max 1600x1100
+
+title Level 2 Data Flow Diagram - Resource Management (Process 2.0)
+
+rectangle "Staff" as Staff
+rectangle "Supplier" as Supplier
+
+rectangle "D2\nResources" as D2
+
+rectangle "2.1\nRegister Resource" as P21
+rectangle "2.2\nUpdate Resource" as P22
+rectangle "2.3\nManage Status" as P23
+rectangle "2.4\nSearch Catalog" as P24
+
+Staff --> P21 : New resource details
+Supplier --> P21 : Resource specifications
+P21 --> Staff : Registration confirmation
+P21 --> Supplier : Registration acknowledgment
+P21 --> P22 : Resource data
+P21 --> D2 : write
+
+Staff --> P22 : Resource updates
+P22 --> Staff : Update confirmation
+P22 --> P23 : Updated resource
+P22 --> D2 : read/write
+
+Staff --> P23 : Status change request
+P23 --> Staff : Status confirmation
+P23 --> P24 : Status update
+P23 --> D2 : read/write
+
+Staff --> P24 : Search query
+P24 --> Staff : Catalog info
+P24 --> P22 : Search results
+P24 --> D2 : read
+
+@enduml
