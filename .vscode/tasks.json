@@ -1,0 +1,48 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Compile Java",
+			"type": "shell",
+			"command": "javac",
+			"args": ["${file}"],
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": "$javac"
+		},
+		{
+			"label": "Run Java",
+			"type": "shell",
+			"command": "java",
+			"args": ["-cp", "${fileDirname}", "${fileBasenameNoExtension}"],
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "Compile and Run Java",
+			"dependsOrder": "sequence",
+			"dependsOn": ["Compile Java", "Run Java"]
+		},
+		{
+			"label": "Run Java File",
+			"type": "shell",
+			"command": "java",
+			"args": [
+				"${fileBasenameNoExtension}"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}
