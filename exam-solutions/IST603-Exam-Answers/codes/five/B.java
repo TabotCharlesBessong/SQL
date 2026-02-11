@@ -1,4 +1,3 @@
-package codes.five;
 
 class B extends A {
   private int y;
