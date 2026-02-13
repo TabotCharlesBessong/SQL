@@ -1,0 +1,108 @@
+% Task 1
+
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{./}}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{ulem}
+
+\title{IST691 - Research Methodology and Scientific Writing}
+\author{TABOT CHARLES BESSONG \\ SC25P089}
+
+\begin{document}
+
+\maketitle
+
+% Task 2
+\section*{Task 2: Complex Formulas}
+
+\subsection*{3x3 Matrix}
+
+A 3x3 matrix example:
+
+\begin{equation}
+A = \begin{pmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{pmatrix}
+\end{equation}
+
+\subsection*{Definite Integral with Limits}
+
+A definite integral example:
+
+\begin{equation}
+\int_{a}^{b} f(x) \, dx = F(b) - F(a)
+\end{equation}
+
+% Task 3
+\section*{Task 3: Tables and Graphics}
+
+\subsection*{3x3 Table with Centered Text}
+
+Table~\ref{tab:example} shows a 3x3 table with centered text:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Header 1} & \textbf{Header 2} & \textbf{Header 3} \\
+\hline
+Cell 1,1 & Cell 1,2 & Cell 1,3 \\
+\hline
+Cell 2,1 & Cell 2,2 & Cell 2,3 \\
+\hline
+Cell 3,1 & Cell 3,2 & Cell 3,3 \\
+\hline
+\end{tabular}
+\caption{Example of a 3x3 table with centered text}
+\label{tab:example}
+\end{table}
+
+\subsection*{Image with Caption and Cross-Reference}
+
+Figure~\ref{fig:screenshot} shows a screen capture image:
+
+\begin{figure}[h]
+\centering
+\includegraphics[angle=0,width=0.85\textwidth,keepaspectratio]{screen.png}
+\caption{Screen capture image example}
+\label{fig:screenshot}
+\end{figure}
+
+As shown in Figure~\ref{fig:screenshot}, the image demonstrates the proper formatting with caption and cross-reference.
+
+% Task 4
+\section*{Task 4: Nested Lists and Text Formatting}
+
+\subsection*{Nested Numbered List}
+
+The following demonstrates a nested numbered list structure:
+
+\begin{enumerate}
+\item \textbf{First Main Item} - This demonstrates \textbf{bold text}
+    \begin{enumerate}
+    \item \textit{First Sub-item} - This demonstrates \textit{italic text}
+    \item \uline{Second Sub-item} - This demonstrates \uline{underlined text}
+    \item \textbf{\textit{Bold and Italic}} - This demonstrates \textbf{\textit{combined formatting}}
+    \end{enumerate}
+\item \textit{Second Main Item} - This demonstrates \textit{italic text}
+    \begin{enumerate}
+    \item \textbf{Bold Sub-item} - This demonstrates \textbf{bold text}
+    \item \uline{Underlined Sub-item} - This demonstrates \uline{underlined text}
+    \item \textbf{\uline{Bold and Underlined}} - This demonstrates \textbf{\uline{combined formatting}}
+    \end{enumerate}
+\item \uline{Third Main Item} - This demonstrates \uline{underlined text}
+    \begin{enumerate}
+    \item \textit{Italic Sub-item} - This demonstrates \textit{italic text}
+    \item \textbf{Bold Sub-item} - This demonstrates \textbf{bold text}
+    \item \textit{\uline{Italic and Underlined}} - This demonstrates \textit{\uline{combined formatting}}
+    \end{enumerate}
+\end{enumerate}
+
+
+\end{document}
