@@ -8,6 +8,7 @@
 \usepackage{booktabs}
 \usepackage{caption}
 \usepackage{ulem}
+\usepackage{enumitem}
 
 \title{IST691 - Research Methodology and Scientific Writing}
 \author{TABOT CHARLES BESSONG \\ SC25P089}
@@ -104,5 +105,84 @@ The following demonstrates a nested numbered list structure:
     \end{enumerate}
 \end{enumerate}
 
+\subsection*{Unordered List}
+
+The following demonstrates an unordered list structure:
+
+\begin{itemize}
+\item First item
+\item Second item
+\item Third item
+    \begin{itemize}
+    \item Nested sub-item A
+    \item Nested sub-item B
+    \item Nested sub-item C
+    \end{itemize}
+\item Fourth item
+\end{itemize}
+
+\subsection*{Ordered List Formatting Options}
+
+The following demonstrates different numbering styles for ordered lists:
+
+\textbf{Arabic numerals (default):}
+\begin{enumerate}
+\item First item
+\item Second item
+\item Third item
+\end{enumerate}
+
+\textbf{Lowercase letters:}
+\begin{enumerate}[label=\alph*)]
+\item First item
+\item Second item
+\item Third item
+\end{enumerate}
+
+\textbf{Lowercase Roman numerals:}
+\begin{enumerate}[label=\roman*)]
+\item First item
+\item Second item
+\item Third item
+\end{enumerate}
+
+\textbf{Uppercase letters:}
+\begin{enumerate}[label=\Alph*)]
+\item First item
+\item Second item
+\item Third item
+\end{enumerate}
+
+\subsection*{Unordered List Formatting Options}
+
+The following demonstrates different bullet styles for unordered lists:
+
+\textbf{Default bullets:}
+\begin{itemize}
+\item First item
+\item Second item
+\item Third item
+\end{itemize}
+
+\textbf{Dashes:}
+\begin{itemize}[label=--]
+\item First item
+\item Second item
+\item Third item
+\end{itemize}
+
+\textbf{Asterisks:}
+\begin{itemize}[label=$\ast$]
+\item First item
+\item Second item
+\item Third item
+\end{itemize}
+
+\textbf{Custom arrows:}
+\begin{itemize}[label=$\rightarrow$]
+\item First item
+\item Second item
+\item Third item
+\end{itemize}
 
 \end{document}
