@@ -1,0 +1,21 @@
+/* Force <details> content to be visible when exporting to PDF */
+details {
+  display: block !important;
+  margin: 0.75em 0;
+  padding: 0.5em 1em;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #f9f9f9;
+}
+
+details summary {
+  display: block !important;
+  font-weight: bold;
+  cursor: default;
+  margin-bottom: 0.25em;
+}
+
+/* Force content inside details to always be visible */
+details summary ~ * {
+  display: block !important;
+}
