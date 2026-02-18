@@ -1,5 +1,33 @@
 # Entity-Relationship Diagram - Hospital Management
 
+## Overview
+
+Based on the scenario and entity identification, we now analyze what information needs to be linked together to determine relationships between entities. This ER diagram phase is where relationships are discovered and defined.
+
+## Relationship Analysis
+
+**From the scenario, we need to track:**
+- Which patients have appointments (APPOINTMENT needs PatientID)
+- Which doctors see which patients (APPOINTMENT needs DoctorID)
+- Which patients are admitted (ADMISSION needs PatientID)
+- Which doctors admit patients (ADMISSION needs DoctorID)
+- Which departments patients are admitted to (ADMISSION needs DepartmentCode)
+- Which patients receive treatments (TREATMENT needs PatientID)
+- Which doctors provide treatments (TREATMENT needs DoctorID)
+- Which patients receive prescriptions (PRESCRIPTION needs PatientID)
+- Which doctors prescribe medications (PRESCRIPTION needs DoctorID)
+- Which medications are prescribed (PRESCRIPTION needs MedicationCode)
+- Which treatments result in prescriptions (PRESCRIPTION might reference TreatmentID)
+- Which treatments involve medication administration (TREATMENT might reference MedicationCode)
+- Which department doctors belong to (DOCTOR needs DepartmentCode)
+- Which department nurses are assigned to (NURSE needs DepartmentCode)
+- Which doctor heads each department (DEPARTMENT needs HeadDoctorID)
+
+**Design Decision:** 
+- A treatment might result in a prescription (e.g., doctor provides treatment and prescribes follow-up medication)
+- A treatment might involve direct medication administration (e.g., IV medication during surgery)
+- We'll add optional foreign keys: PRESCRIPTION.TreatmentID and TREATMENT.MedicationCode
+
 ## Textual ER Diagram
 
 ```
@@ -40,34 +68,41 @@ NURSE                    TREATMENT                  PRESCRIPTION
 │ NurseName    │        │ PatientID FK     │      │ PatientID FK     │
 │ CertLevel    │        │ DoctorID FK      │      │ DoctorID FK      │
 │ Phone        │        │ TreatmentDate    │      │ MedicationCode FK│
-│ Email        │        │ TreatmentType    │      │ PrescriptionDate  │
-│ LicenseNum   │        │ Description      │      │ Dosage           │
-│ DeptCode FK  │        │ Cost             │      │ Frequency        │
-└──────┬───────┘        └──────────────────┘      │ Duration         │
-       │                                            └──────────────────┘
-       │ (M)
-       │ assigned to
-       │
-       ▼
-   DEPARTMENT
-
-MEDICATION
-┌──────────────┐
-│ MedCode PK   │
-│ MedName      │
-│ Manufacturer │
-│ DosageForm   │
-│ UnitPrice    │
-└──────┬───────┘
-       │
-       │ (M)
-       │ prescribed in
-       │
-       ▼
-   PRESCRIPTION
+│ Email        │        │ TreatmentType    │      │ TreatmentID FK   │◄──┐
+│ LicenseNum   │        │ MedicationCode FK│◄────┤ PrescriptionDate  │   │
+│ DeptCode FK  │        │ Description      │     │ Dosage           │   │
+└──────┬───────┘        │ Cost             │     │ Frequency        │   │
+       │                └──────┬───────────┘     │ Duration         │   │
+       │ (M)                   │                  └──────────────────┘   │
+       │                       │ (M)                                       │
+       │ assigned to           │ involves                                   │
+       │                       │                                            │
+       ▼                       ▼                                            │
+   DEPARTMENT              MEDICATION                                        │
+   ┌──────────────┐        ┌──────────────┐                                 │
+   │              │        │ MedCode PK   │                                 │
+   │              │        │ MedName      │                                 │
+   │              │        │ Manufacturer │                                 │
+   │              │        │ DosageForm   │                                 │
+   │              │        │ UnitPrice    │                                 │
+   │              │        └──────┬───────┘                                 │
+   │              │               │                                           │
+   │              │               │ (M)                                      │
+   │              │               │ prescribed in                             │
+   │              │               │                                           │
+   │              │               ▼                                           │
+   │              │          PRESCRIPTION                                     │
+   │              │               │                                           │
+   │              │               │ (M)                                      │
+   │              │               │ results from                              │
+   │              │               └──────────────────────────────────────────┘
+   │              │
+   └──────────────┘
 ```
 
 ## Mermaid ER Diagram
+
+**Note:** The relationships shown below are discovered during ER diagram design by analyzing what information needs to be linked together based on the scenario requirements.
 
 ```mermaid
 erDiagram
@@ -81,6 +116,8 @@ erDiagram
     PATIENT ||--o{ PRESCRIPTION : "receives"
     DOCTOR ||--o{ PRESCRIPTION : "prescribes"
     MEDICATION ||--o{ PRESCRIPTION : "prescribed in"
+    TREATMENT ||--o{ PRESCRIPTION : "results in"
+    TREATMENT }o--|| MEDICATION : "involves"
     DOCTOR }o--|| DEPARTMENT : "belongs to"
     NURSE }o--|| DEPARTMENT : "assigned to"
     DEPARTMENT ||--|| DOCTOR : "headed by"
@@ -154,6 +191,7 @@ erDiagram
         int TreatmentID PK
         string PatientID FK
         string DoctorID FK
+        string MedicationCode FK
         date TreatmentDate
         string TreatmentType
         text Description
@@ -173,6 +211,7 @@ erDiagram
         string PatientID FK
         string DoctorID FK
         string MedicationCode FK
+        int TreatmentID FK
         date PrescriptionDate
         string Dosage
         string Frequency
@@ -181,6 +220,8 @@ erDiagram
 ```
 
 ## PlantUML ER Diagram
+
+**Note:** Relationships are defined here based on analysis of what entities need to reference each other.
 
 ```plantuml
 @startuml Hospital Management ER Diagram

@@ -25,7 +25,6 @@
 - Phone
 - Email
 - LicenseNumber
-- DepartmentCode (FK) - Department doctor belongs to
 
 ### 3. NURSE
 **Attributes:**
@@ -35,7 +34,6 @@
 - Phone
 - Email
 - LicenseNumber
-- DepartmentCode (FK) - Department nurse is assigned to
 
 ### 4. DEPARTMENT
 **Attributes:**
@@ -43,13 +41,11 @@
 - DepartmentName
 - Building
 - Floor
-- HeadDoctorID (FK) - Doctor who heads the department
+- HeadDoctorID (information about which doctor heads the department)
 
 ### 5. APPOINTMENT
 **Attributes:**
 - AppointmentID (PK)
-- PatientID (FK)
-- DoctorID (FK)
 - AppointmentDate
 - AppointmentTime
 - AppointmentType
@@ -59,9 +55,6 @@
 ### 6. ADMISSION
 **Attributes:**
 - AdmissionID (PK)
-- PatientID (FK)
-- DoctorID (FK) - Admitting doctor
-- DepartmentCode (FK)
 - RoomNumber
 - AdmissionDate
 - DischargeDate
@@ -70,12 +63,11 @@
 ### 7. TREATMENT
 **Attributes:**
 - TreatmentID (PK)
-- PatientID (FK)
-- DoctorID (FK)
 - TreatmentDate
 - TreatmentType
 - Description
 - Cost
+- MedicationCode (optional - for treatments involving medication administration)
 
 ### 8. MEDICATION
 **Attributes:**
@@ -88,28 +80,10 @@
 ### 9. PRESCRIPTION
 **Attributes:**
 - PrescriptionID (PK)
-- PatientID (FK)
-- DoctorID (FK)
-- MedicationCode (FK)
 - PrescriptionDate
 - Dosage
 - Frequency
 - Duration
+- TreatmentID (optional - if prescription results from a treatment)
 
-## Relationships
-
-1. **DOCTOR ↔ DEPARTMENT:** Many-to-One (many doctors, one department)
-2. **NURSE ↔ DEPARTMENT:** Many-to-One (many nurses, one department)
-3. **DEPARTMENT ↔ DOCTOR:** One-to-One (one head doctor per department)
-4. **PATIENT ↔ DOCTOR:** Many-to-Many through APPOINTMENT
-5. **PATIENT ↔ DOCTOR:** Many-to-Many through ADMISSION
-6. **PATIENT ↔ DOCTOR:** Many-to-Many through TREATMENT
-7. **PATIENT ↔ DOCTOR:** Many-to-Many through PRESCRIPTION
-8. **PATIENT ↔ MEDICATION:** Many-to-Many through PRESCRIPTION
-9. **DOCTOR ↔ MEDICATION:** Many-to-Many through PRESCRIPTION
-10. **PATIENT ↔ DEPARTMENT:** Many-to-Many through ADMISSION
-
-**Key Design Points:**
-- Multiple junction tables (APPOINTMENT, ADMISSION, TREATMENT, PRESCRIPTION)
-- Direct relationships: DOCTOR→DEPARTMENT, NURSE→DEPARTMENT, DEPARTMENT→DOCTOR (head)
-- Complex network of relationships showing real-world hospital operations
+**Note:** Foreign keys and relationships will be determined during the relational schema design phase based on what information needs to be linked together. The optional attributes (MedicationCode in TREATMENT, TreatmentID in PRESCRIPTION) represent relationships that may or may not exist for every record.

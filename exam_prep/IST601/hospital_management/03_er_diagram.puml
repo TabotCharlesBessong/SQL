@@ -80,6 +80,7 @@ entity "TREATMENT" as treatment {
   --
   * PatientID <<FK>> : VARCHAR(10)
   * DoctorID <<FK>> : VARCHAR(10)
+  MedicationCode <<FK>> : VARCHAR(20)
   TreatmentDate : DATE
   TreatmentType : VARCHAR(50)
   Description : TEXT
@@ -101,6 +102,7 @@ entity "PRESCRIPTION" as prescription {
   * PatientID <<FK>> : VARCHAR(10)
   * DoctorID <<FK>> : VARCHAR(10)
   * MedicationCode <<FK>> : VARCHAR(20)
+  TreatmentID <<FK>> : INT
   PrescriptionDate : DATE
   Dosage : VARCHAR(50)
   Frequency : VARCHAR(50)
@@ -114,9 +116,11 @@ doctor ||--o{ admission : "admits"
 dept ||--o{ admission : "admits to"
 patient ||--o{ treatment : "receives"
 doctor ||--o{ treatment : "provides"
+medication }o--|| treatment : "involves"
 patient ||--o{ prescription : "receives"
 doctor ||--o{ prescription : "prescribes"
 medication ||--o{ prescription : "prescribed in"
+treatment ||--o{ prescription : "results in"
 doctor }o--|| dept : "belongs to"
 nurse }o--|| dept : "assigned to"
 dept ||--|| doctor : "headed by"
