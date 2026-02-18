@@ -1,0 +1,124 @@
+@startuml Hospital Management ER Diagram
+
+skinparam linetype ortho
+skinparam roundcorner 10
+skinparam shadowing false
+
+entity "PATIENT" as patient {
+  * **PatientID** <<PK>> : VARCHAR(10)
+  --
+  PatientName : VARCHAR(100)
+  DateOfBirth : DATE
+  Gender : VARCHAR(10)
+  Phone : VARCHAR(20)
+  Email : VARCHAR(100)
+  Street : VARCHAR(100)
+  City : VARCHAR(50)
+  PostalCode : VARCHAR(20)
+  EmergencyContactName : VARCHAR(100)
+  EmergencyContactPhone : VARCHAR(20)
+  InsuranceProvider : VARCHAR(50)
+}
+
+entity "DOCTOR" as doctor {
+  * **DoctorID** <<PK>> : VARCHAR(10)
+  --
+  DoctorName : VARCHAR(100)
+  Specialization : VARCHAR(50)
+  Phone : VARCHAR(20)
+  Email : VARCHAR(100)
+  LicenseNumber : VARCHAR(20)
+  * DepartmentCode <<FK>> : VARCHAR(10)
+}
+
+entity "NURSE" as nurse {
+  * **NurseID** <<PK>> : VARCHAR(10)
+  --
+  NurseName : VARCHAR(100)
+  CertificationLevel : VARCHAR(20)
+  Phone : VARCHAR(20)
+  Email : VARCHAR(100)
+  LicenseNumber : VARCHAR(20)
+  * DepartmentCode <<FK>> : VARCHAR(10)
+}
+
+entity "DEPARTMENT" as dept {
+  * **DepartmentCode** <<PK>> : VARCHAR(10)
+  --
+  DepartmentName : VARCHAR(50)
+  Building : VARCHAR(50)
+  Floor : INT
+  * HeadDoctorID <<FK>> : VARCHAR(10)
+}
+
+entity "APPOINTMENT" as appointment {
+  * **AppointmentID** <<PK>> : INT
+  --
+  * PatientID <<FK>> : VARCHAR(10)
+  * DoctorID <<FK>> : VARCHAR(10)
+  AppointmentDate : DATE
+  AppointmentTime : TIME
+  AppointmentType : VARCHAR(50)
+  Status : VARCHAR(20)
+  Notes : TEXT
+}
+
+entity "ADMISSION" as admission {
+  * **AdmissionID** <<PK>> : INT
+  --
+  * PatientID <<FK>> : VARCHAR(10)
+  * DoctorID <<FK>> : VARCHAR(10)
+  * DepartmentCode <<FK>> : VARCHAR(10)
+  RoomNumber : VARCHAR(20)
+  AdmissionDate : DATE
+  DischargeDate : DATE
+  Diagnosis : TEXT
+}
+
+entity "TREATMENT" as treatment {
+  * **TreatmentID** <<PK>> : INT
+  --
+  * PatientID <<FK>> : VARCHAR(10)
+  * DoctorID <<FK>> : VARCHAR(10)
+  TreatmentDate : DATE
+  TreatmentType : VARCHAR(50)
+  Description : TEXT
+  Cost : DECIMAL
+}
+
+entity "MEDICATION" as medication {
+  * **MedicationCode** <<PK>> : VARCHAR(20)
+  --
+  MedicationName : VARCHAR(100)
+  Manufacturer : VARCHAR(100)
+  DosageForm : VARCHAR(50)
+  UnitPrice : DECIMAL
+}
+
+entity "PRESCRIPTION" as prescription {
+  * **PrescriptionID** <<PK>> : INT
+  --
+  * PatientID <<FK>> : VARCHAR(10)
+  * DoctorID <<FK>> : VARCHAR(10)
+  * MedicationCode <<FK>> : VARCHAR(20)
+  PrescriptionDate : DATE
+  Dosage : VARCHAR(50)
+  Frequency : VARCHAR(50)
+  Duration : INT
+}
+
+patient ||--o{ appointment : "has"
+doctor ||--o{ appointment : "sees"
+patient ||--o{ admission : "has"
+doctor ||--o{ admission : "admits"
+dept ||--o{ admission : "admits to"
+patient ||--o{ treatment : "receives"
+doctor ||--o{ treatment : "provides"
+patient ||--o{ prescription : "receives"
+doctor ||--o{ prescription : "prescribes"
+medication ||--o{ prescription : "prescribed in"
+doctor }o--|| dept : "belongs to"
+nurse }o--|| dept : "assigned to"
+dept ||--|| doctor : "headed by"
+
+@enduml
