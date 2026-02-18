@@ -1,7 +1,11 @@
 -- ============================================
 -- INSERT DATA - Hospital Management
 -- ============================================
-
+-- 
+-- This file inserts sample data into the normalized tables.
+-- Foreign key relationships (discovered during ER diagram/relational schema phases)
+-- determine the insertion order.
+-- 
 -- Note: Department must be created first, but HeadDoctorID references Doctor
 -- So we'll insert Departments without HeadDoctorID first, then update after Doctors are inserted
 
@@ -35,7 +39,12 @@ INSERT INTO Nurse VALUES
 ('N005', 'Maria Garcia', 'RN', '555-4005', 'maria.g@hospital.gov', 'NUR-RN-004', 'CARD');
 
 -- 5. PATIENTS
-INSERT INTO Patient VALUES
+INSERT INTO Patient (
+    PatientID, PatientName, DateOfBirth, Gender, Phone, Email,
+    Street, City, PostalCode,
+    EmergencyContactName, EmergencyContactPhone,
+    InsuranceProvider
+) VALUES
 ('P001', 'John Smith', '1980-05-15', 'M', '555-1001', 'john.s@email.com', '123 Main St', 'Springfield', '12345', 'Jane Smith', '555-1002', 'BlueCross'),
 ('P002', 'Mary Johnson', '1995-08-22', 'F', '555-2001', 'mary.j@email.com', '456 Oak Ave', 'Springfield', '12346', 'Tom Johnson', '555-2002', 'Aetna'),
 ('P003', 'Robert Brown', '1975-11-10', 'M', '555-3001', 'robert.b@email.com', '789 Pine Rd', 'Riverside', '23456', 'Susan Brown', '555-3002', 'Medicare'),
@@ -67,21 +76,23 @@ INSERT INTO Admission (PatientID, DoctorID, DepartmentCode, RoomNumber, Admissio
 ('P005', 'D002', 'CARD', '302', '2024-10-20', NULL, 'Cardiac observation');
 
 -- 9. TREATMENTS
-INSERT INTO Treatment (PatientID, DoctorID, TreatmentDate, TreatmentType, Description, Cost) VALUES
-('P001', 'D001', '2024-10-02', 'Medication', 'Blood pressure medication adjustment', 150.00),
-('P003', 'D004', '2024-10-11', 'Surgery', 'Appendectomy procedure', 5000.00),
-('P002', 'D003', '2024-10-13', 'Medication', 'Antibiotic treatment', 200.00),
-('P001', 'D001', '2024-10-03', 'Therapy', 'Cardiac rehabilitation session', 300.00),
-('P005', 'D002', '2024-10-21', 'Diagnostic', 'EKG and stress test', 450.00);
+-- Note: Some treatments involve medication (MedicationCode), others don't (surgery, therapy)
+INSERT INTO Treatment (PatientID, DoctorID, MedicationCode, TreatmentDate, TreatmentType, Description, Cost) VALUES
+('P001', 'D001', NULL, '2024-10-02', 'Medication', 'Blood pressure medication adjustment', 150.00),
+('P003', 'D004', NULL, '2024-10-11', 'Surgery', 'Appendectomy procedure', 5000.00),
+('P002', 'D003', 'MED003', '2024-10-13', 'Medication', 'Antibiotic treatment', 200.00),
+('P001', 'D001', NULL, '2024-10-03', 'Therapy', 'Cardiac rehabilitation session', 300.00),
+('P005', 'D002', NULL, '2024-10-21', 'Diagnostic', 'EKG and stress test', 450.00);
 
 -- 10. PRESCRIPTIONS
-INSERT INTO Prescription (PatientID, DoctorID, MedicationCode, PrescriptionDate, Dosage, Frequency, Duration) VALUES
-('P001', 'D001', 'MED001', '2024-10-02', '81mg', 'Once daily', 30),
-('P001', 'D001', 'MED004', '2024-10-02', '10 units', 'Twice daily', 30),
-('P002', 'D003', 'MED003', '2024-10-13', '500mg', 'Three times daily', 7),
-('P003', 'D004', 'MED002', '2024-10-11', '400mg', 'Every 6 hours', 5),
-('P005', 'D002', 'MED001', '2024-10-21', '81mg', 'Once daily', 30),
-('P002', 'D003', 'MED002', '2024-10-13', '200mg', 'Every 8 hours', 7);
+-- Note: Some prescriptions result from treatments (TreatmentID), others are standalone
+INSERT INTO Prescription (PatientID, DoctorID, MedicationCode, TreatmentID, PrescriptionDate, Dosage, Frequency, Duration) VALUES
+('P001', 'D001', 'MED001', 1, '2024-10-02', '81mg', 'Once daily', 30),  -- Results from treatment 1
+('P001', 'D001', 'MED004', NULL, '2024-10-02', '10 units', 'Twice daily', 30),  -- Standalone prescription
+('P002', 'D003', 'MED003', 3, '2024-10-13', '500mg', 'Three times daily', 7),  -- Results from treatment 3
+('P003', 'D004', 'MED002', 2, '2024-10-11', '400mg', 'Every 6 hours', 5),  -- Results from treatment 2 (surgery follow-up)
+('P005', 'D002', 'MED001', NULL, '2024-10-21', '81mg', 'Once daily', 30),  -- Standalone prescription
+('P002', 'D003', 'MED002', NULL, '2024-10-13', '200mg', 'Every 8 hours', 7);  -- Standalone prescription
 
 -- Verify
 SELECT 'Patients' AS tbl, COUNT(*) AS cnt FROM Patient

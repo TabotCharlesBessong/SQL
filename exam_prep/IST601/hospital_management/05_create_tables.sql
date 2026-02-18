@@ -1,6 +1,10 @@
 -- ============================================
 -- HOSPITAL MANAGEMENT - NORMALIZED DATABASE (BCNF)
 -- PostgreSQL compatible
+-- 
+-- This file implements the relational schema designed in 04_relational_schema.md
+-- Foreign keys and relationships were determined during the ER diagram and 
+-- relational schema design phases, not from the initial scenario.
 -- ============================================
 
 DROP TABLE IF EXISTS Prescription;
@@ -34,7 +38,9 @@ CREATE TABLE Patient (
 -- ============================================
 -- 2. DEPARTMENT TABLE
 -- ============================================
--- Note: HeadDoctorID FK added after Doctor table is created (circular dependency)
+-- Foreign Key: HeadDoctorID → DOCTOR (added after Doctor table is created due to circular dependency)
+-- Relationship discovered: Each department has one head doctor (one-to-one)
+-- Note: HeadDoctorID FK constraint added after Doctor table is created (circular dependency)
 CREATE TABLE Department (
     DepartmentCode VARCHAR(10) PRIMARY KEY,
     DepartmentName VARCHAR(50) NOT NULL,
@@ -46,6 +52,8 @@ CREATE TABLE Department (
 -- ============================================
 -- 3. DOCTOR TABLE
 -- ============================================
+-- Foreign Key: DepartmentCode → DEPARTMENT
+-- Relationship discovered: Doctors belong to departments (many-to-one)
 CREATE TABLE Doctor (
     DoctorID VARCHAR(10) PRIMARY KEY,
     DoctorName VARCHAR(100) NOT NULL,
@@ -63,6 +71,8 @@ ALTER TABLE Department ADD CONSTRAINT fk_dept_head_doctor FOREIGN KEY (HeadDocto
 -- ============================================
 -- 4. NURSE TABLE
 -- ============================================
+-- Foreign Key: DepartmentCode → DEPARTMENT
+-- Relationship discovered: Nurses are assigned to departments (many-to-one)
 CREATE TABLE Nurse (
     NurseID VARCHAR(10) PRIMARY KEY,
     NurseName VARCHAR(100) NOT NULL,
@@ -88,6 +98,9 @@ CREATE TABLE Medication (
 -- ============================================
 -- 6. APPOINTMENT TABLE
 -- ============================================
+-- Junction table: PATIENT ↔ DOCTOR (many-to-many)
+-- Foreign Keys: PatientID → PATIENT, DoctorID → DOCTOR
+-- Relationship discovered: Patients have appointments with doctors
 CREATE TABLE Appointment (
     AppointmentID SERIAL PRIMARY KEY,
     PatientID VARCHAR(10) NOT NULL,
@@ -106,6 +119,9 @@ CREATE TABLE Appointment (
 -- ============================================
 -- 7. ADMISSION TABLE
 -- ============================================
+-- Junction table: PATIENT ↔ DOCTOR ↔ DEPARTMENT (many-to-many)
+-- Foreign Keys: PatientID → PATIENT, DoctorID → DOCTOR, DepartmentCode → DEPARTMENT
+-- Relationship discovered: Patients are admitted by doctors to departments
 CREATE TABLE Admission (
     AdmissionID SERIAL PRIMARY KEY,
     PatientID VARCHAR(10) NOT NULL,
@@ -125,26 +141,36 @@ CREATE TABLE Admission (
 -- ============================================
 -- 8. TREATMENT TABLE
 -- ============================================
+-- Junction table: PATIENT ↔ DOCTOR (many-to-many)
+-- Foreign Keys: PatientID → PATIENT, DoctorID → DOCTOR, MedicationCode → MEDICATION (optional)
+-- Relationship discovered: Patients receive treatments from doctors
+-- Additional relationship: Treatments may involve medication administration (optional FK)
 CREATE TABLE Treatment (
     TreatmentID SERIAL PRIMARY KEY,
     PatientID VARCHAR(10) NOT NULL,
     DoctorID VARCHAR(10) NOT NULL,
+    MedicationCode VARCHAR(20),
     TreatmentDate DATE NOT NULL,
     TreatmentType VARCHAR(50),
     Description TEXT,
     Cost DECIMAL(10,2) CHECK (Cost >= 0),
     CONSTRAINT fk_treat_patient FOREIGN KEY (PatientID) REFERENCES Patient(PatientID) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT fk_treat_doctor FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID) ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT fk_treat_doctor FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_treat_medication FOREIGN KEY (MedicationCode) REFERENCES Medication(MedicationCode) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- ============================================
 -- 9. PRESCRIPTION TABLE
 -- ============================================
+-- Junction table: PATIENT ↔ DOCTOR ↔ MEDICATION (many-to-many)
+-- Foreign Keys: PatientID → PATIENT, DoctorID → DOCTOR, MedicationCode → MEDICATION
+-- Relationship discovered: Doctors prescribe medications to patients
 CREATE TABLE Prescription (
     PrescriptionID SERIAL PRIMARY KEY,
     PatientID VARCHAR(10) NOT NULL,
     DoctorID VARCHAR(10) NOT NULL,
     MedicationCode VARCHAR(20) NOT NULL,
+    TreatmentID INT,
     PrescriptionDate DATE NOT NULL,
     Dosage VARCHAR(50),
     Frequency VARCHAR(50),
@@ -152,6 +178,7 @@ CREATE TABLE Prescription (
     CONSTRAINT fk_pres_patient FOREIGN KEY (PatientID) REFERENCES Patient(PatientID) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT fk_pres_doctor FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID) ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT fk_pres_medication FOREIGN KEY (MedicationCode) REFERENCES Medication(MedicationCode) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_pres_treatment FOREIGN KEY (TreatmentID) REFERENCES Treatment(TreatmentID) ON DELETE SET NULL ON UPDATE CASCADE,
     CONSTRAINT uk_pres_unique UNIQUE (PatientID, DoctorID, MedicationCode, PrescriptionDate)
 );
 
@@ -167,6 +194,8 @@ CREATE INDEX idx_adm_doctor ON Admission(DoctorID);
 CREATE INDEX idx_adm_dept ON Admission(DepartmentCode);
 CREATE INDEX idx_treat_patient ON Treatment(PatientID);
 CREATE INDEX idx_treat_doctor ON Treatment(DoctorID);
+CREATE INDEX idx_treat_medication ON Treatment(MedicationCode);
 CREATE INDEX idx_pres_patient ON Prescription(PatientID);
 CREATE INDEX idx_pres_doctor ON Prescription(DoctorID);
 CREATE INDEX idx_pres_medication ON Prescription(MedicationCode);
+CREATE INDEX idx_pres_treatment ON Prescription(TreatmentID);
