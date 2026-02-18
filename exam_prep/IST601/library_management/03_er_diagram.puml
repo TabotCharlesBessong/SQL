@@ -1,0 +1,60 @@
+@startuml Library Management ER Diagram
+
+skinparam linetype ortho
+skinparam roundcorner 10
+skinparam shadowing false
+
+entity "MEMBER" as member {
+  * **MemberID** <<PK>> : VARCHAR(10)
+  --
+  MemberName : VARCHAR(100)
+  Email : VARCHAR(100)
+  Phone : VARCHAR(20)
+  DateOfBirth : DATE
+  Street : VARCHAR(100)
+  City : VARCHAR(50)
+  PostalCode : VARCHAR(20)
+  MembershipType : VARCHAR(20)
+  MembershipStartDate : DATE
+}
+
+entity "LOAN" as loan {
+  * **LoanID** <<PK>> : INT
+  --
+  * MemberID <<FK>> : VARCHAR(10)
+  * ISBN <<FK>> : VARCHAR(20)
+  * StaffID <<FK>> : VARCHAR(10)
+  LoanDate : DATE
+  DueDate : DATE
+  ReturnDate : DATE
+  FineAmount : DECIMAL
+}
+
+entity "BOOK" as book {
+  * **ISBN** <<PK>> : VARCHAR(20)
+  --
+  Title : VARCHAR(200)
+  Author : VARCHAR(100)
+  Publisher : VARCHAR(100)
+  PublicationYear : INT
+  Category : VARCHAR(50)
+  ShelfLocation : VARCHAR(50)
+  CopiesAvailable : INT
+}
+
+entity "STAFF" as staff {
+  * **StaffID** <<PK>> : VARCHAR(10)
+  --
+  StaffName : VARCHAR(100)
+  Email : VARCHAR(100)
+  Phone : VARCHAR(20)
+  Department : VARCHAR(50)
+  Position : VARCHAR(50)
+  HireDate : DATE
+}
+
+member ||--o{ loan : "borrows"
+book ||--o{ loan : "has loans"
+staff ||--o{ loan : "processes"
+
+@enduml
