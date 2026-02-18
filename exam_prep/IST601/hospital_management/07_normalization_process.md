@@ -11,9 +11,9 @@ This document analyzes all nine tables from the relational schema and verifies e
 - DEPARTMENT (DepartmentCode, DepartmentName, Building, Floor, HeadDoctorID)
 - APPOINTMENT (AppointmentID, PatientID, DoctorID, AppointmentDate, AppointmentTime, AppointmentType, Status, Notes)
 - ADMISSION (AdmissionID, PatientID, DoctorID, DepartmentCode, RoomNumber, AdmissionDate, DischargeDate, Diagnosis)
-- TREATMENT (TreatmentID, PatientID, DoctorID, TreatmentDate, TreatmentType, Description, Cost)
+- TREATMENT (TreatmentID, PatientID, DoctorID, MedicationCode, TreatmentDate, TreatmentType, Description, Cost)
 - MEDICATION (MedicationCode, MedicationName, Manufacturer, DosageForm, UnitPrice)
-- PRESCRIPTION (PrescriptionID, PatientID, DoctorID, MedicationCode, PrescriptionDate, Dosage, Frequency, Duration)
+- PRESCRIPTION (PrescriptionID, PatientID, DoctorID, MedicationCode, TreatmentID, PrescriptionDate, Dosage, Frequency, Duration)
 
 ---
 
@@ -92,6 +92,7 @@ This document analyzes all nine tables from the relational schema and verifies e
 | TREATMENT   | TreatmentID  | ✅         | ✅ BCNF |
 | MEDICATION  | MedicationCode| ✅       | ✅ BCNF |
 | PRESCRIPTION| PrescriptionID; (PatientID, DoctorID, MedCode, PrescDate) | ✅ | ✅ BCNF |
+|             | Note: TreatmentID FK is optional, doesn't affect normalization |       |       |
 
 **Conclusion:** All tables satisfy BCNF.
 
@@ -134,14 +135,14 @@ ADMISSION (AdmissionID, PatientID, DoctorID, DepartmentCode, RoomNumber, Admissi
 PK: AdmissionID
 FK: PatientID → PATIENT, DoctorID → DOCTOR, DepartmentCode → DEPARTMENT
 
-TREATMENT (TreatmentID, PatientID, DoctorID, TreatmentDate, TreatmentType, Description, Cost)
+TREATMENT (TreatmentID, PatientID, DoctorID, MedicationCode, TreatmentDate, TreatmentType, Description, Cost)
 PK: TreatmentID
-FK: PatientID → PATIENT, DoctorID → DOCTOR
+FK: PatientID → PATIENT, DoctorID → DOCTOR, MedicationCode → MEDICATION (optional)
 
 MEDICATION (MedicationCode, MedicationName, Manufacturer, DosageForm, UnitPrice)
 PK: MedicationCode
 
-PRESCRIPTION (PrescriptionID, PatientID, DoctorID, MedicationCode, PrescriptionDate, Dosage, Frequency, Duration)
+PRESCRIPTION (PrescriptionID, PatientID, DoctorID, MedicationCode, TreatmentID, PrescriptionDate, Dosage, Frequency, Duration)
 PK: PrescriptionID
-FK: PatientID → PATIENT, DoctorID → DOCTOR, MedicationCode → MEDICATION
+FK: PatientID → PATIENT, DoctorID → DOCTOR, MedicationCode → MEDICATION, TreatmentID → TREATMENT (optional)
 ```
