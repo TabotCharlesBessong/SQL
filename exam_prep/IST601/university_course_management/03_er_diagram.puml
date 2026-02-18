@@ -1,0 +1,66 @@
+@startuml University Course Management ER Diagram
+
+skinparam linetype ortho
+skinparam roundcorner 10
+skinparam shadowing false
+skinparam entity {
+  BackgroundColor #FFE6E6
+  BorderColor #000000
+}
+
+entity "STUDENT" as student {
+  * **StudentID** <<PK>> : VARCHAR(10)
+  --
+  StudentName : VARCHAR(100)
+  Email : VARCHAR(100)
+  Phone : VARCHAR(20)
+  DateOfBirth : DATE
+  Major : VARCHAR(50)
+}
+
+entity "ENROLLMENT" as enrollment {
+  * **EnrollmentID** <<PK>> : INT
+  --
+  * StudentID <<FK>> : VARCHAR(10)
+  * CourseCode <<FK>> : VARCHAR(10)
+  * InstructorID <<FK>> : VARCHAR(10)
+  Semester : VARCHAR(20)
+  Year : INT
+  EnrollmentDate : DATE
+  Grade : VARCHAR(2)
+}
+
+entity "COURSE" as course {
+  * **CourseCode** <<PK>> : VARCHAR(10)
+  --
+  CourseTitle : VARCHAR(200)
+  CreditHours : INT
+  Department : VARCHAR(50)
+  Description : TEXT
+}
+
+entity "INSTRUCTOR" as instructor {
+  * **InstructorID** <<PK>> : VARCHAR(10)
+  --
+  InstructorName : VARCHAR(100)
+  Email : VARCHAR(100)
+  Phone : VARCHAR(20)
+  Department : VARCHAR(50)
+  OfficeBuilding : VARCHAR(50)
+  OfficeRoom : VARCHAR(20)
+}
+
+' Relationships
+student ||--o{ enrollment : "enrolls in"
+course ||--o{ enrollment : "has enrollments"
+instructor ||--o{ enrollment : "teaches"
+
+note right of enrollment
+  **Design Note:**
+  Instructor assignment is per enrollment
+  (per semester), not per course permanently.
+  This allows the same course to be taught
+  by different instructors in different semesters.
+end note
+
+@enduml
