@@ -91,9 +91,10 @@
    - One instructor can have many enrollments (teaches multiple courses/semesters)
    - Each enrollment is taught by exactly one instructor
 
-4. **INSTRUCTOR - COURSE:** One-to-Many (implicit through enrollment)
-   - One instructor can teach multiple courses
-   - Each course is taught by exactly one instructor (per semester)
+**Important Design Note:** There is NO direct relationship between INSTRUCTOR and COURSE. The relationship exists only through ENROLLMENT because:
+- Instructor assignment is per enrollment (per semester), not per course permanently
+- The same course can be taught by different instructors in different semesters
+- This design allows flexibility: CS101 might be taught by Dr. Johnson in Fall 2024 but Dr. Lee in Spring 2025
 
 ## Initial Unnormalized Design (What NOT to do)
 

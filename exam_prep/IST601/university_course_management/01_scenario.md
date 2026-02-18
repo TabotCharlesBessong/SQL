@@ -38,12 +38,13 @@ The university has been storing all this information in a single table, which ha
 
 1. A student can enroll in multiple courses
 2. A course can have multiple students enrolled
-3. Each course is taught by exactly one instructor
+3. Each course enrollment is taught by exactly one instructor (instructor assignment is per enrollment/semester, not per course permanently)
 4. An instructor can teach multiple courses
 5. Each enrollment is for a specific semester and year
 6. A student can enroll in the same course multiple times (retaking a course)
 7. Grades are assigned per enrollment (student + course + semester combination)
 8. Course credit hours are fixed per course, not per enrollment
+9. The same course can be taught by different instructors in different semesters (e.g., CS101 by Dr. Johnson in Fall 2024, Dr. Lee in Spring 2025)
 
 ## Sample Data Requirements
 
