@@ -1,0 +1,115 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package "IST603 Airport Management" {
+
+  interface Identifiable {
+    +getId() : String
+  }
+
+  interface Chargeable {
+    +calculateFees() : double
+  }
+
+  interface AssignableToFlight {
+    +assignTo(flight : Flight) : void
+  }
+
+  abstract class Person {
+    -id : String
+    -fullName : String
+    -email : String
+    +getId() : String
+    +getFullName() : String
+    +role() : String
+    +describe() : String
+  }
+
+  class Passenger extends Person {
+    -loyaltyStatus : String
+    +role() : String
+  }
+
+  abstract class Employee extends Person {
+    -employeeNumber : String
+    +role() : String
+  }
+
+  class Pilot extends Employee
+  class FlightAttendant extends Employee
+  class GroundStaff extends Employee
+
+  abstract class Aircraft {
+    -tailNumber : String
+    -model : String
+    -capacity : int
+    +getCapacity() : int
+    +maxBaggageKgPerPassenger() : int
+  }
+
+  class NarrowBodyAircraft extends Aircraft
+  class WideBodyAircraft extends Aircraft
+
+  enum FlightStatus {
+    SCHEDULED
+    DELAYED
+    BOARDING
+    DEPARTED
+    LANDED
+    CANCELLED
+  }
+
+  class Airport {
+    -code : String
+    -name : String
+    -city : String
+    +findGate(gateCode : String) : Gate
+  }
+
+  class Terminal <<static nested>> {
+    -terminalId : String
+    +findGate(gateCode : String) : Gate
+  }
+
+  class Gate <<inner>> {
+    -code : String
+    +getCode() : String
+  }
+
+  class Flight {
+    -flightNumber : String
+    -status : FlightStatus
+    +assignAircraft(a : Aircraft) : void
+    +assignDepartureGate(g : Gate) : void
+    +cancel(reason : String) : void
+    +addBooking(b : Booking) : void
+  }
+
+  class Manifest <<static nested>> {
+    +validateSeat(seat : String) : void
+    +canAddBooking(capacity : int) : boolean
+  }
+
+  class Booking {
+    -bookingId : String
+    -seat : String
+    -bags : int
+    +calculateFees() : double
+  }
+
+  Person ..|> Identifiable
+  Booking ..|> Chargeable
+  Employee ..|> AssignableToFlight
+
+  Passenger "1" -- "0..*" Booking
+  Flight "1" -- "0..*" Booking
+  Flight "1" o-- "1" Manifest
+  Flight --> Aircraft
+  Flight --> Gate
+
+  Airport "1" o-- "1..*" Terminal
+  Terminal "1" o-- "1..*" Gate
+}
+
+@enduml
+
