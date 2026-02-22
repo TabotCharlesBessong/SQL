@@ -1,0 +1,44 @@
+@startuml Bus Station Management System - External System Integration
+!theme plain
+skinparam backgroundColor #FAFBFC
+skinparam roundcorner 8
+skinparam rectangleBorderColor #37474F
+
+title Figure 5: External System Integration Architecture\n**Bus Station Management System**
+
+' Central system - soft blue (same as architecture)
+rectangle "**Bus Station\nManagement System\n(BSMS)**" as BSMS #7986CB {
+  rectangle "API Gateway\n(Rate limit, Auth, Log)" as GW #9FA8DA
+  rectangle "Application Core\n(Booking, Payment,\nTrip, Notifications)" as CORE #B0BEC5
+}
+
+' External systems - muted tones from same palette
+rectangle "**Payment Gateway**\n\nProcess payments\nRefund requests\nWebhook (status)" as PAY #80CBC4
+rectangle "**GPS Service**\n\nBus location data\nETA updates\nTracking" as GPS #B2DFDB
+rectangle "**SMS Provider**\n\nBooking SMS\nOTP, Reminders\nDelay alerts" as SMS #C5CAE9
+rectangle "**Email Provider**\n\nConfirmations\nTickets\nNotifications" as EMAIL #90A4AE
+
+' API / data flow - neutral
+BSMS -[#546E7A]-> PAY : REST (HTTPS)\nPayment request\nOAuth / API Key
+PAY -[#546E7A,dashed]-> BSMS : Webhook\nPayment status
+
+BSMS -[#546E7A]-> GPS : REST (HTTPS)\nRequest / Poll\nAPI Key
+GPS -[#546E7A,dashed]-> BSMS : Location feed\n(Push or Poll)
+
+BSMS -[#546E7A]-> SMS : REST (HTTPS)\nSend SMS\nAPI Key
+BSMS -[#546E7A]-> EMAIL : REST (HTTPS)\nSend Email\nAPI Key / SMTP
+
+note bottom of BSMS
+  **Single entry/exit**
+  All external traffic via
+  API Gateway. TLS 1.2/1.3,
+  JSON payloads.
+end note
+
+note as N1
+  **Auth:** API Key or OAuth 2.0
+  **Format:** JSON
+  **No payment card data** stored in BSMS
+end note
+
+@enduml
