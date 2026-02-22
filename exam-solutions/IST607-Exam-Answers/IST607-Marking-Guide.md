@@ -570,7 +570,19 @@ Customer Arrives
 
 ## QUESTION 2: OPTION 1 (50 marks total)
 
+**Note on DFD Notation:** The answers and diagrams in this section have been updated based on corrections made in the bus-station-management-system case study. Key corrections include:
+- **Process notation**: Processes must be shown as circles (Yourdon) or rounded rectangles (Gane-Sarson), NOT plain rectangles
+- **Data store notation**: Data stores must be shown as open rectangles (two parallel horizontal lines) labeled D1, D2, D3, etc.
+- **Context diagram**: Must show only ONE process (the system) with NO data stores
+- **Data flow labeling**: All data flows must be labeled with descriptive noun phrases
+- **External entities**: Must be shown as squares/rectangles
+
 ### Part 2(i)a: List Processes and External Entities for Top-Level DFD (9 marks)
+
+**Note:** This section includes:
+- **Level 0 DFD (Context Diagram)**: Shows the system as one process with external entities
+- **Level 1 DFD**: Shows major processes and data stores (top-level decomposition)
+- **Level 2 DFD**: Shows decomposition of Process 3.0 into 3 sub-processes
 
 #### Detailed Answer:
 
@@ -646,28 +658,24 @@ Processes represent transformations of data. For the UB Golden Club system:
    - Archives old data
    - Maintains database efficiency
 
-**PlantUML Level 1 DFD Code:**
+**PlantUML Level 1 DFD Code (Yourdon Notation):**
+
+**Note:** Based on corrections made in the bus-station-management-system case study, proper DFD notation requires:
+- **Processes**: Circles/bubbles (Yourdon notation) or rounded rectangles (Gane-Sarson notation)
+- **Data Stores**: Open rectangles (two parallel horizontal lines) labeled as D1, D2, D3, etc.
+- **External Entities**: Squares/rectangles
+- **Data Flows**: Labeled arrows with noun phrases
 
 ```plantuml
 @startuml Level1_DFD
-!define RECTANGLE class
+skinparam maxwidth 1600
+skinparam maxheight 1100
+skinparam dpi 300
+scale max 1600x1100
 
-skinparam componentStyle rectangle
+title Level 1 Data Flow Diagram - UB Golden Club System (Yourdon Notation)
 
-package "UB Golden Club System" {
-  [1.0 Register\nNew Members] as Register
-  [2.0 Manage Team\nMembership] as TeamMgmt
-  [3.0 Book Playing\nSession] as BookSession
-  [4.0 Cancel\nBooking] as CancelBooking
-  [5.0 Create Session\nRecords] as CreateSession
-  [6.0 Delete Old\nSessions] as DeleteSession
-  
-  database "D1 Members" as MembersDB
-  database "D2 Teams" as TeamsDB
-  database "D3 Sessions" as SessionsDB
-  database "D4 Bookings" as BookingsDB
-}
-
+' External entities (rectangles/squares)
 rectangle "New Members" as NewMembers
 rectangle "Registered Members" as RegMembers
 rectangle "Team Leaders" as TeamLeaders
@@ -675,34 +683,337 @@ rectangle "Individual Members" as IndMembers
 rectangle "Receptionist" as Receptionist
 rectangle "Club Manager" as Manager
 
-NewMembers --> Register : Member Information
-Register --> NewMembers : Member Number
-Register --> MembersDB : Store Member Data
+' Data stores (open rectangles - Yourdon notation: two parallel lines)
+rectangle "D1\nMembers" as D1 #LightBlue
+rectangle "D2\nTeams" as D2 #LightBlue
+rectangle "D3\nSessions" as D3 #LightBlue
+rectangle "D4\nBookings" as D4 #LightBlue
 
-RegMembers --> TeamMgmt : Join Team Request
-TeamMgmt --> RegMembers : Team Confirmation
-TeamMgmt --> TeamsDB : Update Team Membership
+' Processes (circles - Yourdon notation)
+circle "1.0\nRegister\nNew Members" as P1
+circle "2.0\nManage Team\nMembership" as P2
+circle "3.0\nBook Playing\nSession" as P3
+circle "4.0\nCancel\nBooking" as P4
+circle "5.0\nCreate Session\nRecords" as P5
+circle "6.0\nDelete Old\nSessions" as P6
 
-TeamLeaders --> BookSession : Booking Request (Team)
-IndMembers --> BookSession : Booking Request (Individual)
-BookSession --> TeamLeaders : Booking Confirmation
-BookSession --> IndMembers : Booking Confirmation
-BookSession --> SessionsDB : Check Availability
-BookSession --> BookingsDB : Create Booking Record
+' Data flows from/to external entities
+NewMembers --> P1 : Member Information\n(Name, Address, Phone)
+P1 --> NewMembers : Member Number
+P1 --> D1 : write
 
-RegMembers --> CancelBooking : Cancellation Request
-CancelBooking --> RegMembers : Cancellation Confirmation
-CancelBooking --> BookingsDB : Remove Booking
-CancelBooking --> SessionsDB : Update Availability
+RegMembers --> P2 : Join Team Request
+P2 --> RegMembers : Team Confirmation
+P2 --> D2 : read/write
+P2 --> D1 : read
 
-Manager --> CreateSession : Session Details
-CreateSession --> SessionsDB : Store Session Records
+TeamLeaders --> P3 : Booking Request\n(Team)
+IndMembers --> P3 : Booking Request\n(Individual)
+P3 --> TeamLeaders : Booking Confirmation
+P3 --> IndMembers : Booking Confirmation
+P3 --> D3 : read
+P3 --> D4 : write
+P3 --> D1 : read
+P3 --> D2 : read
 
-Manager --> DeleteSession : Delete Request
-DeleteSession --> SessionsDB : Remove Old Records
+RegMembers --> P4 : Cancellation Request
+P4 --> RegMembers : Cancellation Confirmation
+P4 --> D4 : read/write
+P4 --> D3 : read/write
+
+Manager --> P5 : Session Details\n(Date, Time, Court)
+P5 --> Manager : Session Creation\nConfirmation
+P5 --> D3 : write
+
+Manager --> P6 : Delete Request\n(Sessions > 6 months)
+P6 --> Manager : Deletion Confirmation
+P6 --> D3 : read/write
 
 @enduml
 ```
+
+**Alternative PlantUML Level 1 DFD Code (Gane-Sarson Notation):**
+
+```plantuml
+@startuml Level1_DFD_GaneSarson
+skinparam maxwidth 1600
+skinparam maxheight 1100
+skinparam dpi 300
+scale max 1600x1100
+
+title Level 1 Data Flow Diagram - UB Golden Club System (Gane-Sarson Notation)
+
+' External entities (squares/rectangles)
+rectangle "New Members" as NewMembers
+rectangle "Registered Members" as RegMembers
+rectangle "Team Leaders" as TeamLeaders
+rectangle "Individual Members" as IndMembers
+rectangle "Receptionist" as Receptionist
+rectangle "Club Manager" as Manager
+
+' Data stores (open rectangles - Gane-Sarson notation)
+rectangle "D1\nMembers" as D1
+rectangle "D2\nTeams" as D2
+rectangle "D3\nSessions" as D3
+rectangle "D4\nBookings" as D4
+
+' Processes (rounded rectangles - Gane-Sarson notation)
+' Note: In PlantUML, we use rectangles but note they represent rounded rectangles
+rectangle "1.0\nRegister\nNew Members" as P1
+rectangle "2.0\nManage Team\nMembership" as P2
+rectangle "3.0\nBook Playing\nSession" as P3
+rectangle "4.0\nCancel\nBooking" as P4
+rectangle "5.0\nCreate Session\nRecords" as P5
+rectangle "6.0\nDelete Old\nSessions" as P6
+
+' Data flows
+NewMembers --> P1 : Member Information
+P1 --> NewMembers : Member Number
+P1 --> D1 : write
+
+RegMembers --> P2 : Join Team Request
+P2 --> RegMembers : Team Confirmation
+P2 --> D2 : read/write
+P2 --> D1 : read
+
+TeamLeaders --> P3 : Booking Request (Team)
+IndMembers --> P3 : Booking Request (Individual)
+P3 --> TeamLeaders : Booking Confirmation
+P3 --> IndMembers : Booking Confirmation
+P3 --> D3 : read
+P3 --> D4 : write
+P3 --> D1 : read
+P3 --> D2 : read
+
+RegMembers --> P4 : Cancellation Request
+P4 --> RegMembers : Cancellation Confirmation
+P4 --> D4 : read/write
+P4 --> D3 : read/write
+
+Manager --> P5 : Session Details
+P5 --> Manager : Session Creation Confirmation
+P5 --> D3 : write
+
+Manager --> P6 : Delete Request
+P6 --> Manager : Deletion Confirmation
+P6 --> D3 : read/write
+
+@enduml
+```
+
+**Key Notation Corrections (Based on bus-station-management-system):**
+
+1. **Process Notation:**
+   - ✅ **Correct**: Processes shown as **circles** (Yourdon) or **rounded rectangles** (Gane-Sarson)
+   - ❌ **Incorrect**: Processes shown as plain rectangles (this is incorrect notation)
+
+2. **Data Store Notation:**
+   - ✅ **Correct**: Data stores shown as **open rectangles** (two parallel horizontal lines) labeled D1, D2, D3, etc.
+   - ✅ **Correct**: Data stores labeled with noun phrases (e.g., "D1 Members", "D2 Teams")
+   - ❌ **Incorrect**: Using "database" keyword or closed rectangles
+
+3. **External Entity Notation:**
+   - ✅ **Correct**: External entities shown as **squares/rectangles**
+   - ✅ **Correct**: Labeled with noun phrases (e.g., "New Members", "Receptionist")
+
+4. **Data Flow Notation:**
+   - ✅ **Correct**: Data flows shown as **labeled arrows** with noun phrases
+   - ✅ **Correct**: All data flows must have descriptive labels
+   - ✅ **Correct**: Data flows show direction (unidirectional)
+
+5. **Level 1 DFD Requirements:**
+   - ✅ Shows **multiple processes** (decomposition from context diagram)
+   - ✅ Shows **data stores** (not shown in context diagram)
+   - ✅ Maintains **same external entities** as context diagram
+   - ✅ Processes numbered hierarchically (1.0, 2.0, 3.0, etc.)
+
+**Marking Considerations:**
+- Award full marks for correct notation (circles for processes, open rectangles for data stores)
+- Deduct marks (-1 to -2) for incorrect process notation (using rectangles instead of circles)
+- Deduct marks (-0.5 to -1) for incorrect data store notation
+- Ensure data flows are properly labeled with noun phrases
+- Verify all processes have both inputs and outputs
+
+**PlantUML Level 0 DFD Code (Context Diagram - Gane-Sarson Notation):**
+
+```plantuml
+@startuml Level0_DFD_Context
+skinparam maxwidth 1600
+skinparam maxheight 1100
+skinparam dpi 300
+scale max 1600x1100
+
+title Level 0 Data Flow Diagram - UB Golden Club System (Context Diagram)\n(Gane-Sarson style: squares = external entities, one box = process)
+
+' External entities (Gane-Sarson: squares — sources/sinks of data, NOT processes)
+rectangle "New Members" as NewMembers
+rectangle "Registered Members" as RegMembers
+rectangle "Team Leaders" as TeamLeaders
+rectangle "Individual Members" as IndMembers
+rectangle "Receptionist" as Receptionist
+rectangle "Club Manager" as Manager
+
+' Single process (Gane-Sarson: rounded rectangle = the system as one process)
+' Note: In PlantUML, we use rectangle but note it represents the system as ONE process
+rectangle "0.0\nUB Golden Club\nManagement System" as System
+
+' Data flows from external entities to system
+NewMembers --> System : Member Registration\nInformation\n(Name, Address, Phone)
+System --> NewMembers : Member Number
+
+RegMembers --> System : Booking Request\nCancellation Request\nTeam Joining Request
+System --> RegMembers : Booking Confirmation\nCancellation Confirmation\nSession Information\nMembership Information
+
+TeamLeaders --> System : Team Booking Request\nTeam Information Request
+System --> TeamLeaders : Booking Confirmation\nTeam Session Information
+
+IndMembers --> System : Individual Booking Request\nSession Inquiry
+System --> IndMembers : Booking Confirmation\nSession Availability
+
+Receptionist --> System : Registration Processing\nMember Inquiry\nBooking Assistance
+System --> Receptionist : Member Information\nBooking Status\nSession Details
+
+Manager --> System : Session Creation Request\nSystem Management Requests
+System --> Manager : Session Creation Confirmation\nSystem Reports
+
+@enduml
+```
+
+**Key Points for Level 0 DFD (Context Diagram):**
+- ✅ Shows the **entire system as ONE process** (numbered 0.0)
+- ✅ Shows all **external entities** that interact with the system
+- ✅ Shows **data flows** between external entities and the system
+- ✅ **NO data stores** shown at this level (they appear in Level 1 DFD)
+- ✅ **NO internal processes** shown (system treated as black box)
+
+**PlantUML Level 2 DFD Code - Process 3.0 Decomposition (Yourdon Notation):**
+
+**Note:** Level 2 DFD decomposes Process 3.0 "Book Playing Session" into 3 sub-processes:
+
+```plantuml
+@startuml Level2_DFD_Booking
+skinparam maxwidth 1600
+skinparam maxheight 1100
+skinparam dpi 300
+scale max 1600x1100
+
+title Level 2 Data Flow Diagram - Book Playing Session (Process 3.0 Decomposition)\n(Yourdon Notation - 3 Sub-processes)
+
+' External entities (rectangles/squares)
+rectangle "Team Leaders" as TeamLeaders
+rectangle "Individual Members" as IndMembers
+
+' Data stores (open rectangles - Yourdon notation: two parallel lines)
+rectangle "D1\nMembers" as D1 #LightBlue
+rectangle "D2\nTeams" as D2 #LightBlue
+rectangle "D3\nSessions" as D3 #LightBlue
+rectangle "D4\nBookings" as D4 #LightBlue
+
+' Sub-processes (circles - Yourdon notation)
+' Process 3.0 decomposed into 3 sub-processes
+circle "3.1\nCheck Session\nAvailability" as P31
+circle "3.2\nCalculate Session\nPrice" as P32
+circle "3.3\nCreate Booking\nRecord" as P33
+
+' Data flows from external entities
+TeamLeaders --> P31 : Booking Request\n(Date, Time, Court)
+IndMembers --> P31 : Booking Request\n(Date, Time, Court)
+
+' Process 3.1: Check Session Availability
+P31 --> D3 : read\n(Session Details)
+D3 --> P31 : Session Availability\nStatus
+P31 --> D1 : read\n(Member Info)
+D1 --> P31 : Member Details
+P31 --> D2 : read\n(Team Info)
+D2 --> P31 : Team Details
+P31 --> P32 : Available Session\nDetails
+
+' Process 3.2: Calculate Session Price
+P32 --> D3 : read\n(Session Details)
+D3 --> P32 : Session Information\n(Date, Time, Day)
+P32 --> P33 : Calculated Price\nSession Details
+
+' Process 3.3: Create Booking Record
+P33 --> D4 : write\n(Booking Record)
+D4 --> P33 : Booking ID
+P33 --> D3 : read/write\n(Update Availability)
+D3 --> P33 : Updated Status
+P33 --> TeamLeaders : Booking Confirmation\n(Booking ID, Price)
+P33 --> IndMembers : Booking Confirmation\n(Booking ID, Price)
+
+@enduml
+```
+
+**Alternative PlantUML Level 2 DFD Code (Gane-Sarson Notation):**
+
+```plantuml
+@startuml Level2_DFD_Booking_GaneSarson
+skinparam maxwidth 1600
+skinparam maxheight 1100
+skinparam dpi 300
+scale max 1600x1100
+
+title Level 2 Data Flow Diagram - Book Playing Session (Process 3.0 Decomposition)\n(Gane-Sarson Notation - 3 Sub-processes)
+
+' External entities (squares/rectangles)
+rectangle "Team Leaders" as TeamLeaders
+rectangle "Individual Members" as IndMembers
+
+' Data stores (open rectangles - Gane-Sarson notation)
+rectangle "D1\nMembers" as D1
+rectangle "D2\nTeams" as D2
+rectangle "D3\nSessions" as D3
+rectangle "D4\nBookings" as D4
+
+' Sub-processes (rounded rectangles - Gane-Sarson notation)
+' Note: In PlantUML, we use rectangles but note they represent rounded rectangles
+rectangle "3.1\nCheck Session\nAvailability" as P31
+rectangle "3.2\nCalculate Session\nPrice" as P32
+rectangle "3.3\nCreate Booking\nRecord" as P33
+
+' Data flows
+TeamLeaders --> P31 : Booking Request
+IndMembers --> P31 : Booking Request
+
+P31 --> D3 : read
+D3 --> P31 : Session Availability
+P31 --> D1 : read
+D1 --> P31 : Member Details
+P31 --> D2 : read
+D2 --> P31 : Team Details
+P31 --> P32 : Available Session Details
+
+P32 --> D3 : read
+D3 --> P32 : Session Information
+P32 --> P33 : Calculated Price
+
+P33 --> D4 : write
+D4 --> P33 : Booking ID
+P33 --> D3 : read/write
+D3 --> P33 : Updated Status
+P33 --> TeamLeaders : Booking Confirmation
+P33 --> IndMembers : Booking Confirmation
+
+@enduml
+```
+
+**Key Points for Level 2 DFD:**
+- ✅ **Decomposes Process 3.0** "Book Playing Session" into **3 sub-processes**:
+  - **3.1 Check Session Availability**: Validates session availability and member/team information
+  - **3.2 Calculate Session Price**: Calculates price based on session details (date, time, day)
+  - **3.3 Create Booking Record**: Creates booking record and updates session availability
+- ✅ Shows **data stores** used by the sub-processes (D1, D2, D3, D4)
+- ✅ Shows **data flows** between sub-processes, data stores, and external entities
+- ✅ Maintains **same external entities** as Level 1 DFD (Team Leaders, Individual Members)
+- ✅ Process numbering reflects hierarchy (3.1, 3.2, 3.3 are sub-processes of 3.0)
+- ✅ All data flows from Level 1 DFD Process 3.0 are accounted for in Level 2 DFD
+
+**Marking Considerations for Level 2 DFD:**
+- Award marks for proper decomposition (3 sub-processes)
+- Award marks for correct notation (circles for Yourdon, rounded rectangles for Gane-Sarson)
+- Award marks for proper data flow balancing (all inputs/outputs from Level 1 accounted for)
+- Deduct marks (-1) if sub-processes are not properly numbered (should be 3.1, 3.2, 3.3)
+- Deduct marks (-0.5 to -1) for missing data flows or incorrect data store access
 
 ---
 
@@ -1442,15 +1753,24 @@ A **Context Diagram** (also called Level 0 DFD) is the highest level of a Data F
 - Team membership confirmations
 - Cancellation confirmations
 
-**PlantUML Context Diagram Code:**
+**PlantUML Context Diagram Code (Gane-Sarson Notation):**
+
+**Note:** Based on corrections made in the bus-station-management-system case study, proper Context Diagram (Level 0 DFD) notation requires:
+- **System Process**: ONE process representing the entire system (numbered 0.0)
+- **External Entities**: Squares/rectangles (sources/sinks of data, NOT processes)
+- **Data Flows**: Labeled arrows with noun phrases
+- **NO Data Stores**: Context diagram shows NO data stores (they appear in Level 1 DFD)
 
 ```plantuml
 @startuml Context_Diagram
-skinparam componentStyle rectangle
+skinparam maxwidth 1600
+skinparam maxheight 1100
+skinparam dpi 300
+scale max 1600x1100
 
-rectangle "UB Golden Club System" as System {
-}
+title Level 0 Data Flow Diagram - UB Golden Club System (Context Diagram)\n(Gane-Sarson style: squares = external entities, one box = process)
 
+' External entities (Gane-Sarson: squares — sources/sinks of data, NOT processes)
 rectangle "New Members" as NewMembers
 rectangle "Registered Members" as RegMembers
 rectangle "Team Leaders" as TeamLeaders
@@ -1458,6 +1778,11 @@ rectangle "Individual Members" as IndMembers
 rectangle "Receptionist" as Receptionist
 rectangle "Club Manager" as Manager
 
+' Single process (Gane-Sarson: rounded rectangle = the system as one process)
+' Note: In PlantUML, we use rectangle but note it represents the system as ONE process
+rectangle "0.0\nUB Golden Club\nManagement System" as System
+
+' Data flows from external entities to system
 NewMembers --> System : Member Registration\nInformation\n(Name, Address, Phone)
 System --> NewMembers : Member Number
 
@@ -1479,12 +1804,38 @@ System --> Manager : Session Creation Confirmation\nSystem Reports
 @enduml
 ```
 
-**Key Points:**
-- Only ONE process (the system itself)
-- All external entities shown
-- Data flows labeled with descriptive names
-- NO data stores (they appear in Level 1 DFD)
-- NO internal processes (they appear in Level 1 DFD)
+**Key Points (Based on bus-station-management-system corrections):**
+
+1. **System Representation:**
+   - ✅ **Correct**: Shows the entire system as **ONE process** (numbered 0.0)
+   - ✅ **Correct**: Process labeled with system name (e.g., "UB Golden Club Management System")
+   - ❌ **Incorrect**: Showing multiple processes or internal details at this level
+
+2. **External Entities:**
+   - ✅ **Correct**: External entities shown as **squares/rectangles**
+   - ✅ **Correct**: Labeled with noun phrases (e.g., "New Members", "Receptionist")
+   - ✅ **Correct**: Represent sources/sinks of data outside the system boundary
+
+3. **Data Flows:**
+   - ✅ **Correct**: All data flows **labeled** with descriptive noun phrases
+   - ✅ **Correct**: Data flows show direction (unidirectional arrows)
+   - ✅ **Correct**: Data flows connect external entities to the system process
+   - ❌ **Incorrect**: Data flows without labels or between external entities directly
+
+4. **Data Stores:**
+   - ✅ **Correct**: **NO data stores** shown in context diagram
+   - ❌ **Incorrect**: Including data stores at this level (they appear in Level 1 DFD)
+
+5. **Process Decomposition:**
+   - ✅ **Correct**: **NO internal processes** shown (system treated as black box)
+   - ❌ **Incorrect**: Showing sub-processes or internal details at this level
+
+**Marking Considerations:**
+- Award full marks for correct notation (one process, external entities as squares, no data stores)
+- Deduct marks (-1 to -2) for showing data stores in context diagram
+- Deduct marks (-1) for showing multiple processes instead of one system process
+- Deduct marks (-0.5 to -1) for unlabeled data flows
+- Ensure all external entities are properly identified and connected
 
 ---
 
@@ -1967,11 +2318,16 @@ stop
 
 ## APPENDIX: COMMON TERMINOLOGY EXPECTATIONS
 
-### DFD Components:
-- **Process:** Circle/bubble, verb phrase, transforms data
-- **Data Flow:** Arrow, noun phrase, shows data movement
-- **Data Store:** Open rectangle, noun phrase, data repository
-- **External Entity:** Square/rectangle, noun phrase, outside system
+### DFD Components (Based on bus-station-management-system corrections):
+- **Process:** Circle/bubble (Yourdon) or rounded rectangle (Gane-Sarson), verb phrase, transforms data
+  - ❌ **Incorrect**: Plain rectangle (this is NOT correct DFD notation)
+  - ✅ **Correct**: Circle (Yourdon notation) or rounded rectangle (Gane-Sarson notation)
+- **Data Flow:** Arrow, noun phrase, shows data movement (must be labeled)
+- **Data Store:** Open rectangle (two parallel horizontal lines), labeled D1, D2, D3, etc., noun phrase, data repository
+  - ❌ **Incorrect**: Closed rectangle or "database" keyword
+  - ✅ **Correct**: Open rectangle (two parallel lines) with Dn label
+- **External Entity:** Square/rectangle, noun phrase, outside system boundary
+- **Context Diagram (Level 0):** ONE process (the system), external entities, NO data stores
 
 ### Activity Diagram Components:
 - **Activity:** Rounded rectangle, verb phrase, action performed
