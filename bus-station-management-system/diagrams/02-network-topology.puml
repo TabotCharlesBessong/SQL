@@ -1,0 +1,47 @@
+@startuml Bus Station Management System - Network Topology
+!theme plain
+skinparam backgroundColor #FAFBFC
+skinparam roundcorner 8
+skinparam rectangleBorderColor #37474F
+
+title Figure 2: Network Topology Diagram\n**Bus Station Management System**\n(Hierarchical Star)
+
+' Central hub - single soft blue
+rectangle "**Central Office / Data Center**\n\nApplication Server(s)\nDatabase Server(s)\nLoad Balancer\nFirewall" as HUB #7986CB {
+  rectangle "BSMS Core" as CORE #9FA8DA
+}
+
+' Stations - same blue, lighter
+rectangle "**Station A**\n(Ticketing Counters\nKiosks\nLAN)" as SA #B0BEC5
+rectangle "**Station B**\n(Ticketing Counters\nKiosks\nLAN)" as SB #B0BEC5
+rectangle "**Station C**\n(Ticketing Counters\nKiosks\nLAN)" as SC #B0BEC5
+rectangle "**Station D**\n(Ticketing Counters\nKiosks\nLAN)" as SD #B0BEC5
+
+' Mobile / remote - soft grey-blue
+rectangle "**Mobile Users**\n(Passengers, Drivers)\n4G / Wi-Fi" as MOB #90A4AE
+rectangle "**Remote Staff**\n(VPN)" as REM #90A4AE
+
+' Connections - neutral
+SA -[#546E7A]-> HUB : Fiber / Broadband\nDedicated Link
+SB -[#546E7A]-> HUB : Fiber / Broadband\nDedicated Link
+SC -[#546E7A]-> HUB : Fiber / Broadband\nDedicated Link
+SD -[#546E7A]-> HUB : Fiber / Broadband\nDedicated Link
+MOB -[#78909C,dashed]-> HUB : Internet\n(HTTPS / TLS)
+REM -[#78909C,dashed]-> HUB : VPN\n(HTTPS)
+
+note bottom of HUB
+  **Central Hub**
+  Single point of management
+  and policy enforcement.
+  Faults at one station do not
+  bring down the core system.
+end note
+
+note as N1
+  **Topology:** Hierarchical Star
+  **Primary:** Fiber / Broadband / Wi-Fi
+  **Secondary:** 4G/LTE for mobile
+  **Security:** TLS, VPN for remote
+end note
+
+@enduml

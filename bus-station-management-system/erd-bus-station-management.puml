@@ -1,0 +1,306 @@
+@startuml Bus Station Management System - ER Diagram
+!theme plain
+skinparam linetype ortho
+skinparam roundcorner 10
+skinparam shadowing false
+
+title Bus Station Management System - Entity Relationship Diagram
+
+' ========== ENTITIES ==========
+
+entity "Passenger" as Passenger {
+  * **PassengerID** : INT <<PK>>
+  --
+  FullName : VARCHAR(100)
+  Email : VARCHAR(255)
+  PhoneNumber : VARCHAR(20)
+  Address : VARCHAR(255)
+  City : VARCHAR(50)
+  State : VARCHAR(50)
+  Country : VARCHAR(50)
+  DateOfBirth : DATE
+  IDNumber : VARCHAR(50)
+  PasswordHash : VARCHAR(255)
+  EmailVerified : BOOLEAN
+  AccountStatus : VARCHAR(20)
+  CreatedDate : TIMESTAMP
+  LastLoginDate : TIMESTAMP
+}
+
+entity "Staff" as Staff {
+  * **StaffID** : INT <<PK>>
+  --
+  FullName : VARCHAR(100)
+  Email : VARCHAR(255)
+  PhoneNumber : VARCHAR(20)
+  Address : VARCHAR(255)
+  DateOfBirth : DATE
+  EmploymentDate : DATE
+  * RoleID : INT <<FK>>
+  * DepartmentID : INT <<FK>>
+  PasswordHash : VARCHAR(255)
+  AccountStatus : VARCHAR(20)
+  LicenseNumber : VARCHAR(50)
+  LicenseExpiryDate : DATE
+  CreatedDate : TIMESTAMP
+  LastLoginDate : TIMESTAMP
+}
+
+entity "Role" as Role {
+  * **RoleID** : INT <<PK>>
+  --
+  RoleName : VARCHAR(50)
+  Description : VARCHAR(255)
+  Permissions : TEXT
+  CreatedDate : TIMESTAMP
+}
+
+entity "Department" as Department {
+  * **DepartmentID** : INT <<PK>>
+  --
+  DepartmentName : VARCHAR(100)
+  Description : VARCHAR(255)
+  ManagerID : INT <<FK>>
+  CreatedDate : TIMESTAMP
+}
+
+entity "Bus" as Bus {
+  * **BusID** : INT <<PK>>
+  --
+  LicensePlate : VARCHAR(20)
+  Model : VARCHAR(50)
+  Manufacturer : VARCHAR(50)
+  YearOfManufacture : INT
+  Capacity : INT
+  * BusTypeID : INT <<FK>>
+  Status : VARCHAR(20)
+  RegistrationDate : DATE
+  InsuranceNumber : VARCHAR(50)
+  InsuranceExpiryDate : DATE
+  LastMaintenanceDate : DATE
+  NextMaintenanceDate : DATE
+  GPSDeviceID : VARCHAR(50)
+  CreatedDate : TIMESTAMP
+}
+
+entity "BusType" as BusType {
+  * **BusTypeID** : INT <<PK>>
+  --
+  TypeName : VARCHAR(50)
+  Description : VARCHAR(255)
+  BaseFareMultiplier : DECIMAL(5,2)
+  Amenities : TEXT
+  CreatedDate : TIMESTAMP
+}
+
+entity "Route" as Route {
+  * **RouteID** : INT <<PK>>
+  --
+  RouteName : VARCHAR(100)
+  RouteCode : VARCHAR(20)
+  * OriginStationID : INT <<FK>>
+  * DestinationStationID : INT <<FK>>
+  Distance : DECIMAL(10,2)
+  EstimatedTravelTime : INT
+  RouteClassification : VARCHAR(30)
+  Status : VARCHAR(20)
+  BaseFare : DECIMAL(10,2)
+  CreatedDate : TIMESTAMP
+}
+
+entity "Station" as Station {
+  * **StationID** : INT <<PK>>
+  --
+  StationName : VARCHAR(100)
+  StationCode : VARCHAR(20)
+  Address : VARCHAR(255)
+  City : VARCHAR(50)
+  State : VARCHAR(50)
+  Country : VARCHAR(50)
+  Latitude : DECIMAL(10,7)
+  Longitude : DECIMAL(10,7)
+  ContactNumber : VARCHAR(20)
+  Facilities : TEXT
+  Status : VARCHAR(20)
+  CreatedDate : TIMESTAMP
+}
+
+entity "RouteStop" as RouteStop {
+  * **RouteStopID** : INT <<PK>>
+  --
+  * RouteID : INT <<FK>>
+  * StationID : INT <<FK>>
+  StopOrder : INT
+  DistanceFromOrigin : DECIMAL(10,2)
+  EstimatedTimeFromOrigin : INT
+  StopFare : DECIMAL(10,2)
+  CreatedDate : TIMESTAMP
+}
+
+entity "Trip" as Trip {
+  * **TripID** : INT <<PK>>
+  --
+  TripNumber : VARCHAR(30)
+  * RouteID : INT <<FK>>
+  * BusID : INT <<FK>>
+  * DriverID : INT <<FK>>
+  DepartureDate : DATE
+  DepartureTime : TIME
+  ExpectedArrivalTime : TIME
+  ActualDepartureTime : TIME
+  ActualArrivalTime : TIME
+  Status : VARCHAR(20)
+  TotalSeats : INT
+  BookedSeats : INT
+  AvailableSeats : INT
+  CurrentLocation : VARCHAR(100)
+  ETA : TIME
+  DelayMinutes : INT
+  CreatedDate : TIMESTAMP
+  UpdatedDate : TIMESTAMP
+}
+
+entity "Schedule" as Schedule {
+  * **ScheduleID** : INT <<PK>>
+  --
+  * RouteID : INT <<FK>>
+  DepartureTime : TIME
+  Frequency : VARCHAR(30)
+  DaysOfWeek : TEXT
+  EffectiveDate : DATE
+  ExpiryDate : DATE
+  Status : VARCHAR(20)
+  CreatedDate : TIMESTAMP
+}
+
+entity "Booking" as Booking {
+  * **BookingID** : INT <<PK>>
+  --
+  BookingReference : VARCHAR(30)
+  * PassengerID : INT <<FK>>
+  * TripID : INT <<FK>>
+  StaffID : INT <<FK>>
+  BookingDate : DATE
+  BookingTime : TIME
+  NumberOfPassengers : INT
+  TotalFare : DECIMAL(10,2)
+  DiscountAmount : DECIMAL(10,2)
+  FinalAmount : DECIMAL(10,2)
+  PaymentStatus : VARCHAR(20)
+  BookingStatus : VARCHAR(20)
+  CancellationDate : DATE
+  CancellationReason : VARCHAR(255)
+  SpecialRequests : TEXT
+  CreatedDate : TIMESTAMP
+  UpdatedDate : TIMESTAMP
+}
+
+entity "Ticket" as Ticket {
+  * **TicketID** : INT <<PK>>
+  --
+  TicketNumber : VARCHAR(30)
+  * BookingID : INT <<FK>>
+  * PassengerID : INT <<FK>>
+  * TripID : INT <<FK>>
+  SeatNumber : VARCHAR(10)
+  QRCode : TEXT
+  Barcode : VARCHAR(100)
+  Status : VARCHAR(20)
+  CheckInTime : TIMESTAMP
+  BoardingTime : TIMESTAMP
+  IssuedDate : TIMESTAMP
+  ExpiryDate : TIMESTAMP
+}
+
+entity "Payment" as Payment {
+  * **PaymentID** : INT <<PK>>
+  --
+  * BookingID : INT <<FK>>
+  PaymentMethod : VARCHAR(30)
+  Amount : DECIMAL(10,2)
+  TransactionID : VARCHAR(100)
+  PaymentGateway : VARCHAR(50)
+  PaymentDate : TIMESTAMP
+  PaymentStatus : VARCHAR(20)
+  PaymentGatewayResponse : TEXT
+  ReceiptNumber : VARCHAR(50)
+  CreatedDate : TIMESTAMP
+}
+
+entity "Refund" as Refund {
+  * **RefundID** : INT <<PK>>
+  --
+  * BookingID : INT <<FK>>
+  * PaymentID : INT <<FK>>
+  RefundAmount : DECIMAL(10,2)
+  RefundReason : VARCHAR(255)
+  RefundMethod : VARCHAR(50)
+  RefundDate : DATE
+  RefundStatus : VARCHAR(20)
+  TransactionID : VARCHAR(100)
+  ProcessedBy : INT <<FK>>
+  CreatedDate : TIMESTAMP
+  ProcessedDate : TIMESTAMP
+}
+
+entity "Maintenance" as Maintenance {
+  * **MaintenanceID** : INT <<PK>>
+  --
+  * BusID : INT <<FK>>
+  MaintenanceType : VARCHAR(30)
+  ScheduledDate : DATE
+  CompletedDate : DATE
+  Cost : DECIMAL(10,2)
+  Description : TEXT
+  PartsReplaced : TEXT
+  MaintenanceProvider : VARCHAR(100)
+  ProviderContact : VARCHAR(50)
+  Status : VARCHAR(20)
+  NextMaintenanceDate : DATE
+  MileageAtMaintenance : INT
+  CreatedDate : TIMESTAMP
+  UpdatedDate : TIMESTAMP
+}
+
+' ========== RELATIONSHIPS ==========
+
+' Passenger
+Passenger ||--o{ Booking : "makes"
+Passenger ||--o{ Ticket : "has"
+
+' Staff
+Role ||--o{ Staff : "assigned to"
+Department ||--o{ Staff : "has"
+Staff ||--o{ Trip : "drives"
+Staff ||--o{ Booking : "creates"
+Department }o--|| Staff : "managed by\n(ManagerID)"
+
+' Bus
+BusType ||--o{ Bus : "has"
+Bus ||--o{ Trip : "assigned to"
+Bus ||--o{ Maintenance : "has"
+
+' Route & Station
+Station ||--o{ Route : "origin\n(OriginStationID)"
+Station ||--o{ Route : "destination\n(DestinationStationID)"
+Route ||--o{ RouteStop : "has"
+Station ||--o{ RouteStop : "at"
+Route ||--o{ Trip : "follows"
+Route ||--o{ Schedule : "has"
+
+' Trip
+Trip ||--o{ Booking : "has"
+Trip ||--o{ Ticket : "has"
+
+' Booking
+Booking ||--o{ Ticket : "issues"
+Booking ||--o{ Payment : "has"
+Booking ||--o{ Refund : "has"
+
+' Payment
+Payment ||--o{ Refund : "refunded by"
+
+' Refund (processed by Staff)
+Staff ||--o{ Refund : "processes"
+
+@enduml
