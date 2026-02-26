@@ -1,0 +1,66 @@
+' ```plantuml
+@startuml Activity_Diagram
+|#LightBlue|Club Manager|
+start
+:Create Session Records;
+:Set Session Details\n(Date, Time, Court);
+:Store in System;
+|#LightGreen|Receptionist|
+:Receive New Member;
+:Collect Member Information\n(Name, Address, Phone);
+|#LightYellow|System|
+:Generate Member Number;
+:Store Member Data;
+:Send Member Number;
+|#LightGreen|Receptionist|
+:Provide Member Number\nto New Member;
+|#LightYellow|Member/Team Leader|
+:Login to System;
+:Select Action;
+if (Action Type?) then (Join Team)
+  :Request to Join Team;
+  |#LightYellow|System|
+  :Check Team Membership;
+  if (Already in Team?) then (Yes)
+    :Reject Request;
+    :Display Error Message;
+    stop
+  else (No)
+    :Add to Team;
+    :Confirm Team Membership;
+    |#LightYellow|Member/Team Leader|
+    :Receive Confirmation;
+  endif
+elseif (Book Session?) then (Book Session)
+  :Select Session\n(Date, Time, Court);
+  |#LightYellow|System|
+  :Check Session Availability;
+  if (Available?) then (No)
+    :Display Unavailable Message;
+    stop
+  else (Yes)
+    :Calculate Session Price;
+    :Create Booking Record;
+    :Update Session Availability;
+    :Send Booking Confirmation;
+    |#LightYellow|Member/Team Leader|
+    :Receive Confirmation;
+  endif
+elseif (Cancel Booking?) then (Cancel Booking)
+  :Select Booking to Cancel;
+  |#LightYellow|System|
+  :Find Booking Record;
+  :Remove Booking;
+  :Update Session Availability;
+  :Send Cancellation Confirmation;
+  |#LightYellow|Member/Team Leader|
+  :Receive Confirmation;
+else (Other)
+  stop
+endif
+|#LightBlue|Club Manager|
+:Check Old Sessions\n(>6 months);
+:Delete Old Session Records;
+:Archive Data;
+stop
+@enduml

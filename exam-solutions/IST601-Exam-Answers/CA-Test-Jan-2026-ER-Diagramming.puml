@@ -1,0 +1,274 @@
+' IST601 CA Test on ER Diagramming - January 2026
+' PlantUML code for all ER diagrams in CA-Test-Jan-2026-ER-Diagramming.md
+' Use: export each @startuml...@enduml block to a separate file, or use PlantUML to render by diagram name.
+
+' ==============================================================================
+' Diagram 1: Question 1e - Department Has Employee (1:N) - Chen style
+' ==============================================================================
+@startuml(Q1e-Department-Employee-Chen)
+!theme plain
+skinparam linetype ortho
+skinparam backgroundColor #FEFEFE
+
+entity "Department" as dept {
+  * DepartmentID --
+  Name
+}
+
+entity "Employee" as emp {
+  * EmployeeID --
+  Name
+}
+
+entity "Has" as has <<relationship>> {
+  --
+}
+
+dept -- has : "1"
+has -- emp : "N"
+
+@enduml
+
+' ==============================================================================
+' Diagram 2a: Question 2b-A - Mandatory One-to-One (Crow's Foot)
+' ==============================================================================
+@startuml(Q2b-A-Mandatory-One-to-One)
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+entity "Entity A" as a {
+  * Id --
+  --
+}
+
+entity "Entity B" as b {
+  * Id --
+  --
+}
+
+a ||--|| b : "Relationship"
+
+@enduml
+
+' ==============================================================================
+' Diagram 2b: Question 2b-B - Optional One (Crow's Foot)
+' ==============================================================================
+@startuml(Q2b-B-Optional-One)
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+entity "Entity A" as a {
+  * Id --
+  --
+}
+
+entity "Entity B" as b {
+  * Id --
+  --
+}
+
+a }o--|| b : "Relationship"
+
+@enduml
+
+' ==============================================================================
+' Diagram 2c: Question 2b-C - Mandatory One-to-Many (Crow's Foot)
+' ==============================================================================
+@startuml(Q2b-C-Mandatory-One-to-Many)
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+entity "Entity A" as a {
+  * Id --
+  --
+}
+
+entity "Entity B" as b {
+  * Id --
+  --
+}
+
+a ||--o{ b : "Relationship"
+
+@enduml
+
+' ==============================================================================
+' Diagram 2d: Question 2b-D - Optional One-to-Many (Crow's Foot)
+' ==============================================================================
+@startuml(Q2b-D-Optional-One-to-Many)
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+entity "Entity A" as a {
+  * Id --
+  --
+}
+
+entity "Entity B" as b {
+  * Id --
+  --
+}
+
+a }o--o{ b : "Relationship"
+
+@enduml
+
+' ==============================================================================
+' Diagram 3a: Question 3a-i - Retail Store (Chen notation)
+' Customer -- Places (1,N) -- Order -- Contains (M,N) -- Product
+' ==============================================================================
+@startuml(Q3a-Retail-Store-Chen)
+!theme plain
+skinparam linetype ortho
+skinparam backgroundColor #FEFEFE
+
+entity "Customer" as cust {
+  * CustomerID --
+  Name --
+  Email
+}
+
+entity "Order" as ord {
+  * OrderID --
+  Date --
+  TotalAmount
+}
+
+entity "Product" as prod {
+  * ProductID --
+  ProductName --
+  Price
+}
+
+entity "Places" as places <<relationship>>
+entity "Contains" as contains <<relationship>>
+
+cust -- places : "1"
+places -- ord : "N"
+
+ord -- contains : "M"
+contains -- prod : "N"
+
+note bottom of contains
+  (M, N)
+  Relationship
+end note
+
+note bottom of places
+  (1, N)
+end note
+
+@enduml
+
+' ==============================================================================
+' Diagram 3b: Question 3a - Retail Store with relationship attributes (Chen)
+' Contains has attributes: Quantity, UnitPrice
+' ==============================================================================
+@startuml(Q3a-Retail-Store-Chen-With-Attributes)
+!theme plain
+skinparam linetype ortho
+skinparam backgroundColor #FEFEFE
+
+entity "Customer" as cust {
+  * CustomerID --
+  Name --
+  Email
+}
+
+entity "Order" as ord {
+  * OrderID --
+  Date --
+  TotalAmount
+}
+
+entity "Product" as prod {
+  * ProductID --
+  ProductName --
+  Price
+}
+
+entity "Places" as places <<relationship>>
+entity "Contains" as contains <<relationship>> {
+  Quantity --
+  UnitPrice
+}
+
+cust -- places : "1"
+places -- ord : "N"
+
+ord -- contains : "M"
+contains -- prod : "N"
+
+note bottom of places
+  (1, N)
+end note
+
+note bottom of contains
+  (M, N)
+  Relationship attributes:
+  Quantity, UnitPrice
+end note
+
+@enduml
+
+' ==============================================================================
+' Diagram 3c: Question 3a-ii - Retail Store (Crow's Foot notation)
+' Customer | Places > Order < Contains > Product
+' ==============================================================================
+@startuml(Q3a-Retail-Store-CrowsFoot)
+!theme plain
+skinparam linetype ortho
+skinparam backgroundColor #FEFEFE
+
+entity "Customer" as cust {
+  * CustomerID --
+  Name --
+  Email
+}
+
+entity "Order" as ord {
+  * OrderID --
+  Date --
+  TotalAmount
+}
+
+entity "Product" as prod {
+  * ProductID --
+  ProductName --
+  Price
+}
+
+cust ||--o{ ord : "Places"
+ord }o--o{ prod : "Contains\n(Quantity, UnitPrice)"
+
+@enduml
+
+' ==============================================================================
+' Diagram 4: Question 3b-iii - Employee and Dependent (MySQL Workbench style)
+' Strong entity Employee, Weak entity Dependent, Identifying relationship (1:N)
+' ==============================================================================
+@startuml(Q3b-Employee-Dependent)
+!theme plain
+skinparam backgroundColor #FEFEFE
+
+entity "Employee" as emp <<strong>> {
+  * EmployeeID --
+  Name --
+  Birthdate
+}
+
+entity "Dependent" as dep <<weak>> {
+  * EmployeeID <<FK>> --
+  * Name <<partial key>> --
+  Relationship --
+  Birthdate
+}
+
+emp ||--o{ dep : "Has\n(Identifying)\nSolid line"
+
+note bottom of dep
+  Composite PK: (EmployeeID, Name)
+  FK: EmployeeID → Employee(EmployeeID)
+end note
+
+@enduml
