@@ -13,97 +13,88 @@ This document contains complete solutions to the IST691 CA Test on Research Meth
 
 ---
 
-## Question 1: Research Questions and Variables (6 marks)
+## Question 1: Research Types, Variables, Validity and Causation (15 marks)
 
-### a) State what is meant by the research question. (1 mark)
+### a) Explain briefly, the following characterizations of research. (4 marks)
 
-**Answer:**
+#### i) Descriptive vs experimental research
 
-A **research question** is the **specific, focused question** that comes from the research problem and **asks what relationship exists between two or more variables**, in a way that **can be answered by collecting and analysing data**.  
-It turns the general research problem into a clear, testable inquiry that guides the design of the study.
+**Descriptive (non-experimental) research**
+- **Purpose:** To **describe “what is”** – characteristics, behaviours or phenomena as they **naturally occur**.  
+- **Method:** The researcher **observes and measures variables without manipulating them** (surveys, case studies, observational and correlational studies).  
+- **Causation:** Can show **associations** or patterns but **cannot establish cause–effect**.
 
----
+**Experimental research**
+- **Purpose:** To investigate **cause–effect relationships**.  
+- **Method:** The researcher **manipulates one or more independent variables** and **controls extraneous variables**, then **observes the effect on the dependent variable**.  
+- **Causation:** With good control (random assignment, constancy, etc.), experimental research can provide **strong evidence for causation**.
 
-### b) Examine the following research question: "Do Form Five students who participate in a supplemental daily mathematics tutorial program learn more mathematics as demonstrated in the mathematics mock GCE results than those who do not receive this supplementary mathematics tutorial program?" (2 marks)
+#### ii) Quantitative vs qualitative research
 
-#### i) What is the independent variable? (1 mark)
+**Quantitative research**
+- Uses **numerical data and statistics** to **measure variables**, **test hypotheses**, find patterns and (when sampling is good) **generalize** to a population.  
+- Typical methods: structured surveys, experiments, numerical observations, analysis of existing numerical records.
 
-**Answer:**
-
-The **independent variable (IV)** is **participation in the supplemental daily mathematics tutorial program** (tutorial program participation: **yes vs no**).
-
-- In the notes, the IV is the factor the researcher **changes or selects** in order to observe its effect on the dependent variable (the “cause” side of the relationship).
-
----
-
-#### ii) What is the dependent variable? (1 mark)
-
-**Answer:**
-
-The **dependent variable (DV)** is **mathematics achievement**, measured by the **mathematics mock GCE results** (students’ scores).
-
-- In the notes, the DV is the **outcome or effect that is measured**; it is expected to **change in response to the IV** (the “effect” side of the relationship).
-
-**Variable Relationship:**
-```
-Independent Variable → Dependent Variable
-Tutorial Program Participation → Mathematics Learning (GCE Results)
-```
+**Qualitative research**
+- Uses **non‑numerical data** (words, images, observations) to **understand meanings, experiences and processes in depth**.  
+- Typical methods: interviews, focus groups, case studies, ethnography, document analysis; aims more at **“why” and “how”** than “how much”.
 
 ---
 
-### c) In a large study of historical data that was collected over the past 10 years, the following results were arrived at: (3 marks)
+### b) State in one sentence only, the meaning of each of the following types of variables. (3 marks)
 
-- There was greater incidence of diabetes in people with high blood sugar levels than in people with low blood sugar levels
-- No relationship was found in people's heights and the time they spent reading
-- People with high stress levels had lower levels of alertness than people with low stress level
+#### i) Independent Variable
+The **independent variable (IV)** is the variable that the researcher **manipulates or selects** in order to see its **effect on the dependent variable** – the “cause” side of the relationship.
 
-#### i) State the kind of research that was involved in the study. (1 mark)
+#### ii) Dependent Variable
+The **dependent variable (DV)** is the **outcome or response** that is **measured**, expected to **change as a result of the independent variable** – the “effect” side of the relationship.
 
-**Answer:**
-
-The study is a **non-experimental, quantitative (descriptive/correlational) study using existing data**.
-
-- According to the notes on **non-experimental research**, the researcher **does not manipulate variables** but simply **observes relationships** using data that already exist (here, historical data collected over 10 years).
+#### iii) Extraneous / Confounding Variable
+An **extraneous variable** is **any variable other than the IV that can influence the DV**, and when it varies with the IV and offers an alternative explanation for the results it becomes a **confounding variable** and threatens validity.
 
 ---
 
-#### ii) Write one sentence or phrase that summarizes each of the three results that are outlined above. (1.5 marks)
+### c) State in one sentence only, the meaning of each of the following. (3 marks)
 
-**Answer:**
+#### i) Internal validity in experimentation
+**Internal validity** is the extent to which, in an experiment, we can correctly conclude that **the independent variable caused the observed change in the dependent variable**, rather than the change being due to extraneous or confounding variables.
 
-1. **Result 1:** "High blood sugar levels are positively associated with increased diabetes incidence" or "People with high blood sugar have higher rates of diabetes."
+#### ii) Validity of the independent variable
+The **validity of the independent variable (construct validity of the IV)** is the extent to which the way the IV is **operationally defined and manipulated really represents the theoretical concept** the researcher intends to study.
 
-2. **Result 2:** "Height and reading time are not correlated" or "There is no relationship between height and reading time."
-
-3. **Result 3:** "High stress levels are negatively associated with alertness" or "People with high stress have lower alertness levels."
-
----
-
-#### iii) For each of the three results, indicate if causation was established; if causation was not established, state why. (1.5 marks)
-
-**Answer:**
-
-**Result 1: High blood sugar levels and diabetes incidence**
-
-- **Causation:** **Not established.**  
-- **Why:** In the notes on non-experimental (correlational) research, we are reminded that **“correlation does not imply causation.”** The researchers only **observed a relationship** using historical data; they did **not manipulate blood sugar levels or control all other variables**, so other factors (e.g. diet, genetics, lifestyle) could explain the higher incidence of diabetes.
+#### iii) Reliability of the dependent variable
+The **reliability of the dependent variable** is the degree to which the **measure of the DV gives consistent results** when the same phenomenon is measured under the same conditions (i.e. results are reproducible).
 
 ---
 
-**Result 2: Height and reading time**
+### d) Causation and necessary/sufficient conditions (2 + 3 marks)
 
-- **Causation:** **Not established (and no relationship was found).**  
-- **Why:** The study found **no relationship**, so there is **no evidence of any effect** to explain. In addition, like other non-experimental findings, this is based on **observation only**, not on manipulation of height or reading time.
+#### i) What is the meaning of causation in an experiment? (2 marks)
 
----
+In an experiment, **causation** means that **manipulating the independent variable produces a change in the dependent variable**, and alternative explanations (extraneous or confounding variables) have been **controlled or ruled out**, so the IV can be regarded as the **cause** of the effect on the DV.
 
-**Result 3: High stress levels and alertness**
+#### ii) Classify each statement as a necessary condition, sufficient condition, or necessary and sufficient condition. (3 marks)
+Use the **underlined part** of each sentence as the condition being tested.
 
-- **Causation:** **Not established.**  
-- **Why:** The result shows that stress level and alertness are **associated**, but in non-experimental research the variables are **not manipulated or controlled**. As stressed in the notes, other variables (e.g. sleep, workload, health) could be responsible for both higher stress and lower alertness, so we cannot conclude that stress **causes** the change in alertness from this kind of study alone.
+Let the **underlined part** be the condition and the rest of the statement be the effect:
 
-**Overall:** The three findings come from **non-experimental (correlational) research**, which, as stated in the notes, **describes relationships but cannot by itself prove causation**.
+a) *Rain* makes the ground wet  
+→ **Sufficient condition** (rain is enough to make the ground wet, but the ground can also be wet for other reasons).
+
+b) *Water* is necessary for human life  
+→ **Necessary condition** (humans cannot live without water, but water alone is not enough for life).
+
+c) *Having four sides* is necessary for an object to be called a square  
+→ **Necessary condition** (a square must have four sides, but not every four‑sided figure is a square).
+
+d) *An unmarried adult male* is a bachelor  
+→ **Necessary and sufficient condition** (being an unmarried adult male is exactly what it means to be a bachelor).
+
+e) *Being a dog* is sufficient for being an animal  
+→ **Sufficient condition** (every dog is an animal, but there are animals that are not dogs).
+
+f) *An alcoholic* is a consumer of alcohol  
+→ **Sufficient condition** (every alcoholic consumes alcohol, but there are alcohol consumers who are not alcoholics).
 
 ---
 
