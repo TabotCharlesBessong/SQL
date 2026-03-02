@@ -19,18 +19,8 @@ This document contains complete solutions to the IST691 CA Test on Research Meth
 
 **Answer:**
 
-A **research question** is a clear, focused, and specific inquiry that defines what a researcher wants to investigate or understand. It guides the entire research process by:
-
-- Identifying the problem or phenomenon to be studied
-- Determining the scope and direction of the research
-- Shaping the methodology and data collection approach
-- Providing a framework for analyzing and interpreting results
-
-**Key Characteristics:**
-- Must be answerable through empirical investigation
-- Should be specific and well-defined
-- Must be relevant to the field of study
-- Should be feasible to investigate within available resources
+A **research question** is the **specific, focused question** that comes from the research problem and **asks what relationship exists between two or more variables**, in a way that **can be answered by collecting and analysing data**.  
+It turns the general research problem into a clear, testable inquiry that guides the design of the study.
 
 ---
 
@@ -40,14 +30,9 @@ A **research question** is a clear, focused, and specific inquiry that defines w
 
 **Answer:**
 
-The **independent variable** is: **Participation in the supplemental daily mathematics tutorial program** (or **Tutorial Program Participation**).
+The **independent variable (IV)** is **participation in the supplemental daily mathematics tutorial program** (tutorial program participation: **yes vs no**).
 
-**Explanation:**
-- The independent variable is the factor that is **manipulated** or **controlled** by the researcher
-- In this study, students are either in the group that receives the tutorial program or the group that does not
-- This variable has two levels/categories:
-  - **Level 1:** Students who participate in the tutorial program
-  - **Level 2:** Students who do not participate in the tutorial program
+- In the notes, the IV is the factor the researcher **changes or selects** in order to observe its effect on the dependent variable (the “cause” side of the relationship).
 
 ---
 
@@ -55,13 +40,9 @@ The **independent variable** is: **Participation in the supplemental daily mathe
 
 **Answer:**
 
-The **dependent variable** is: **Mathematics learning** (as measured by **mathematics mock GCE results**).
+The **dependent variable (DV)** is **mathematics achievement**, measured by the **mathematics mock GCE results** (students’ scores).
 
-**Explanation:**
-- The dependent variable is the **outcome** or **effect** that is being measured
-- It is what the researcher expects to change or differ based on the independent variable
-- In this case, mathematics learning is measured through the **mathematics mock GCE results** (scores/performance)
-- The researcher is investigating whether tutorial program participation affects mathematics learning outcomes
+- In the notes, the DV is the **outcome or effect that is measured**; it is expected to **change in response to the IV** (the “effect” side of the relationship).
 
 **Variable Relationship:**
 ```
@@ -81,19 +62,9 @@ Tutorial Program Participation → Mathematics Learning (GCE Results)
 
 **Answer:**
 
-The kind of research involved is: **Correlational Research** (or **Observational Research** / **Non-experimental Research**).
+The study is a **non-experimental, quantitative (descriptive/correlational) study using existing data**.
 
-**Explanation:**
-- The study used **historical data** collected over the past 10 years
-- The researchers **observed** and **analyzed** existing relationships between variables
-- No manipulation of variables occurred - the researchers did not control or assign participants to conditions
-- The study examined **associations** or **relationships** between variables without intervention
-- This is characteristic of **correlational/observational research** rather than experimental research
-
-**Alternative acceptable answers:**
-- **Retrospective Research** (since it uses historical data)
-- **Archival Research** (if data came from existing records)
-- **Longitudinal Research** (if data was collected over time from the same participants)
+- According to the notes on **non-experimental research**, the researcher **does not manipulate variables** but simply **observes relationships** using data that already exist (here, historical data collected over 10 years).
 
 ---
 
@@ -115,55 +86,24 @@ The kind of research involved is: **Correlational Research** (or **Observational
 
 **Result 1: High blood sugar levels and diabetes incidence**
 
-**Causation:** **NOT established**
-
-**Reason:**
-- This is a **correlational relationship** - the study only shows an association, not causation
-- **Third variable problem:** Other factors (genetics, diet, exercise, age) could be causing both high blood sugar and diabetes
-- **Directionality problem:** It's unclear if high blood sugar causes diabetes or if diabetes causes high blood sugar, or if both are caused by another factor
-- **Reverse causation:** Diabetes might cause high blood sugar rather than the other way around
-- To establish causation, an **experimental study** would be needed where blood sugar levels are manipulated
+- **Causation:** **Not established.**  
+- **Why:** In the notes on non-experimental (correlational) research, we are reminded that **“correlation does not imply causation.”** The researchers only **observed a relationship** using historical data; they did **not manipulate blood sugar levels or control all other variables**, so other factors (e.g. diet, genetics, lifestyle) could explain the higher incidence of diabetes.
 
 ---
 
 **Result 2: Height and reading time**
 
-**Causation:** **NOT established** (and no relationship was found)
-
-**Reason:**
-- No relationship was found, so there is nothing to establish causation for
-- Even if a relationship existed, causation could not be established from correlational data
-- Height is largely determined by genetics and cannot be manipulated, making causal inference difficult
-- The lack of relationship suggests these variables are independent of each other
+- **Causation:** **Not established (and no relationship was found).**  
+- **Why:** The study found **no relationship**, so there is **no evidence of any effect** to explain. In addition, like other non-experimental findings, this is based on **observation only**, not on manipulation of height or reading time.
 
 ---
 
 **Result 3: High stress levels and alertness**
 
-**Causation:** **NOT established**
+- **Causation:** **Not established.**  
+- **Why:** The result shows that stress level and alertness are **associated**, but in non-experimental research the variables are **not manipulated or controlled**. As stressed in the notes, other variables (e.g. sleep, workload, health) could be responsible for both higher stress and lower alertness, so we cannot conclude that stress **causes** the change in alertness from this kind of study alone.
 
-**Reason:**
-- This is a **correlational relationship** - the study only shows an association
-- **Third variable problem:** Other factors (sleep quality, workload, health conditions, caffeine intake) could affect both stress and alertness
-- **Bidirectional relationship:** Stress might reduce alertness, but low alertness might also increase stress
-- **Confounding variables:** Factors like work environment, personal circumstances, or health issues could be influencing both variables
-- To establish causation, an **experimental study** would be needed where stress levels are manipulated and other variables are controlled
-
----
-
-**General Principle:**
-
-**Correlational research CANNOT establish causation** because:
-1. **No manipulation:** Variables are not controlled or manipulated by the researcher
-2. **Third variable problem:** Unmeasured variables may be causing the observed relationship
-3. **Directionality problem:** The direction of causality is unclear
-4. **Confounding variables:** Other factors may influence both variables
-
-**To establish causation, experimental research is required:**
-- Random assignment to groups
-- Manipulation of the independent variable
-- Control of extraneous variables
-- Randomization to minimize confounding
+**Overall:** The three findings come from **non-experimental (correlational) research**, which, as stated in the notes, **describes relationships but cannot by itself prove causation**.
 
 ---
 
