@@ -11,14 +11,15 @@
 #### **Meaning of Research Question**
 
 **Definition:**
-A **research question** is a clear, focused, and specific question that the research study aims to answer. It identifies what the researcher wants to know about a particular topic, problem, or phenomenon. It guides the entire research process and determines the direction of the study.
+A **research question** is the **specific, focused question** that grows out of the research problem and **asks what relationship exists between two or more variables**, in a way that **can be answered by collecting and analysing data**.  
+It converts a general problem (or gap in knowledge) into a clear, testable inquiry that guides the design of the study.
 
 **Key Characteristics:**
-- **Interrogative Form:** Posed as a question (What? Why? How? When? Where?)
-- **Clear and Specific:** Clearly states what is being investigated
-- **Focused:** Narrow enough to be answerable within the scope of the study
-- **Researchable:** Can be investigated through empirical research
-- **Significant:** Addresses an important issue or problem
+- **Interrogative or clear statement form:** Usually posed as a question, or as a very clear, unambiguous problem statement.
+- **Variables and relationship:** Clearly identifies the **variables** involved and the **relationship** of interest (association or cause–effect).
+- **Specific and focused:** Narrow enough to be investigated within the scope of the study.
+- **Empirically testable:** Implies that the variables and relationship can be **measured in the real world** (data can be collected to answer it).
+- **Significant:** Addresses a meaningful issue, gap, or problem in the area of study.
 
 **Examples:**
 - "What is the effect of online learning on student academic performance?"
