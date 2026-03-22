@@ -597,3 +597,49 @@
 ### 80. [HARD] What is R-precision? How is it different from P@10? When might R-precision be preferred?
 
 **Answer:** **R-precision** = precision when the number of documents retrieved equals **R** (the number of relevant documents for that query); i.e. P@R, and R varies per query. **P@10** is at a **fixed** cutoff (10) for all queries. R-precision is query-dependent and often correlated with AP; preferred when we want a cutoff that adapts to each query's relevance set size.
+
+---
+
+# Set 4 — Exam-Aligned Practice (June 2023 Style)
+
+## SHORT STRUCTURAL
+
+### 81. [MEDIUM] State Zipf's law using both frequency and probability forms.
+
+**Answer:** Frequency form: $f(r) \propto 1/r$. Probability form: $P(r)=c/r$, where $r$ is word rank and $c$ is a corpus-dependent constant.
+
+### 82. [MEDIUM] What does a Zipf curve look like on normal axes and on log-log axes?
+
+**Answer:** On normal axes, it is a steeply decreasing curve with a long tail. On log-log axes, it is approximately a straight line with negative slope.
+
+### 83. [MEDIUM] Write Heaps' law and define all parameters.
+
+**Answer:** Heaps' law is $v = k n^{\beta}$, where $v$ is vocabulary size, $n$ is number of tokens, and $k,\beta$ are corpus constants.
+
+### 84. [HARD] Given $(n,v)=(10^3,10^3)$ and $(10^5,10^4)$, estimate $\beta$ in Heaps' law.
+
+**Answer:** Divide equations: $10 = 100^{\beta}$, so $\beta = \log(10)/\log(100)=0.5$.
+
+### 85. [HARD] If $\beta=0.5$ and $k=\sqrt{1000}$, estimate vocabulary when $n=10^9$.
+
+**Answer:** $v=k n^{0.5}=\sqrt{1000}\cdot\sqrt{10^9}\approx 31.62\times31622.78\approx 10^6$ terms.
+
+### 86. [MEDIUM] In PageRank, what do $B_u$, $L_v$, $N$, and $d$ represent?
+
+**Answer:** $B_u$ is the set of pages linking to page $u$; $L_v$ is number of outgoing links from page $v$; $N$ is total number of pages; $d$ is damping factor.
+
+### 87. [HARD] Why does PageRank divide incoming contribution by outdegree $L(v)$?
+
+**Answer:** A page's rank vote is split among all pages it links to; more outlinks means less rank passed per link.
+
+### 88. [HARD] Compare incidence matrix and inverted index in one sentence each.
+
+**Answer:** Incidence matrix stores a full $M\times N$ binary grid of term-document presence. Inverted index stores only non-zero occurrences as postings lists per term.
+
+### 89. [HARD] State space complexity for incidence matrix and inverted index.
+
+**Answer:** Incidence matrix: $O(MN)$. Inverted index: $O(M+K)$ where $K$ is number of non-zero term-document incidences.
+
+### 90. [HARD] Why is inverted indexing preferred in IR systems?
+
+**Answer:** Real collections are sparse, so inverted index avoids storing massive zeros, giving large space savings and efficient query-time processing.

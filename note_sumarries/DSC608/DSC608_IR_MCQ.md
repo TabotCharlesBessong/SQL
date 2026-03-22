@@ -691,3 +691,195 @@
 
 **Answer: B**  
 **Explanation:** A difference in MAP (or other metric) between two systems might be due to random variation across queries. Significance tests (e.g. paired t-test, Wilcoxon) test whether the difference is statistically significant. We report p-values or confidence intervals; small p suggests the difference is unlikely due to chance.
+
+---
+
+# Set 4 — Exam-Aligned MCQs (Zipf, Heaps, PageRank, Index Structures)
+
+**Distribution:** 4 Easy | 6 Medium | 10 Hard
+
+## EASY (Set 4)
+
+### 61. [EASY] Zipf's law primarily relates word frequency to:
+- A) Document length  
+- B) Word rank  
+- C) Number of query terms  
+- D) Number of documents in the corpus  
+
+**Answer: B**  
+**Explanation:** Zipf's law states frequency is inversely proportional to rank when words are ordered by decreasing frequency.
+
+### 62. [EASY] Heaps' law models:
+- A) Link popularity  
+- B) Vocabulary growth with corpus size  
+- C) Snippet quality  
+- D) Precision-recall trade-off  
+
+**Answer: B**  
+**Explanation:** Heaps' law is $v = k n^\beta$, where vocabulary size grows sublinearly with total tokens.
+
+### 63. [EASY] In PageRank, a hyperlink from page A to page B is treated as:
+- A) A duplicate signal  
+- B) A vote passed from A to B  
+- C) A stemming rule  
+- D) A stopword indicator  
+
+**Answer: B**  
+**Explanation:** PageRank interprets links as votes, weighted by source rank and source outdegree.
+
+### 64. [EASY] Which structure is standard for large-scale text retrieval?
+- A) Full incidence matrix  
+- B) Inverted index  
+- C) Dense tensor table  
+- D) B-tree of snippets  
+
+**Answer: B**  
+**Explanation:** Inverted index stores only observed term-document occurrences and is efficient for sparse text data.
+
+## MEDIUM (Set 4)
+
+### 65. [MEDIUM] If $f(r) \propto 1/r$, then moving from rank 10 to rank 20 approximately changes frequency by:
+- A) Doubles  
+- B) Halves  
+- C) Stays same  
+- D) Quadruples  
+
+**Answer: B**  
+**Explanation:** Inverse proportionality means doubling rank roughly halves frequency.
+
+### 66. [MEDIUM] Heaps' law is $v = k n^\beta$. If $\beta=0.5$, doubling $n$ multiplies $v$ by:
+- A) 2  
+- B) $\sqrt{2}$  
+- C) 1/2  
+- D) 4  
+
+**Answer: B**  
+**Explanation:** $v \propto n^{0.5}$ so doubling tokens scales vocabulary by $2^{0.5}$.
+
+### 67. [MEDIUM] In $PR(u)=\frac{1-d}{N}+d\sum_{v\in B_u}\frac{PR(v)}{L(v)}$, $L(v)$ is:
+- A) Number of inlinks to $v$  
+- B) Number of outlinks from $v$  
+- C) Number of terms on page $v$  
+- D) Length of query $v$  
+
+**Answer: B**  
+**Explanation:** Page $v$ distributes its rank across its outgoing links; $L(v)$ is outdegree.
+
+### 68. [MEDIUM] With $N=5$ and $d=0.85$, the random jump term in PageRank is:
+- A) 0.85/5  
+- B) 0.15/5  
+- C) 1/5  
+- D) 0.85  
+
+**Answer: B**  
+**Explanation:** Random component is $(1-d)/N = 0.15/5 = 0.03$.
+
+### 69. [MEDIUM] Space for incidence matrix with $M$ terms and $N$ docs is best described as:
+- A) $O(M+N)$  
+- B) $O(MN)$  
+- C) $O(\log MN)$  
+- D) $O(K)$ only  
+
+**Answer: B**  
+**Explanation:** The full matrix stores every term-document cell, regardless of sparsity.
+
+### 70. [MEDIUM] If $K$ is non-zero term-document entries, inverted index space is approximately:
+- A) $O(MN)$  
+- B) $O(M+K)$  
+- C) $O(N^2)$  
+- D) $O(M^2)$  
+
+**Answer: B**  
+**Explanation:** Dictionary plus postings scales with terms and observed incidences.
+
+## HARD (Set 4)
+
+### 71. [HARD] Given Heaps data points $(n,v)=(10^3,10^3)$ and $(10^5,10^4)$, which $\beta$ fits best?
+- A) 0.25  
+- B) 0.5  
+- C) 0.75  
+- D) 1.0  
+
+**Answer: B**  
+**Explanation:** $10=100^\beta$, so $\beta=\log(10)/\log(100)=0.5$.
+
+### 72. [HARD] With $\beta=0.5$ and $k\approx31.62$, estimated vocabulary at $n=10^9$ is closest to:
+- A) $10^4$  
+- B) $10^5$  
+- C) $10^6$  
+- D) $10^7$  
+
+**Answer: C**  
+**Explanation:** $v=kn^{0.5}\approx31.62\times31622.78\approx10^6$.
+
+### 73. [HARD] In PageRank, which change typically decreases rank passed along each outgoing edge from a page?
+- A) Increasing damping factor  
+- B) Increasing outdegree of source page  
+- C) Decreasing corpus size  
+- D) Increasing stopword list  
+
+**Answer: B**  
+**Explanation:** Rank share per edge is $PR(v)/L(v)$; higher $L(v)$ means less per outgoing link.
+
+### 74. [HARD] Why is an incidence matrix often impractical for web-scale IR?
+- A) It cannot represent Boolean queries  
+- B) It is dense with ones  
+- C) It is huge and mostly zeros  
+- D) It cannot store document IDs  
+
+**Answer: C**  
+**Explanation:** For large vocabularies and corpora, the matrix is massive and sparse, wasting space.
+
+### 75. [HARD] Which statement about inverted index postings is most accurate?
+- A) They are usually sorted by term frequency only  
+- B) They are usually sorted by document ID for efficient merging/intersection  
+- C) They are unsorted for faster appends only  
+- D) They cannot store positional information  
+
+**Answer: B**  
+**Explanation:** Sorted postings support efficient Boolean and ranked query processing.
+
+### 76. [HARD] If a PageRank question has unclear edge direction in the diagram, the best exam strategy is to:
+- A) Skip the question  
+- B) Assume random directions and provide no explanation  
+- C) State your adjacency assumption clearly and compute consistently  
+- D) Use TF-IDF instead  
+
+**Answer: C**  
+**Explanation:** Clear assumptions with consistent math can still earn method marks.
+
+### 77. [HARD] A no-damping PageRank variant differs from standard PageRank mainly by removing:
+- A) Inlink contribution term  
+- B) Outdegree normalization  
+- C) Random jump term  
+- D) Initialisation values  
+
+**Answer: C**  
+**Explanation:** Standard PageRank includes random jump $(1-d)/N$; no-damping forms omit it.
+
+### 78. [HARD] Which pair are both empirical laws used in IR text statistics?
+- A) Bayes and Markov  
+- B) Zipf and Heaps  
+- C) TF and IDF  
+- D) AP and MAP  
+
+**Answer: B**  
+**Explanation:** Zipf models frequency-rank distribution; Heaps models vocabulary growth.
+
+### 79. [HARD] If vocabulary growth is sublinear, then as corpus grows large, new-word discovery rate:
+- A) Increases linearly  
+- B) Stays constant  
+- C) Decreases  
+- D) Becomes negative  
+
+**Answer: C**  
+**Explanation:** Heaps law with $\beta<1$ implies diminishing marginal growth in vocabulary.
+
+### 80. [HARD] In a sparse corpus, which representation directly stores only observed term-document matches?
+- A) Dense incidence matrix  
+- B) Inverted index postings  
+- C) Euclidean distance matrix  
+- D) Query log table  
+
+**Answer: B**  
+**Explanation:** Postings lists record only actual occurrences, avoiding zero storage overhead.

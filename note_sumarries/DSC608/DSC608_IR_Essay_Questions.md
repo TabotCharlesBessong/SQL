@@ -376,3 +376,109 @@
 - Easy: 10/50 = 20%  
 - Medium: 15/50 = 30%  
 - Hard: 25/50 = 50%
+
+---
+
+# Set 4 — Essay Questions: Exam-Aligned Additions (50 marks total)
+
+**Distribution:** 10 marks Easy (20%) | 15 marks Medium (30%) | 25 marks Hard (50%).
+
+## EASY (Set 4) — 10 marks
+
+### Essay 16 [10 marks – EASY]
+
+**Question:** Distinguish between **information need** and **query**. Explain why short keyword queries are common and one limitation of short queries.
+
+**Model answer and marking guide:**
+
+- **Definitions (4 marks):** Information need is the underlying user problem or knowledge gap; query is the explicit text entered into the search system.
+- **Why short queries dominate (3 marks):** Interfaces, user behavior, and efficiency push users toward 2–3 keywords.
+- **Limitation (3 marks):** Short queries are ambiguous and often fail to express context, causing relevance mismatch.
+
+## MEDIUM (Set 4) — 15 marks
+
+### Essay 17 [8 marks – MEDIUM] (Calculation-based)
+
+**Question:** Given Heaps' law $v = k n^\beta$ and observations $(n,v)=(10^3,10^3)$ and $(10^5,10^4)$, estimate $\beta$, estimate $k$, then estimate $v$ for $n=10^9$.
+
+**Model answer and marking guide:**
+
+- **Find $\beta$ (3 marks):**
+  $$
+  \frac{10^4}{10^3}=\left(\frac{10^5}{10^3}\right)^\beta \Rightarrow 10 = 100^\beta \Rightarrow \beta=0.5
+  $$
+- **Find $k$ (2 marks):**
+  $$
+  10^3 = k(10^3)^{0.5} \Rightarrow k=\frac{10^3}{\sqrt{10^3}}=\sqrt{10^3}\approx31.62
+  $$
+- **Estimate at $10^9$ tokens (3 marks):**
+  $$
+  v = 31.62\times (10^9)^{0.5}=31.62\times 10^{4.5}\approx 10^6
+  $$
+
+### Essay 18 [7 marks – MEDIUM]
+
+**Question:** Explain query refinement using **spell correction**, **query expansion**, and **relevance feedback**. For each, state one strength and one risk.
+
+**Model answer and marking guide:**
+
+- **Spell correction (2 marks):** edit-distance/noisy-channel techniques; strength: fixes misspellings; risk: wrong correction without context.
+- **Query expansion (2 marks):** adds related terms from logs, association, or top docs; strength: improves recall; risk: query drift.
+- **Relevance feedback (2 marks):** uses user-marked relevant docs or pseudo-relevance; strength: better term weighting; risk: pseudo-feedback can reinforce early ranking errors.
+- **Clarity and examples (1 mark).**
+
+## HARD (Set 4) — 25 marks
+
+### Essay 19 [12 marks – HARD] (Calculation-based)
+
+**Question:** For a 5-page graph, initial PageRank values are all $1/5$. Use
+$$
+PR(u)=\frac{1-d}{N}+d\sum_{v\in B_u}\frac{PR(v)}{L(v)}
+$$
+with $d=0.85$, $N=5$. Explain the role of each parameter and compute two iterations for any clearly stated directed adjacency list.
+
+**Model answer and marking guide:**
+
+- **Parameter interpretation (4 marks):** correct meaning of $d$, $N$, $B_u$, $L(v)$, and random jump term.
+- **Method setup (2 marks):** explicitly state edges and outdegrees; compute base term $(1-d)/N=0.03$.
+- **Iteration 1 (3 marks):** correct substitution and arithmetic.
+- **Iteration 2 (3 marks):** correct update using iteration-1 values and coherent conclusion.
+
+Note for grading fairness:
+- full method marks awarded when the student states adjacency assumptions clearly and computes consistently if a diagram is ambiguous.
+
+### Essay 20 [13 marks – HARD]
+
+**Question:** Compare **incidence matrix** and **inverted index** for IR indexing. Include:
+1) definition of each,
+2) small example,
+3) space complexity,
+4) practical implications for web-scale systems.
+
+**Model answer and marking guide:**
+
+- **Definitions (3 marks):**
+  - Incidence matrix: binary term-by-document table.
+  - Inverted index: dictionary + postings lists of docs per term.
+- **Example (3 marks):** any valid 2-term/3-document illustration mapping matrix to postings.
+- **Complexity (3 marks):**
+  - Incidence matrix: $O(MN)$.
+  - Inverted index: $O(M+K)$ where $K$ is non-zero incidences.
+- **Practical implications (4 marks):** sparsity makes dense matrix wasteful; inverted index is storage- and query-efficient, supports fast Boolean and ranked retrieval.
+
+---
+
+## Set 4 summary of mark allocation
+
+| Question  | Level  | Marks |
+|-----------|--------|-------|
+| Essay 16  | Easy   | 10    |
+| Essay 17  | Medium | 8     |
+| Essay 18  | Medium | 7     |
+| Essay 19  | Hard   | 12    |
+| Essay 20  | Hard   | 13    |
+| **Total** |        | **50**|
+
+- Easy: 10/50 = 20%
+- Medium: 15/50 = 30%
+- Hard: 25/50 = 50%
