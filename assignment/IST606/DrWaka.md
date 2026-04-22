@@ -12,208 +12,96 @@ This report is written as a **defensive academic analysis**. It explains malware
 Malware (malicious software) is any code intentionally designed to compromise confidentiality, integrity, or availability of systems and data. Three foundational malware families in cybersecurity theory are **viruses**, **worms**, and **trojan horses**.
 
 ### 1.1 Virus
-A **virus** is malware that requires a host object (for example, an executable, macro-enabled document, script, or boot sector) and spreads when the host is executed or shared.
-
-Core characteristics:
-- Host-dependent (cannot usually spread as a truly standalone agent).
-- Often modifies legitimate files by injecting malicious payloads.
-- Spread is commonly assisted by user action (opening files, sharing USB, email attachments).
-
-Typical stages:
-1. Attachment to host file.
-2. Dormancy (optional waiting trigger).
-3. Replication and infection of additional files.
-4. Payload activation (for example, data corruption, ransomware behavior, sabotage).
+A **virus** is malware that replicates by **modifying other programs and inserting its own code** into those hosts. It therefore requires a host object (for example an executable, macro-enabled document, script, or boot area) and typically spreads when that host is executed or shared. In theoretical terms, a virus is host-dependent and usually cannot spread as a fully autonomous agent. Its spread is frequently supported by user action such as opening files, transferring removable media, or sharing attachments. A common lifecycle includes host infection, possible dormancy, propagation into additional hosts, trigger activation, and payload execution.
 
 ### 1.2 Worm
-A **worm** is a self-contained, self-propagating malware that spreads across networks without requiring a host file in the classic sense.
-
-Core characteristics:
-- Standalone propagation logic.
-- Uses network weaknesses, weak credentials, exposed services, or software vulnerabilities.
-- Can spread at high speed, producing large-scale operational disruption.
-
-Typical stages:
-1. Scanning for reachable targets.
-2. Exploitation or unauthorized access.
-3. Self-copying to remote systems.
-4. Optional secondary payload (botnet enrollment, data theft, cryptomining).
+A **worm** is a standalone malware program that replicates itself in order to spread to other computers. Unlike a virus, it does not need to insert itself into a host file; instead it can run independently and use networks, shared folders, exposed services, weak credentials, or other vulnerabilities to move from one machine to another. Its propagation logic is usually autonomous and often includes target discovery through scanning, exploitation or unauthorized access, copying itself to newly reached systems, and then repeating the cycle from those systems. Because worms can spread exponentially, even payload-free worms may cause major disruption by consuming bandwidth and system resources.
 
 ### 1.3 Trojan Horse
-A **trojan horse** is malware disguised as legitimate software or an apparently harmless file. Unlike worms, trojans generally do not self-replicate aggressively by default.
-
-Core characteristics:
-- Relies on deception and social engineering.
-- Appears useful or trustworthy (fake updates, cracked software, malicious installers).
-- Opens backdoors, steals credentials, or downloads additional malware after execution.
-
-Typical stages:
-1. Social engineering delivery.
-2. User execution.
-3. Installation of hidden functionality.
-4. Command-and-control communication or local abuse.
+A **trojan horse** is malware that misleads users about its true intent by masquerading as legitimate software, a normal document, or a benign utility. Its defining trait is **deception-based delivery**, typically through social engineering (for example fake updates, manipulated installers, deceptive attachments, or malicious ads). Unlike viruses and worms, trojans generally do **not** self-replicate by infecting other files or autonomously spreading across hosts; instead they rely on user execution and trust abuse. Once executed, many trojans operate as backdoors, contact command-and-control infrastructure, steal credentials/data, or act as downloaders that install additional malware.
 
 ### 1.4 Comparative Summary
+In comparative terms, viruses are host-mediated, worms are network-autonomous, and trojans are deception-centered. A virus typically depends on file or host execution pathways, a worm can spread independently through reachable systems, and a trojan often enters through human trust rather than technical scanning. Their impact profiles differ accordingly: viruses frequently cause host-level infection artifacts, worms are associated with speed and scale of disruption, and trojans are often used for stealth, credential theft, remote access, or staged follow-on compromise.
 
-| Property | Virus | Worm | Trojan Horse |
-|---|---|---|---|
-| Needs host file | Yes | No (usually standalone) | No strict host requirement, but often disguised installer |
-| Self-propagation | Limited, host-mediated | Strong network propagation | Usually limited; propagation mostly via social spread |
-| Main enabler | File sharing / execution | Network exposure / vulnerabilities | Human trust and deception |
-| Typical impact | File infection, corruption | Rapid spread, service disruption | Backdoor, spying, credential theft |
+Worms are often more infectious than viruses because they do not depend on a user opening an infected file. That makes network segmentation, patching, and strict service exposure especially important for worm containment.
+
+Common trojan functional classes include **banking trojans** (financial credential theft), **remote access trojans (RATs)** (interactive attacker control), **downloaders/droppers** (malware staging), and **information stealers** (cookie/session/document theft). In practice, modern trojans often combine several of these roles.
 
 ---
 
 ## 2. Lifecycle and Propagation Theory
 
-Although malware families differ, many follow a common kill-chain style lifecycle:
+Although malware families differ, many follow a similar kill-chain-style lifecycle in which initial entry is followed by execution, persistence attempts, and objective-driven actions. Initial access commonly occurs through phishing links, unsafe attachments, drive-by downloads, compromised updates, infected removable media, or externally exposed access services with weak authentication controls. After entry, malware seeks execution context through direct process launch, script engines, or exploit-triggered loaders.
+
+For virus-specific analysis, an additional classic four-phase framing is often used in malware theory: **dormant**, **propagation**, **triggering**, and **execution**. This report uses both models: kill-chain language for incident operations and four-phase language for virus mechanics.
+
+For worm-specific analysis, the key operational cycle is autonomous infection, propagation to new reachable targets, and continuation from each newly compromised system. In practice, that makes speed, reachability, and patch status central to worm risk.
 
 ### 2.1 Initial Access
-Common entry vectors:
-- Phishing attachments or links.
-- Drive-by browser downloads.
-- Infected USB devices.
-- Compromised software updates (supply-chain).
-- Exposed remote access services (RDP/SSH) with weak credentials.
+Initial access describes the moment a malicious artifact enters the environment and gains a foothold. In enterprise case studies this usually reflects one or more weak controls in user awareness, access hardening, patch status, or software trust validation.
 
 ### 2.2 Execution
-The malicious code gains execution context:
-- User-level process launch.
-- Script engines (PowerShell, WScript, macros).
-- Exploit-triggered shellcode or loader behavior.
+Execution is the transition from static artifact to active behavior. From this stage onward, defenders often rely on process monitoring and script telemetry to identify suspicious parent-child relationships and unusual runtime patterns.
 
 ### 2.3 Persistence
-To survive reboot or user logout, malware may create persistence artifacts:
-- Scheduled tasks or startup entries.
-- Service creation.
-- Registry run keys (Windows).
-- Login scripts or cron jobs (Unix-like systems).
+Persistence reflects a malware attempt to survive restart, user logout, or temporary containment. This may involve startup mechanisms, scheduled jobs, service installation, or other boot-time hooks depending on the operating system model.
 
 ### 2.4 Privilege Escalation and Defense Evasion
-Advanced samples attempt to:
-- Elevate rights from standard user to admin/root.
-- Disable logging and security tools.
-- Obfuscate payloads to evade signature detection.
+Privilege escalation and defense evasion are frequently paired, because higher privilege increases attacker freedom while evasion suppresses detection opportunities. In mature attacks this stage includes disabling controls, obfuscating artifacts, and reducing forensic visibility.
 
 ### 2.5 Lateral Movement and Command/Control
-More mature campaigns move inside a network:
-- Credential reuse or token theft.
-- Remote service abuse.
-- Beaconing to external command-and-control servers.
+Lateral movement expands compromise beyond the initial endpoint by reusing credentials, abusing remote management paths, or chaining trust relationships. Command-and-control behavior then coordinates remote instructions and data flow between infected assets and controlling infrastructure.
 
 ### 2.6 Actions on Objectives
-Final goals include:
-- Data theft and exfiltration.
-- File encryption for ransom.
-- Botnet coordination.
-- Fraud, sabotage, or intelligence collection.
+Actions on objectives represent the operational end state, such as data exfiltration, encryption-based extortion, fraud enablement, sabotage, or strategic intelligence gathering. At this phase, business impact is often highest and recovery cost is greatest.
 
 ---
 
 ## 3. Technical Manifestation in Systems (How Malware Appears in Real Environments)
 
-Malware manifestation means the observable changes it creates in endpoints, servers, and network telemetry.
+Malware manifestation refers to the observable traces left in endpoints, identity systems, servers, and network telemetry. On endpoints, common signs include suspicious process trees, unexpected startup artifacts, unusual system resource spikes, and rapid creation of similarly patterned files. At the file-system level, defenders may observe unauthorized content modification, hash mismatch from known-good baselines, hidden artifacts, and mass file operations associated with destructive workflows.
 
 ### 3.1 Endpoint Indicators
-- Unexpected process trees (for example, office app spawning shell process).
-- New autorun entries or scheduled tasks not tied to approved software.
-- Sudden creation of similarly named files across many directories.
-- Unusual CPU, memory, or disk I/O spikes without business workload explanation.
+Endpoint indicators are particularly valuable because they expose runtime behavior rather than static signatures. This allows detection programs to remain effective even when malware code is repacked or modified.
 
 ### 3.2 File System Indicators
-- Unauthorized modification of executables or scripts.
-- Hash mismatch against known-good baselines.
-- Hidden files or suspicious extensions.
-- Mass file rename/encrypt patterns.
+File system indicators help differentiate accidental system events from deliberate malicious change. Integrity monitoring and baselining are therefore central to practical defensive engineering.
+
+In file infection scenarios, defenders should also track whether executable files change **without normal update provenance** (unexpected hash drift, suspicious section changes, or unexplained timestamp patterns). Historically, some viruses attempted to hide infection by preserving visible file metadata while modifying internal content.
 
 ### 3.3 Network Indicators
-- Repeated outbound calls to unknown IP/domain destinations.
-- Unusual protocol usage from non-network tools.
-- Rapid internal scanning behavior (many connection attempts across ports/hosts).
-- Data transfer anomalies (e.g., exfiltration bursts at odd hours).
+Network manifestation often includes repeated outbound contact to unfamiliar destinations, protocol misuse by non-network applications, broad internal connection scanning patterns, and unusual transfer timing consistent with staged exfiltration.
 
 ### 3.4 Identity and Access Indicators
-- Login attempts from impossible travel patterns.
-- Privilege changes outside normal admin windows.
-- Creation of unexpected service accounts.
-- Repeated authentication failures followed by successful access.
+Identity-domain signals include abnormal authentication sequences, impossible travel events, unexplained privilege changes, and creation of service accounts that do not match change management records.
 
 ### 3.5 Mapping to Defensive Frameworks
-Using frameworks like MITRE ATT&CK helps categorize behavior by tactics:
-- Initial Access
-- Execution
-- Persistence
-- Privilege Escalation
-- Defense Evasion
-- Credential Access
-- Lateral Movement
-- Exfiltration
-- Impact
-
-This behavior-based framing is critical because modern variants mutate code quickly, but behavior patterns often remain detectable.
+Frameworks such as MITRE ATT&CK provide a tactical lens for classifying these manifestations across stages including initial access, execution, persistence, privilege escalation, defense evasion, credential access, lateral movement, exfiltration, and impact. This behavior-first framing is especially useful because malware code variants can mutate rapidly, while operational behavior patterns often remain recognizable.
 
 ---
 
 ## 4. Historical Case Studies and Lessons
 
 ### 4.1 Virus Case: Melissa (1999)
-What happened:
-- Macro virus delivered through infected Word document attachments.
-- Leveraged email clients to send itself to contact lists.
-
-Why it mattered:
-- Demonstrated how user productivity tools can become malware vectors.
-- Showed that social trust and macro execution settings are major risks.
-
-Lesson:
-- Macro controls, attachment filtering, and least-privileged execution reduce risk significantly.
+The Melissa incident illustrated how macro-enabled office documents can become high-efficiency malware carriers when distributed through trusted communication channels. It mattered historically because it exposed the combined risk of user trust and permissive execution settings in ordinary productivity workflows. The long-term lesson is that macro governance, attachment filtering, and least-privileged execution policies are foundational controls, not optional hardening extras.
 
 ### 4.2 Worm Case: WannaCry (2017)
-What happened:
-- Ransomware worm that spread using an SMB vulnerability.
-- Impacted hospitals, enterprises, and public infrastructure globally.
+WannaCry demonstrated the systemic risk created when a network-propagating worm model is combined with ransomware objectives. Its global effect on healthcare, enterprise operations, and public institutions showed that patch latency is not merely a technical issue but an organizational resilience problem. The most consistent lesson from this case is the necessity of disciplined patching, segmentation to limit blast radius, and backup validation under realistic recovery conditions.
 
-Why it mattered:
-- Combined worm-speed propagation with ransomware impact.
-- Revealed the operational cost of delayed patch management.
-
-Lesson:
-- Aggressive patching, network segmentation, and tested backup strategy are essential.
+WannaCry is also a good reminder that a worm does not need a complex payload to be damaging; the combination of self-propagation and network churn alone can create severe operational disruption.
 
 ### 4.3 Trojan Case: Zeus / Zbot Family
-What happened:
-- Banking trojan focused on credential theft and financial fraud.
-- Used keylogging and web-injection techniques on infected hosts.
-
-Why it mattered:
-- Demonstrated long-term monetization through silent credential abuse.
-- Highlighted the role of social engineering and downloader chains.
-
-Lesson:
-- Multi-factor authentication, browser hardening, and endpoint monitoring are key controls.
+The Zeus/Zbot family is a key trojan case because it prioritized stealthy credential abuse and financial theft over immediate disruption, including man-in-the-browser style interception patterns in affected campaigns. Its persistence in criminal ecosystems highlighted the economic viability of long-term information harvesting and the effectiveness of deception-led delivery chains. Defensive priorities derived from this history include phishing-resistant authentication, browser/session hardening, egress monitoring for suspicious C2 communications, and endpoint telemetry that can reveal covert credential collection behavior.
 
 ---
 
 ## 5. Safe Simulation Demonstration (Benign and Non-Destructive)
 
 ### 5.1 Purpose of the Simulation
-To academically demonstrate malware-like **spread patterns and detection logic** without creating real malware.
-
-The simulation below:
-- Creates harmless marker text files named `SIMULATED_INFECTION.txt`.
-- Copies those marker files through a controlled test directory.
-- Logs every action with timestamp.
-- Never executes arbitrary payloads.
-- Never modifies system settings.
-- Never transmits data over the internet.
+The simulation is designed to demonstrate malware-like **propagation patterns and defensive detection logic** without producing real malware behavior. It uses harmless marker files named `SIMULATED_INFECTION.txt`, copies them through a controlled local directory structure, and records every operation in a timestamped log. The implementation explicitly avoids arbitrary code execution, operating system persistence, configuration tampering, or any external network transmission.
 
 ### 5.2 Ethical Safety Constraints
-This simulation is safe because it avoids all harmful characteristics:
-- No persistence mechanism.
-- No privilege escalation.
-- No code injection.
-- No network exploitation.
-- No deletion or encryption of user data.
+This model is ethically safe because it excludes all harmful characteristics associated with operational malware, including persistence mechanisms, privilege escalation logic, code injection behavior, network exploitation, and destructive effects such as deletion or encryption of user data.
 
 ### 5.3 Benign Python Simulation Code
 
@@ -292,58 +180,23 @@ if __name__ == "__main__":
 ```
 
 ### 5.4 How to Explain This in Your Report
-In your write-up, describe the simulation as follows:
-- The code models **propagation pattern only**, not malicious capability.
-- Marker-file spread approximates how infections can scale through shared resources.
-- Log analysis demonstrates how defenders detect anomalies using thresholds.
-- Mock quarantine represents incident response containment in production SOC workflows.
+In the report narrative, the simulation should be explained as a propagation-pattern model rather than a malicious capability model. The marker-file spread approximates how infection patterns can scale through shared resources, while log analysis demonstrates practical anomaly detection using thresholds. The quarantine step can be interpreted as a simplified containment mechanism aligned with real SOC incident response workflows.
 
 ---
 
 ## 6. Prevention, Detection, and Incident Response Strategy
 
 ### 6.1 Preventive Controls
-1. Patch and vulnerability management:
-	Close known software vulnerabilities rapidly.
-2. Least privilege:
-	Limit admin access and enforce role-based permissions.
-3. Email and web filtering:
-	Block malicious attachments, links, and known bad domains.
-4. Application allowlisting:
-	Permit execution only for approved binaries/scripts.
-5. Security awareness training:
-	Reduce social engineering success rates.
+Preventive controls should be implemented as a layered architecture. Fast patch and vulnerability management reduces exploitability windows, least-privilege access limits attacker movement, and strong email and web filtering lowers initial access success rates. Application allowlisting reduces unauthorized execution surfaces, while continuous security awareness training helps reduce social engineering effectiveness.
 
 ### 6.2 Detective Controls
-1. Endpoint Detection and Response (EDR):
-	Monitor process creation, script execution, and persistence artifacts.
-2. SIEM correlation:
-	Combine logs from endpoints, identity systems, and firewalls.
-3. File integrity monitoring:
-	Detect unauthorized changes and hash deviations.
-4. Network behavior analytics:
-	Identify unusual scanning, beaconing, and data transfer patterns.
+Detective controls depend on correlated visibility across multiple telemetry layers. Endpoint detection and response platforms provide process and persistence insight, SIEM systems connect identity, endpoint, and network evidence, file integrity monitoring reveals unauthorized changes, and network behavior analytics highlights scanning, beaconing, or anomalous transfer patterns. For worm-heavy scenarios, defenders should prioritize detection of random or broad scanning behavior, repeated connection attempts to vulnerable services, unusual lateral movement, and sudden spikes in network traffic. For trojan-heavy scenarios, defenders should prioritize detection of suspicious parent-child process chains, abnormal outbound command-and-control patterns, unusual use of scripting/administration tools, and credential access anomalies.
 
 ### 6.3 Corrective and Recovery Controls
-1. Isolate infected hosts immediately.
-2. Revoke compromised credentials and tokens.
-3. Remove persistence artifacts and malicious binaries.
-4. Restore from verified clean backups.
-5. Conduct root-cause and gap analysis to prevent recurrence.
+Corrective and recovery actions begin with rapid isolation of affected hosts and revocation of compromised identities. This is followed by artifact eradication, restoration from validated clean backups, and root-cause analysis that informs policy and architecture improvements to reduce recurrence probability.
 
 ### 6.4 Incident Response Lifecycle (Practical View)
-1. Preparation:
-	Playbooks, backup testing, monitoring design.
-2. Identification:
-	Confirm suspicious behavior and classify severity.
-3. Containment:
-	Segment and isolate affected systems.
-4. Eradication:
-	Remove malware artifacts and entry vectors.
-5. Recovery:
-	Rebuild/restore systems and validate normal operations.
-6. Lessons learned:
-	Update controls, training, and architecture.
+In practical operations, incident response progresses from preparation to identification, containment, eradication, and recovery, with lessons learned closing the loop. Preparation includes playbooks and testing, identification confirms severity and scope, containment limits spread, eradication removes malicious footholds, and recovery validates business restoration. The final lesson-learning phase is essential for durable institutional improvement.
 
 ---
 
@@ -352,96 +205,28 @@ In your write-up, describe the simulation as follows:
 This section documents a separate implementation folder used to support the theoretical research with safe, non-destructive experiments.
 
 ### 7.1 Lab Location and Structure
-The practical work is implemented in:
-
-- [assignment/IST606/safe-malware-theory-lab](safe-malware-theory-lab)
-
-Core files:
-
-- Vulnerable toy program: [assignment/IST606/safe-malware-theory-lab/src/vulnerable_app.py](safe-malware-theory-lab/src/vulnerable_app.py)
-- Controlled abuse demonstration: [assignment/IST606/safe-malware-theory-lab/src/safe_exploit_demo.py](safe-malware-theory-lab/src/safe_exploit_demo.py)
-- Virus-style simulator: [assignment/IST606/safe-malware-theory-lab/src/sim_virus.py](safe-malware-theory-lab/src/sim_virus.py)
-- Trojan-style simulator: [assignment/IST606/safe-malware-theory-lab/src/sim_trojan.py](safe-malware-theory-lab/src/sim_trojan.py)
-- Worm-style simulator: [assignment/IST606/safe-malware-theory-lab/src/sim_worm.py](safe-malware-theory-lab/src/sim_worm.py)
-- Detection and quarantine monitor: [assignment/IST606/safe-malware-theory-lab/src/monitor.py](safe-malware-theory-lab/src/monitor.py)
-- One-command runner: [assignment/IST606/safe-malware-theory-lab/src/run_all.py](safe-malware-theory-lab/src/run_all.py)
+The practical work is implemented in [assignment/IST606/safe-malware-theory-lab](safe-malware-theory-lab), where the toy vulnerable application, controlled abuse script, malware-family behavior simulators, detection monitor, and one-command runner are separated into clear modules. The vulnerable program is located at [assignment/IST606/safe-malware-theory-lab/src/vulnerable_app.py](safe-malware-theory-lab/src/vulnerable_app.py), the controlled abuse demonstration is at [assignment/IST606/safe-malware-theory-lab/src/safe_exploit_demo.py](safe-malware-theory-lab/src/safe_exploit_demo.py), and the family simulations are implemented in [assignment/IST606/safe-malware-theory-lab/src/sim_virus.py](safe-malware-theory-lab/src/sim_virus.py), [assignment/IST606/safe-malware-theory-lab/src/sim_trojan.py](safe-malware-theory-lab/src/sim_trojan.py), and [assignment/IST606/safe-malware-theory-lab/src/sim_worm.py](safe-malware-theory-lab/src/sim_worm.py). Defensive containment logic is implemented in [assignment/IST606/safe-malware-theory-lab/src/monitor.py](safe-malware-theory-lab/src/monitor.py), and the full sequence can be executed from [assignment/IST606/safe-malware-theory-lab/src/run_all.py](safe-malware-theory-lab/src/run_all.py).
 
 ### 7.2 Vulnerability Model in the Toy Program
-The vulnerable application intentionally includes insecure patterns that are academically relevant:
-
-1. Unsanitized path handling:
-	The app accepts user-controlled file names and writes them directly, illustrating path traversal-style risk.
-2. Weak hardcoded authentication token:
-	The app uses a simplistic fixed token, demonstrating poor authentication design.
-3. Unsafe expression execution pattern:
-	The app uses a dangerous pattern in privileged logic to illustrate why this design is forbidden in secure software engineering.
-
-These weaknesses are intentionally introduced to create observable abuse scenarios for learning purposes.
+The toy vulnerable application intentionally models academically relevant weaknesses. It accepts user-controlled path-like input in unsafe ways, uses a hardcoded weak token pattern, and includes an intentionally dangerous execution pathway in privileged logic to illustrate why such design choices violate secure coding principles. These weaknesses are not accidental defects but controlled teaching constructs intended to generate observable and discussable abuse conditions.
 
 ### 7.3 Controlled Abuse Demonstration (Safe "Exploit" Concept)
-The controlled abuse script demonstrates policy violation without harmful payloads:
-
-1. File path abuse simulation:
-	Shows how insecure path handling can produce writes outside expected paths in a controlled local folder.
-2. Authentication weakness simulation:
-	Shows how weak token design enables unauthorized privileged action.
-3. Unsafe execution path reachability:
-	Demonstrates execution of harmless mathematical expressions only, used to explain why this pattern is dangerous.
-
-No destructive actions, no persistence, and no external communication are performed.
+The controlled abuse script demonstrates policy violations in a strictly harmless form. It shows how unsafe path handling can write outside expected locations in a local sandbox, how weak authentication design can permit unauthorized privileged flow, and how an unsafe execution pathway can be reached even when only harmless arithmetic expressions are used. The demonstration is intentionally bounded: it includes no destructive behavior, no persistence, and no external communications.
 
 ### 7.4 Malware Family Behavior Mapping
-The three family simulators model behavior signatures only:
-
-1. Virus-style model:
-	Creates host-adjacent marker files to mimic file-bound replication behavior.
-2. Trojan-style model:
-	Displays a benign utility message while performing a hidden harmless marker write, demonstrating deception mechanics.
-3. Worm-style model:
-	Autonomously traverses a mock network list and writes markers for vulnerable nodes only, demonstrating self-propagation logic.
+The three simulator modules map directly to family-level behavior signatures. The virus-style module creates host-adjacent markers to reflect file-bound replication patterns, the trojan-style module presents a benign utility-style message while performing a hidden harmless side action to represent deception mechanics, and the worm-style module autonomously traverses a mock network map and propagates only to designated vulnerable nodes to illustrate self-propagation dynamics and network reachability.
 
 ### 7.5 Detection and Containment
-The monitor script demonstrates defensive operations:
-
-1. Detects marker artifacts as indicators of compromise (IOCs).
-2. Logs event counts and locations.
-3. Quarantines marker files into an isolated folder.
-
-This maps directly to incident response theory in Section 6 (Identification, Containment, Eradication).
+The monitoring component demonstrates practical defensive operations by detecting marker artifacts as indicators of compromise, recording event counts and locations, and quarantining detected artifacts into an isolated folder. This implementation aligns directly with the incident response concepts discussed in Section 6, especially identification, containment, and eradication phases.
 
 ### 7.6 Execution Evidence
-The full safe workflow was executed successfully using:
-
-python .\assignment\IST606\safe-malware-theory-lab\src\run_all.py
-
-Observed outcomes:
-
-1. Vulnerable app executed and logged normal plus denied/allowed privileged flow.
-2. Controlled abuse simulation completed.
-3. Virus, trojan, and worm behavior simulators completed.
-4. Monitor quarantined marker artifacts and logged the actions.
-
-Evidence artifacts can be inspected in the lab output folder and logs:
-
-- [assignment/IST606/safe-malware-theory-lab/lab_output](safe-malware-theory-lab/lab_output)
-- [assignment/IST606/safe-malware-theory-lab/lab_output/events.log](safe-malware-theory-lab/lab_output/events.log)
+The full workflow was executed successfully with the command `python .\assignment\IST606\safe-malware-theory-lab\src\run_all.py`, and all expected stages completed: vulnerable-flow execution, controlled abuse demonstration, family behavior simulations, and quarantine operations. Evidence artifacts are available for review in [assignment/IST606/safe-malware-theory-lab/lab_output](safe-malware-theory-lab/lab_output) and the consolidated event log at [assignment/IST606/safe-malware-theory-lab/lab_output/events.log](safe-malware-theory-lab/lab_output/events.log).
 
 ### 7.7 Screenshot Checklist for Submission
-For a complete graded submission, include screenshots of:
-
-1. Terminal output after running the one-command script.
-2. Folder tree showing generated marker files and quarantine folder.
-3. Excerpts from events.log showing detection and quarantine entries.
-4. One short snippet from each simulator file to show behavior mapping.
+For a complete graded submission, the practical section should include screenshots that show terminal execution output, the generated lab folder artifacts including quarantine results, selected log excerpts demonstrating detection and containment, and short code snippets from each simulator to evidence behavior-family mapping.
 
 ### 7.8 Academic Integrity and Safety Statement
-This practical section does not create malware. It is a constrained educational simulation designed to teach:
-
-1. How vulnerabilities emerge from insecure coding decisions.
-2. How malware families differ in propagation and manifestation.
-3. How defenders detect, contain, and recover from suspicious behavior.
-
-No harmful payloads or offensive exploitation techniques are included.
+This practical section does not create malware and is intentionally constrained to educational simulation only. Its purpose is to show how insecure coding decisions create abuse opportunities, how malware families differ in propagation and manifestation theory, and how defenders detect, contain, and recover from suspicious behavior. No harmful payloads or offensive exploitation methods are included.
 
 ---
 
@@ -455,7 +240,21 @@ The benign simulation included in this report demonstrates that students can stu
 
 ## Optional References (Add in your preferred citation style)
 
-- MITRE ATT&CK knowledge base
-- CISA ransomware and malware advisories
-- NIST SP 800-61 (Computer Security Incident Handling Guide)
-- Academic papers on malware taxonomy and propagation models
+Recommended references for final citation formatting include the MITRE ATT&CK knowledge base, CISA malware and ransomware advisories, NIST SP 800-61 on incident handling, and peer-reviewed academic literature on malware taxonomy and propagation models.
+
+Additional source used for refinement:
+- Wikipedia contributors. "Computer virus." *Wikipedia, The Free Encyclopedia*. https://en.wikipedia.org/wiki/Computer_virus (accessed 2026-04-19).
+- Wikipedia contributors. "Trojan horse (computing)." *Wikipedia, The Free Encyclopedia*. https://en.wikipedia.org/wiki/Trojan_horse_(computing) (accessed 2026-04-19).
+- Wikipedia contributors. "Computer worm." *Wikipedia, The Free Encyclopedia*. https://en.wikipedia.org/wiki/Computer_worm (accessed 2026-04-19).
+
+---
+
+## Appendix A. Terminology Precision Update (Post-Review)
+
+In many classroom and media contexts, the word "virus" is used as a generic label for all malware. Strictly speaking, that is imprecise. In formal taxonomy, **malware** is the umbrella term, while **virus**, **worm**, and **trojan horse** are distinct subtypes with different propagation models. This distinction improves both technical accuracy and response planning:
+
+- Virus: requires host-code infection and replication through modified programs.
+- Worm: self-contained propagation across network-reachable targets.
+- Trojan: deceptive delivery through trusted-looking artifacts and user execution.
+
+Maintaining this terminology in analysis avoids conflating containment priorities (for example, infection-surface control for viruses versus network segmentation urgency for worms).
