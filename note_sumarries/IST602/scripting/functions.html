@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      li {
+        display: inline;
+        margin-right: 10px;
+      }
+      ul {
+        margin: 0;
+      }
+    </style>
+    <script>
+      var dice1Image;
+      var dice2Image;
+      var dice3Image;
+      var dice4Image;
+      // register button listener and get the img elements
+      function start() {
+        var button = document.getElementById("rollButton");
+        button.addEventListener("click", rollDice, false);
+        dice1Image = document.getElementById("dice1");
+        dice2Image = document.getElementById("dice2");
+        dice3Image = document.getElementById("dice3");
+        dice4Image = document.getElementById("dice4");
+      } // end function rollDice
+      // roll the dice
+      function rollDice() {
+        setImage(dice1Image);
+        setImage(dice2Image);
+        setImage(dice3Image);
+        setImage(dice4Image);
+      } // end function rollDice
+      // set image source for a dice
+      function setImage(diceImg) {
+        var diceValue = Math.floor(1 + Math.random() * 6);
+        diceImg.setAttribute("src", "dice/dice" + diceValue + ".png");
+        diceImg.setAttribute(
+          "alt",
+          "dice image with " + diceValue + " spot(s)",
+        );
+      } // end function setImage
+      window.addEventListener("load", start, false);
+    </script>
+  </head>
+  <body>
+    <form action="#">
+      <input id="rollButton" type="button" value="Roll Dice" />
+    </form>
+    <ol>
+      <li><img id="dice1" src="dice/diceBlank.png" alt="dice 1 image" /></li>
+      <li><img id="dice2" src="dice/diceBlank.png" alt="dice 2 image" /></li>
+      <li><img id="dice3" src="dice/diceBlank.png" alt="dice 3 image" /></li>
+      <li><img id="dice4" src="dice/diceBlank.png" alt="dice 4 image" /></li>
+    </ol>
+  </body>
+</html>
