@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css" >
+    table {
+      border-collapse: collapse;
+      width: 50%;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+    caption {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+  </style>
+  <script>
+    var amount // current amount in the account
+    var princinple = 1000 // initial amount in the account
+    var rate = 0.05 // interest rate
+
+    document.writeln("<table>")
+    document.writeln("<caption>Account Value with Interest</caption>")
+    document.writeln("<tr><th>Year</th><th>Amount on Deposit</th></tr>")
+    for (var year = 1; year <= 10; year++) {
+      amount = princinple * Math.pow(1.0 + rate, year)
+      if (year % 2 == 0) {
+        document.writeln("<tr><td>" + year + "</td><td style='color:blue'>" + amount.toFixed(2) + "</td></tr>")
+      } else { 
+        document.writeln("<tr><td>" + year + "</td><td style='color:red'>" + amount.toFixed(2) + "</td></tr>")
+      }
+      document.writeln("<tr><td>" + year + "</td><td>" + amount.toFixed(2) + "</td></tr>")
+    }
+  </script>
+</head>
+<body>
+  
+</body>
+</html>
