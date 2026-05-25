@@ -1,0 +1,1391 @@
+
+================================================================================
+FILE: DSC602 2025-2026 - 01 Introduction.pdf
+================================================================================
+
+Total Pages: 13
+
+--- PAGE 1 ---
+DSC602: Data Visualization
+What is Data Visualization?
+Denis L. Nkweteyim
+
+--- PAGE 2 ---
+01/04/26 D. L. Nkweteyim - UB-HCS606 (Human-Computer Interaction and GUI Design) 2Outline
+●Introduction
+●Some notes
+
+--- PAGE 3 ---
+01/04/26 D. L. Nkweteyim - UB-HCS606 (Human-Computer Interaction and GUI Design) 3Introduction
+●What is data visualization?
+–The practice of translating raw information into a visual context – such as maps or 
+graphs – to make data easier for the human brain to understand and pull insights from
+–Goal
+○To enable our brains to identify patterns, trends, and outliers that are often 
+invisible in raw numbers
+●Cognitive Efficiency: Reduces the mental effort required to process large 
+datasets
+●Communication: Acts as a universal language for technical and non-technical 
+audiences
+●Decision Support: Helps stakeholders make faster, smarter, and more 
+informed strategic choices.
+
+--- PAGE 4 ---
+01/04/26 D. L. Nkweteyim - UB-HCS606 (Human-Computer Interaction and GUI Design) 4Introduction
+●Some definitions for data visualization
+–The visual representation and presentation of data to facilitate 
+understanding
+–Visual representation of datasets designed to help people carry out 
+tasks more e ectively ﬀ
+–The use of computer-generated, interactive, visual representations of 
+data to amplify cognition
+–Creation of images that convey salient information about underlying 
+data and Processes
+–Communication of information using graphical representations
+
+--- PAGE 5 ---
+01/04/26 D. L. Nkweteyim - UB-HCS606 (Human-Computer Interaction and GUI Design) 5Introduction
+●A visualization should
+–Save time
+–Have a clear purpose
+–Include only the relevant content
+–Encode data/information appropriately
+
+--- PAGE 6 ---
+01/04/26 D. L. Nkweteyim - UB-HCS606 (Human-Computer Interaction and GUI Design) 6Some Notes
+●Visualization is suitable when there is a need to augment human 
+capabilities rather than replace people with computational decision-making 
+methods
+●The design space of possible visualizations of data is huge
+●Visualization design is full of trade-offs, and most possibilities in the design 
+space are ineffective for a particular task
+–Hence, need to validating the effectiveness of any design, but this is 
+difﬁcult
+●Visualization design should consider resource limitations viz.
+–Limitations of computers, of humans, and of displays
+
+--- PAGE 7 ---
+01/04/26 D. L. Nkweteyim - UB-HCS606 (Human-Computer Interaction and GUI Design) 7Some Notes
+●Why are humans involved
+–Visual representation of datasets designed to help people carry out 
+tasks more e ectively ﬀ
+–Visualization allows people to analyze data when they don’t know 
+exactly what questions they need to ask in advance
+●Why external representation
+–Replaces cognition with perception
+○External representations (e.g., carefully designed images) augment 
+human capacity by allowing us to surpass the limitations of our own 
+internal cognition and memory
+
+--- PAGE 8 ---
+01/04/26 D. L. Nkweteyim - UB-HCS606 (Human-Computer Interaction and GUI Design) 8Some Notes
+●Why depend on vision
+–Vision is high-bandwidth interface with our brain
+–Overview is possible due to background processing
+○We see everything simultaneously, and the visual system processes 
+in parallel and pre-attentively
+–Sound has lower bandwidth
+○Poorly suited for providing overviews of large information spaces 
+compared with vision
+
+--- PAGE 9 ---
+01/04/26 D. L. Nkweteyim - UB-HCS606 (Human-Computer Interaction and GUI Design) 9Some Notes
+●Why Show the Data in Detail?
+–Visualization tools help people in situations where seeing the dataset 
+structure in detail is better than seeing only a brief summary of it
+–Examples
+○When exploring the data to ﬁnd patterns, both to conﬁrm expected 
+ones and ﬁnd unexpected ones
+○When assessing the validity of a statistical model, to judge whether 
+the model in fact ﬁts the data
+●Statistical characterization of datasets is a great, but it has the 
+intrinsic limitation of losing information through summarization 
+(see example on next slide)
+
+--- PAGE 10 ---
+01/04/26 D. L. Nkweteyim - UB-HCS606 (Human-Computer Interaction and GUI Design) 10Introduction
+●Anscombe’s Quartet
+–Four datasets with identical simple 
+statistical properties: mean, variance, 
+correlation, and linear regression line. 
+–However, visual inspection 
+immediately shows how their 
+structures are quite different
+
+
+--- PAGE 11 ---
+01/04/26 D. L. Nkweteyim - UB-HCS606 (Human-Computer Interaction and GUI Design) 11Some Notes
+●Why Use Interactivity
+–Crucial for building visualization tools that handle complexity
+–Limitations of people and displays preclulde showing all of a large 
+datasets at once
+–Interactive data visualization enables users to directly manipulate 
+graphical representations of data, e.g., by filtering and zooming,  to 
+explore complex datasets, uncover hidden patterns, and gain deeper 
+insights in real-time
+
+--- PAGE 12 ---
+01/04/26 D. L. Nkweteyim - UB-HCS606 (Human-Computer Interaction and GUI Design) 12Methodology
+●It can be hard to decide how to approach a visualization problem
+●Many computer-based visualization idioms and tools have been created in the 
+past several decades, and considering them one by one leaves you faced with a 
+big collection of different possibilities
+●Analysis framework that imposes a structure on this enormous design space and 
+intended to serve as a scaffold to help you think about design choices 
+systematically
+●Based on three questions
+–What are we visualising?
+–Why are we visualising it?
+–How can we visualise?
+
+--- PAGE 13 ---
+01/04/26 D. L. Nkweteyim - UB-HCS606 (Human-Computer Interaction and GUI Design) 13Methodology
+●What are we visualising?
+–Major data types and classifications of them
+●Why are we visualising it?
+–What is the need for this visualization?
+–Why do the users need this, and what do they need to be able to work 
+with it?
+●How can we visualise?
+–The components of a visualization
+–Good and bad practices
+
+
+================================================================================
+FILE: DSC602 2025-2026 - 02 Data Abstraction and Representation.pdf
+================================================================================
+
+Total Pages: 21
+
+--- PAGE 1 ---
+DSC602: Data Visualization
+Data Abstraction and Representation
+Denis L. Nkweteyim
+
+--- PAGE 2 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 2Outline
+●Data Types for Visualization
+●Dataset Types
+
+--- PAGE 3 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 3Data Types and
+Dataset Types
+
+
+--- PAGE 4 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 4Data Types
+●Munzner defines 5 fundamental data types
+–Items
+–Attributes
+–Links
+–Positions
+–Grids
+
+--- PAGE 5 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 5Data Types
+●Item
+–A discrete individual entity - such as a row in a tidy table, or a node in a 
+network
+●Attributes
+–Also called variables or data dimensions
+–Speciﬁc property that can be measured, observed, or logged
+
+--- PAGE 6 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 6Data Types - Attributes
+●Attributes types
+–Categorical Data
+○Does not intrinsically support arithmetic operations or a total 
+ordering
+○Categorical (nominal)
+●No total ordering
+●Examples
+●Names (of brands, people, places, …)
+●Movie genres
+●File types
+
+--- PAGE 7 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 7Data Types – Attribute
+●Attribute types
+–Ordered Data
+○Data that has an implicit (total) ordering
+○Two types
+●Ordered (categorical)
+●Also known as ordinal
+●Does not support arithmetic operations
+●Examples: shirt size (ordinal), rankings (ordinal)
+●Quantitative
+●Data that can be measured or counted
+●Supports arithmetic operations
+●Examples: weight, height
+–
+
+--- PAGE 8 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 8Data Types – Attribute
+●Types of quantitative data
+–Integers vs reals
+–Interval data vs ratio data
+○Interval data
+●The di erence between values is meaningful ﬀ
+●May not have a meaningful 0-value
+○Ratio data
+●The ratio between values is meaningful
+●May not have a meaningful 0-value
+–
+
+--- PAGE 9 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 9Data Types – Attribute
+●Interval data
+–Provides ordered, ranked values with equal spacing between them, but 
+the zero point is not absolute
+–Can measure the distance between points, but cannot calculate ratios
+○e.g., 20 °C is not "twice as hot" as 10 °C
+○Examples: Temperature (Celsius/Fahrenheit), IQ scores, Calendar 
+years (2024, 2025)
+
+--- PAGE 10 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 10Data Types – Attribute
+●Ratio data
+–The most precise level of measurement, possessing all properties of 
+interval data but with a meaningful zero point
+○0 represents the total absence of the quantity
+–Ratios are meaningful (e.g. 20kg  is exactly twice as heavy as 10kg
+–Examples: Weight, height, time duration, distance, income.
+
+--- PAGE 11 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 11●Ordered data – Ordering direction
+–Sequential
+–Diverging
+–Cyclic
+–
+
+--- PAGE 12 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 12●Sequential
+–Goes from a minimum value to a maximum value
+–Does not have to have a meaningful basepoint or 0-value.
+–Examples
+○Height or weight of a person, course grades, taxation brackets
+
+--- PAGE 13 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 13Data Types
+●Diverging ordinal data
+–Emerges from one neutral center in two (or, rarely, more) directions of 
+progressively more extreme values.
+–Examples
+○Temperature (above/below freezing)
+○Altitude (above/below sea level)
+
+--- PAGE 14 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 14Data Types
+● Cyclic
+–An attribute is cyclic if its values wrap around to a starting point after a 
+while
+–Examples
+○Time of day, day of week, day of year, year of century
+○Also compass directions
+
+--- PAGE 15 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 15Data Type Links
+●Connections between items, usually in networks and graphs
+–A link will connect two items to each other
+–Examples
+○Friends/follows on social networks
+○Connectivity of roads or along train lines
+○Family relationships
+○Organizational charts
+
+--- PAGE 16 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 16Data Type Positions
+●Position data corresponds to locations in spatial data - primarily as 2-
+dimensional or 3-dimensional points
+●Location in space, typically given as a set of coordinates
+●Examples
+–Latitude and longitude
+–x and y coordinates
+
+--- PAGE 17 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 17Data Type Grids
+●Grid acts as a structured framework, defined by its geometry and topology, that 
+connects positions in space to data
+–Examples: square grid, triangular grid, hexagonal grid
+●Structure
+–Grids can be uniform, regular, or irregular, and they are typically used to 
+represent spatial data where each cell contains one or more data attributes
+●Scalar/Vector Fields
+–Grids often contain
+○Scalar data (a single quantitative attribute per grid cell, like temperature) or
+○Vector/tensor data (multiple attributes per cell)
+
+--- PAGE 18 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 18Types of Datasets
+
+
+--- PAGE 19 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 19Types of Datasets
+●Core dataset types
+–Tables
+○Structured as rows (items) and columns (attributes)
+○Each variable must have its own column
+○Each item (observation) must have its own row
+○Each value must have its own cell
+○Note
+●Tabular (cell) data also includes multidimensional tables (data 
+hypercubes; tensors) that have composite keys
+
+--- PAGE 20 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 20Types of Datasets
+●Core dataset types
+–Networks & Trees
+○Represent relationships between items
+○Networks consist of nodes and links
+○Trees: A specific type of network without cycles, showing hierarchy
+–Fields
+○Represent continuous, spatial data, often defined on a grid
+○They describe data that exists across a continuous space (e.g., fluid flow, 
+temperature map)
+–Geometry
+○Data that describes the shape of objects, focusing on spatial positions
+
+--- PAGE 21 ---
+09/04/26 D. L. Nkweteyim - UB-DSC602 (Data Visualization) 21Types of Datasets
+●Other Data Classifications
+–Clusters, Sets, Lists
+○Collections of items without the rigid structure of a table
+–Static vs. Dynamic
+○Static data: Entire dataset available at once
+○Dynamic data: Data trickles in over time, such as streams
+
+
+================================================================================
+FILE: DSC602_LECT03_04 (1).pdf
+================================================================================
+
+Total Pages: 107
+
+--- PAGE 1 ---
+Visualization Analysis & Design
+Analysis: Nested Model (Ch 4)
+Tamara Munzner
+Department of Computer Science
+University of British Columbia
+@tamaramunzner
+
+--- PAGE 2 ---
+Analysis framework: Four levels, three questions
+•domain situation
+–who are the target users?
+2domain
+[A Nested Model of Visualization Design and Validation. Munzner.  IEEE TVCG 15(6):921-928, 2009 (Proc. InfoVis 2009 ). ]
+
+--- PAGE 3 ---
+Analysis framework: Four levels, three questions
+•domain situation
+–who are the target users?
+•abstraction
+–translate from specifics of domain to vocabulary of vis
+•what  is shown? data abstraction
+•why  is the user looking at it? task abstraction
+3abstractiondomain
+[A Multi -Level Typology of Abstract Visualization Tasks. Brehmer and Munzner.  IEEE TVCG 19(12):2376 -2385, 2013 (Proc. InfoVis 2 013). ]
+[A Nested Model of Visualization Design and Validation. Munzner.  IEEE TVCG 15(6):921 -928, 2009 (Proc. InfoVis 2009). ]
+
+--- PAGE 4 ---
+Analysis framework: Four levels, three questions
+•domain situation
+–who are the target users?
+•abstraction
+–translate from specifics of domain to vocabulary of vis
+•what  is shown? data abstraction
+•why  is the user looking at it? task abstraction
+•idiom
+–how  is it shown?
+•visual encoding  idiom: how to draw
+•interaction  idiom: how to manipulate
+4idiomabstractiondomain
+[A Multi -Level Typology of Abstract Visualization Tasks. Brehmer and Munzner.  IEEE TVCG 19(12):2376 -2385, 2013 (Proc. InfoVis 2 013). ]
+[A Nested Model of Visualization Design and Validation. Munzner.  IEEE TVCG 15(6):921 -928, 2009 (Proc. InfoVis 2009). ]
+
+--- PAGE 5 ---
+Analysis framework: Four levels, three questions
+•domain situation
+–who are the target users?
+•abstraction
+–translate from specifics of domain to vocabulary of vis
+•what  is shown? data abstraction
+•why  is the user looking at it? task abstraction
+•idiom
+–how  is it shown?
+•visual encoding  idiom: how to draw
+•interaction  idiom: how to manipulate
+•algorithm
+–efficient computation
+5algorithmidiomabstractiondomain
+[A Multi -Level Typology of Abstract Visualization Tasks. Brehmer and Munzner.  IEEE TVCG 19(12):2376 -2385, 2013 (Proc. InfoVis 2 013). ]
+[A Nested Model of Visualization Design and Validation. Munzner.  IEEE TVCG 15(6):921-928, 2009 (Proc. InfoVis 2009 ). ]
+
+--- PAGE 6 ---
+Nested model
+•downstream: cascading effects
+6
+ [A Nested Model of Visualization Design and Validation. Munzner.  IEEE TVCG 15(6):921-928, 2009 (Proc. InfoVis 2009 ). ]
+
+--- PAGE 7 ---
+Nested model
+•downstream: cascading effects
+•upstream: iterative refinement 
+7
+ [A Nested Model of Visualization Design and Validation. Munzner.  IEEE TVCG 15(6):921-928, 2009 (Proc. InfoVis 2009 ). ]
+
+--- PAGE 8 ---
+Why is validation difficult?
+•different ways to get it wrong at each level
+8
+ [A Nested Model of Visualization Design and Validation. Munzner.  IEEE TVCG 15(6):921-928, 2009 (Proc. InfoVis 2009 ). ]
+
+--- PAGE 9 ---
+Why is validation difficult?
+•solution: use methods from different fields at each level
+9
+ [A Nested Model of Visualization Design and Validation. Munzner.  IEEE TVCG 15(6):921-928, 2009 (Proc. InfoVis 2009 ). ]
+
+--- PAGE 10 ---
+Why is validation difficult?
+•solution: use methods from different fields at each level
+10
+computer 
+sciencetechnique -driven 
+work
+[A Nested Model of Visualization Design and Validation. Munzner.  IEEE TVCG 15(6):921 -928, 2009 (Proc. InfoVis 2009). ]
+
+
+--- PAGE 11 ---
+Why is validation difficult?
+•solution: use methods from different fields at each level
+11
+computer 
+sciencedesign
+cognitive 
+psychology
+[A Nested Model of Visualization Design and Validation. Munzner.  IEEE TVCG 15(6):921 -928, 2009 (Proc. InfoVis 2009). ]technique -driven 
+work
+
+
+--- PAGE 12 ---
+Why is validation difficult?
+•solution: use methods from different fields at each level
+12
+computer 
+sciencedesign
+cognitive 
+psychology
+anthropology/
+ethnographyanthropology/
+ethnography
+technique -driven 
+work
+[A Nested Model of Visualization Design and Validation. Munzner.  IEEE TVCG 15(6):921-928, 2009 (Proc. InfoVis 2009 ). ]
+
+
+--- PAGE 13 ---
+Why is validation difficult?
+•solution: use methods from different fields at each level
+13
+computer 
+sciencedesign
+cognitive 
+psychology
+anthropology/
+ethnographyanthropology/
+ethnography
+problem -driven work 
+(design study)
+technique -driven 
+work
+[A Nested Model of Visualization Design and Validation. Munzner.  IEEE TVCG 15(6):921 -928, 2009 (Proc. InfoVis 2009). ]
+
+
+--- PAGE 14 ---
+Avoid mismatches
+14
+computational benchmarks 
+do not confirm idiom design
+[A Nested Model of Visualization Design and Validation. Munzner.  IEEE TVCG 15(6):921 -928, 2009 (Proc. InfoVis 2009). ]
+
+--- PAGE 15 ---
+Avoid mismatches
+15
+computational benchmarks 
+do not confirm idiom designlab studies do not 
+confirm task abstraction
+[A Nested Model of Visualization Design and Validation. Munzner.  IEEE TVCG 15(6):921-928, 2009 (Proc. InfoVis 2009 ). ]
+
+--- PAGE 16 ---
+Visualization Analysis & Design
+Analysis: Nested Model (Ch 4) II
+Tamara Munzner
+Department of Computer Science
+University of British Columbia
+@tamaramunzner
+
+--- PAGE 17 ---
+Analysis examples: Single paper includes only subset of methods
+17
+
+
+--- PAGE 18 ---
+Analysis examples: Single paper includes only subset of methods
+18MatrixExplorer. Henry and Fekete. InfoVis 2006 . 
+measure system time/memory 
+qualitative result image analysisobserve and interview target users
+justify encoding/interaction design 
+
+--- PAGE 19 ---
+Analysis examples: Single paper includes only subset of methods
+19MatrixExplorer. Henry and Fekete. InfoVis 2006.  
+LiveRAC. McLachlan, Munzner, Koutsoﬁos, and 
+North. CHI 2008 .measure system time/memory 
+qualitative result image analysisobserve and interview target users
+justify encoding/interaction design 
+qualitative result image analysisobserve and interview target users
+justify encoding/interaction design 
+field study, document deployed usage
+
+--- PAGE 20 ---
+Analysis examples: Single paper includes only subset of methods
+20qualitative/quantitative image analysisMatrixExplorer. Henry and Fekete. InfoVis 2006 . 
+An energy model for visual graph clustering. (LinLog)
+Noack. Graph Drawing 2003LiveRAC. McLachlan, Munzner, Koutsoﬁos, and 
+North. CHI 2008.measure system time/memory 
+qualitative result image analysisobserve and interview target users
+justify encoding/interaction design 
+qualitative result image analysisobserve and interview target users
+justify encoding/interaction design 
+field study, document deployed usage
+
+--- PAGE 21 ---
+Analysis examples: Single paper includes only subset of methods
+21qualitative/quantitative image analysislab study, measure time/errors for operationMatrixExplorer. Henry and Fekete. InfoVis 2006.  
+An energy model for visual graph clustering. (LinLog)
+Noack. Graph Drawing 2003LiveRAC. McLachlan, Munzner, Koutsoﬁos, and 
+North. CHI 2008.Effectiveness of animation in trend visualization.
+Robertson et al. InfoVis 2008.
+measure system time/memory 
+qualitative result image analysisobserve and interview target users
+justify encoding/interaction design 
+qualitative result image analysisobserve and interview target users
+justify encoding/interaction design 
+field study, document deployed usage
+
+--- PAGE 22 ---
+Analysis examples: Single paper includes only subset of methods
+22justify encoding/interaction design
+qualitative result image analysis
+test on target users, get utility anecdotes   
+qualitative/quantitative image analysislab study, measure time/errors for operationMatrixExplorer. Henry and Fekete. InfoVis 2006 . 
+An energy model for visual graph clustering. (LinLog)
+Noack. Graph Drawing 2003LiveRAC. McLachlan, Munzner, Koutsoﬁos, and 
+North. CHI 2008.Effectiveness of animation in trend visualization.
+Robertson et al. InfoVis 2008.
+measure system time/memory 
+qualitative result image analysisobserve and interview target users
+justify encoding/interaction design 
+qualitative result image analysisobserve and interview target users
+justify encoding/interaction design 
+field study, document deployed usageInteractive visualization of genealogical graphs. 
+McGufﬁn and Balakrishnan. InfoVis 2005 . 
+
+--- PAGE 23 ---
+Analysis examples: Single paper includes only subset of methods
+23justify encoding/interaction design
+qualitative result image analysis
+test on target users, get utility anecdotes   
+justify encoding/interaction design 
+measure system time/memory 
+qualitative result image analysiscomputational complexity analysis
+qualitative/quantitative image analysislab study, measure time/errors for operationMatrixExplorer. Henry and Fekete. InfoVis 2006.  
+An energy model for visual graph clustering. (LinLog)
+Noack. Graph Drawing 2003Flow map layout. Phan et al. InfoVis 2005 . LiveRAC. McLachlan, Munzner, Koutsoﬁos, and 
+North. CHI 2008.Effectiveness of animation in trend visualization.
+Robertson et al. InfoVis 2008.
+measure system time/memory 
+qualitative result image analysisobserve and interview target users
+justify encoding/interaction design 
+qualitative result image analysisobserve and interview target users
+justify encoding/interaction design 
+field study, document deployed usageInteractive visualization of genealogical graphs. 
+McGufﬁn and Balakrishnan. InfoVis 2005. 
+
+--- PAGE 24 ---
+Visualization Analysis & Design
+Task Abstraction (Ch 3)
+Tamara Munzner
+Department of Computer Science
+University of British Columbia
+@tamaramunzner
+
+--- PAGE 25 ---
+From domain to abstraction
+25
+
+
+--- PAGE 26 ---
+From domain to abstraction
+26domain
+•domain characterization: 
+details of application domain
+
+--- PAGE 27 ---
+From domain to abstraction
+27
+domain•domain characterization: 
+details of application domain
+–group of users, target domain, their questions & data
+•varies wildly by domain
+•must be specific enough to get traction
+
+--- PAGE 28 ---
+From domain to abstraction
+28
+domain•domain characterization: 
+details of application domain
+–group of users, target domain, their questions & data
+•varies wildly by domain
+•must be specific enough to get traction
+–domain questions/problems
+•break down into simpler abstract tasks
+
+--- PAGE 29 ---
+From domain to abstraction
+•domain characterization: 
+details of application domain
+–group of users, target domain, their questions & data
+•varies wildly by domain
+•must be specific enough to get traction
+–domain questions/problems
+•break down into simpler abstract tasks
+•abstraction: data & task
+–map what  and why into generalized terms
+29abstractiondomain
+
+
+--- PAGE 30 ---
+From domain to abstraction
+•domain characterization: 
+details of application domain
+–group of users, target domain, their questions & data
+•varies wildly by domain
+•must be specific enough to get traction
+–domain questions/problems
+•break down into simpler abstract tasks
+•abstraction: data & task
+–map what  and why into generalized terms
+•identify tasks that users wish to perform, or already do
+•find data types that will support those tasks
+–possibly transform /derive if need be
+30abstractiondomain
+
+
+--- PAGE 31 ---
+Design process
+31Characterize Domain Situation
+Map Domain -Language Task
+to Abstract Task
+Identify/Create Suitable Idiom/TechniqueMap Domain -Language 
+Data Description to 
+Data Abstraction
+Identify/Create Suitable Algorithm
+
+--- PAGE 32 ---
+Task abstraction: Actions and targets
+•very high -level pattern
+32•{action, target} pairs
+–discover distribution
+–compare trends
+–locate outliers
+–browse topology
+
+--- PAGE 33 ---
+Task abstraction: Actions and targets
+•very high -level pattern
+•actions
+–analyze
+•high -level choices
+–search
+•find a known/unknown item
+–query
+•find out about characteristics of item
+33•{action, target} pairs
+–discover distribution
+–compare trends
+–locate outliers
+–browse topology
+
+--- PAGE 34 ---
+Task abstraction: Actions and targets
+•very high -level pattern
+•actions
+–analyze
+•high -level choices
+–search
+•find a known/unknown item
+–query
+•find out about characteristics of item
+•targets
+–what is being acted on
+34•{action, target} pairs
+–discover distribution
+–compare trends
+–locate outliers
+–browse topology
+
+--- PAGE 35 ---
+35Actions: Analyze
+•consume
+–discover vs present
+•classic split
+•aka explore vs explain
+–enjoy
+•newcomer
+•aka casual, social 
+•produce
+–annotate, record
+–derive
+•crucial design choice
+
+
+--- PAGE 36 ---
+36Actions: Search
+
+--- PAGE 37 ---
+37Actions: Search
+•what does user know?
+–target, location
+
+
+--- PAGE 38 ---
+38Actions: Search
+•what does user know?
+–target, location
+•lookup
+–ex: word in dictionary
+•alphabetical order
+
+
+--- PAGE 39 ---
+39Actions: Search
+•what does user know?
+–target, location
+•lookup
+–ex: word in dictionary
+•alphabetical order
+•locate
+–ex: keys in your house
+–ex: node in network
+https://bl.ocks.org/heybignick/ 3faf257bbbbc 7743 bb72310 d03b86ee8
+
+
+--- PAGE 40 ---
+40Actions: Search
+•what does user know?
+–target, location
+•lookup
+–ex: word in dictionary
+•alphabetical order
+•locate
+–ex: keys in your house
+–ex: node in network
+•browse
+–ex: books in bookstore
+https://bl.ocks.org/heybignick/ 3faf257bbbbc 7743 bb72310 d03b86ee8
+
+
+--- PAGE 41 ---
+41Actions: Search
+•what does user know?
+–target, location
+•lookup
+–ex: word in dictionary
+•alphabetical order
+•locate
+–ex: keys in your house
+–ex: node in network
+•browse
+–ex: books in bookstore
+•explore
+–ex: find cool neighborhood in 
+new city
+https://bl.ocks.org/heybignick/ 3faf257bbbbc 7743 bb72310 d03b86ee8
+
+
+--- PAGE 42 ---
+42Actions: Query
+•how much of the data 
+matters?
+–one: identify
+–some: compare
+–all: summarize
+
+
+--- PAGE 43 ---
+43Actions
+•independent choices for 
+each of these three levels
+–analyze, search, query
+–mix and match 
+
+
+--- PAGE 44 ---
+Task abstraction: Targets 
+44
+
+--- PAGE 45 ---
+Task abstraction: Targets 
+45
+
+
+--- PAGE 46 ---
+Task abstraction: Targets 
+46
+
+
+--- PAGE 47 ---
+Task abstraction: Targets 
+47
+
+
+--- PAGE 48 ---
+Task abstraction: Targets 
+48
+
+
+--- PAGE 49 ---
+Abstraction
+•these {action, target} pairs are good starting point for vocabulary
+–but sometimes you'll need more precision!
+•rule of thumb
+–systematically remove all domain jargon
+•interplay: task and data abstraction
+–need to use data abstraction within task abstraction
+•to specify your targets!
+•but task abstraction can lead you to transform the data 
+–iterate back and forth
+•first pass data, first pass task, second pass data, ... 
+49
+
+--- PAGE 50 ---
+Means and ends
+50
+
+
+--- PAGE 51 ---
+51•{action, target} pairs
+–discover distribution
+–compare trends
+–locate outliers
+–browse topology
+
+
+--- PAGE 52 ---
+Visualization Analysis & Design
+Marks & Channels (Ch 5) I
+Tamara Munzner
+Department of Computer Science
+University of British Columbia
+@tamaramunzner
+
+--- PAGE 53 ---
+Visual encoding
+•how to systematically analyze idiom structure?
+53
+
+
+--- PAGE 54 ---
+Visual encoding
+•how to systematically analyze idiom structure?
+54
+
+
+--- PAGE 55 ---
+Visual encoding
+•how to systematically analyze idiom structure?
+•marks & channels
+–marks: represent items or links
+–channels: change appearance of marks based on attributes
+55
+
+
+--- PAGE 56 ---
+56Marks for items
+•basic geometric elements
+•3D mark: volume, rarely used
+0D 1D 2DInterlocking Areas
+
+--- PAGE 57 ---
+Marks for links
+57
+ https://observablehq.com/@d3/force -directed -graph vialab.science.uoit.ca/portfolio/bubblesets
+
+--- PAGE 58 ---
+Containment can be nested
+58
+[Untangling Euler Diagrams, Riche and Dwyer, 2010 ]
+
+--- PAGE 59 ---
+Channels
+•control appearance of 
+marks
+–proportional to or based 
+on attributes
+•many names
+–visual channels
+–visual variables
+–retinal channels
+–visual dimensions
+–...
+59
+
+
+--- PAGE 60 ---
+60Definitions: Marks and channels
+•marks
+–geometric primitives
+
+
+--- PAGE 61 ---
+61Definitions: Marks and channels
+•marks
+–geometric primitives
+•channels
+–control appearance of marks
+Interlocking Areas
+
+--- PAGE 62 ---
+62Definitions: Marks and channels
+•marks
+–geometric primitives
+•channels
+–control appearance of marks
+•channel properties differ
+•type & amount of information that 
+can be conveyed to human 
+perceptual system
+Interlocking Areas
+
+--- PAGE 63 ---
+Visual encoding
+•analyze idiom structure as combination of marks and channels
+63
+
+
+--- PAGE 64 ---
+Visual encoding
+•analyze idiom structure as combination of marks and channels
+64
+1: 
+vertical position
+mark: line
+
+--- PAGE 65 ---
+Visual encoding
+•analyze idiom structure as combination of marks and channels
+65
+1: 
+vertical position
+mark: line2: 
+vertical position
+horizontal position
+mark: point
+
+--- PAGE 66 ---
+Visual encoding
+•analyze idiom structure as combination of marks and channels
+66
+1: 
+vertical position
+mark: line2: 
+vertical position
+horizontal position
+mark: point3: 
+vertical position
+horizontal position
+color hue
+mark: point
+
+--- PAGE 67 ---
+Visual encoding
+•analyze idiom structure as combination of marks and channels
+67
+1: 
+vertical position
+mark: line2: 
+vertical position
+horizontal position
+mark: point3: 
+vertical position
+horizontal position
+color hue
+mark: point4: 
+vertical position
+horizontal position
+color hue
+size (area)
+mark: point
+
+--- PAGE 68 ---
+Redundant encoding
+•multiple channels
+–sends stronger message
+–but uses up channels
+68
+ Length and Luminance 
+
+--- PAGE 69 ---
+0D 1D 2DMarks as constraints
+•math view: geometric primitives have dimensions
+69
+Interlocking Areas
+
+--- PAGE 70 ---
+0D 1D 2DMarks as constraints
+•math view: geometric primitives have dimensions
+•constraint view: mark type constrains what else can be encoded
+–points: 0 constraints on size, can encode more attributes w/ size & shape
+–lines: 1 constraint on size (length), can still size code other way (width)
+–interlocking areas: 2 constraints on size (length/width), cannot size or shape code
+•interlocking: size, shape, position
+70
+Interlocking Areas
+
+--- PAGE 71 ---
+0D 1D 2DMarks as constraints
+•math view: geometric primitives have dimensions
+•constraint view: mark type constrains what else can be encoded
+–points: 0 constraints on size, can encode more attributes w/ size & shape
+–lines: 1 constraint on size (length), can still size code other way (width)
+–interlocking areas: 2 constraints on size (length/width), cannot size or shape code
+•interlocking: size, shape, position
+•quick check: can you size -code another attribute
+–or is size/shape in use?
+71
+Interlocking Areas
+
+--- PAGE 72 ---
+Scope of analysis
+•simplifying assumptions: one mark per item, single view
+•later on
+–multiple views
+–multiple marks in a region (glyph)
+–some items not represented by marks (aggregation and filtering)
+72
+
+--- PAGE 73 ---
+When to use which channel?
+73expressiveness
+    match channel type to data type
+effectiveness
+    some channels are better than others
+
+--- PAGE 74 ---
+Channels: Rankings
+74
+
+
+--- PAGE 75 ---
+Channels: Rankings
+75
+•expressiveness
+–match channel and data characteristics
+
+--- PAGE 76 ---
+Channels: Rankings
+76
+•expressiveness
+–match channel and data characteristics
+–magnitude for ordered
+– how much? which rank?
+–identity for categorical
+–what?
+
+
+--- PAGE 77 ---
+Channels: Rankings
+77
+•expressiveness
+–match channel and data characteristics
+•effectiveness
+–channels differ in accuracy of perception
+
+--- PAGE 78 ---
+Channels: Rankings
+78
+•expressiveness
+–match channel and data characteristics
+•effectiveness
+–channels differ in accuracy of perception
+–spatial position ranks high for both
+
+
+--- PAGE 79 ---
+79Grouping
+•containment
+•connection
+•proximity
+–same spatial region
+•similarity
+–same values as other 
+categorical channels
+
+
+--- PAGE 80 ---
+Visualization Analysis & Design
+Marks & Channels (Ch 5) II
+Tamara Munzner
+Department of Computer Science
+University of British Columbia
+@tamaramunzner
+
+--- PAGE 81 ---
+Channel effectiveness
+•accuracy: how precisely can we tell the difference between encoded 
+items?
+•discriminability: how many unique steps can we perceive?
+•separability: is our ability to use this channel affected by another one? 
+•popout: can things jump out using this channel?
+81
+
+--- PAGE 82 ---
+Accuracy: Fundamental theory
+•length is accurate: linear
+•others magnified or 
+compressed
+–exponent characterizes
+82
+S = sensation 
+I = intensity 
+
+--- PAGE 83 ---
+Accuracy: Vis experiments
+83 after Michael McGuffin course slides, http://profs.etsmtl.ca/mmcguffin/[Crowdsourcing Graphical 
+Perception: Using Mechanical 
+Turk to Assess Visualization 
+Design. Heer and Bostock. Proc 
+ACM Conf. Human Factors in 
+Computing Systems (CHI) 2010, 
+p. 203 –212.]
+
+
+--- PAGE 84 ---
+Discriminability: How many usable steps?
+•must be sufficient for number of 
+attribute levels to show
+–linewidth: few bins
+84
+ [mappa.mundi.net/maps/maps 014/telegeography.html]
+
+--- PAGE 85 ---
+Separability vs. Integrality
+852 groups each
+
+
+--- PAGE 86 ---
+Separability vs. Integrality
+862 groups each 2 groups each
+
+
+--- PAGE 87 ---
+Separability vs. Integrality
+872 groups each 2 groups each 3 groups total:
+integral area
+
+
+--- PAGE 88 ---
+Separability vs. Integrality
+882 groups each 2 groups each 3 groups total:
+integral area4 groups total:
+integral hue
+
+
+--- PAGE 89 ---
+Popout
+•find the red dot
+–how long does it take?
+89
+
+--- PAGE 90 ---
+Popout
+•find the red dot
+–how long does it take?
+90
+
+
+--- PAGE 91 ---
+Popout
+•find the red dot
+–how long does it take?
+91
+
+
+--- PAGE 92 ---
+Popout
+•find the red dot
+–how long does it take?
+92
+
+
+--- PAGE 93 ---
+Popout
+•find the red dot
+–how long does it take?
+93
+
+
+--- PAGE 94 ---
+Popout
+•find the red dot
+–how long does it take?
+94
+
+
+--- PAGE 95 ---
+Popout
+•find the red dot
+–how long does it take?
+95
+
+
+--- PAGE 96 ---
+Popout
+•find the red dot
+–how long does it take?
+•parallel processing on many individual 
+channels
+–speed independent of distractor count
+–speed depends on channel and amount of 
+difference from distractors
+•serial search for (almost all) combinations
+–speed depends on number of distractors
+96
+
+
+--- PAGE 97 ---
+Popout
+•many channels
+–tilt, size, shape, 
+proximity, shadow 
+direction, ...
+97
+
+
+--- PAGE 98 ---
+Popout
+•many channels
+–tilt, size, shape, 
+proximity, shadow 
+direction, ...
+•but not all!
+– parallel line pairs do 
+not pop out from 
+tilted pairs
+98
+
+
+--- PAGE 99 ---
+Factors affecting accuracy
+•alignment
+•distractors
+•distance
+•common scale / alignment
+99
+
+
+--- PAGE 100 ---
+Relative vs. absolute judgements
+•perceptual system mostly operates with relative judgements, not absolute 
+100
+length position along 
+unaligned 
+common scaleposition along 
+aligned scale
+
+--- PAGE 101 ---
+Relative vs. absolute judgements
+•perceptual system mostly operates with relative judgements, not absolute 
+–that’s why accuracy increases with common frame/scale and alignment
+101
+length position along 
+unaligned 
+common scale
+position along 
+aligned scale
+length position along 
+unaligned 
+common scaleposition along 
+aligned scaleafter [Graphical Perception: Theory, Experimentation, and 
+Application to the Development of Graphical Methods. Cleveland 
+and McGill. Journ.  American Statistical Association 79:387 
+(1984), 531 –554.]
+
+--- PAGE 102 ---
+Relative vs. absolute judgements
+•perceptual system mostly operates with relative judgements, not absolute 
+–that’s why accuracy increases with common frame/scale and alignment
+–Weber ’s Law: ratio of increment to background is constant
+102
+length position along 
+unaligned 
+common scale
+position along 
+aligned scale
+length position along 
+unaligned 
+common scaleposition along 
+aligned scaleafter [Graphical Perception: Theory, Experimentation, and 
+Application to the Development of Graphical Methods. Cleveland 
+and McGill. Journ.  American Statistical Association 79:387 
+(1984 ), 531–554.]
+
+--- PAGE 103 ---
+Relative vs. absolute judgements
+•perceptual system mostly operates with relative judgements, not absolute 
+–that’s why accuracy increases with common frame/scale and alignment
+–Weber’s Law: ratio of increment to background is constant
+•filled rectangles differ in length by 1:9, difficult judgement
+•white rectangles differ in length by 1:2, easy judgement
+103
+length
+after [Graphical Perception: Theory, Experimentation, and 
+Application to the Development of Graphical Methods. Cleveland 
+and McGill. Journ.  American Statistical Association 79:387 
+(1984), 531 –554.]position along 
+unaligned 
+common scale
+position along 
+aligned scale
+length position along 
+unaligned 
+common scaleposition along 
+aligned scale
+
+--- PAGE 104 ---
+Relative luminance judgements
+•perception of luminance is contextual based on contrast with surroundings
+104
+http://persci.mit.edu/gallery/checkershadow
+
+--- PAGE 105 ---
+Relative luminance judgements
+•perception of luminance is contextual based on contrast with surroundings
+105
+http://persci.mit.edu/gallery/checkershadow
+
+--- PAGE 106 ---
+Relative color judgements
+•color constancy across broad range of illumination conditions
+106http://www.purveslab.net/seeforyourself/
+
+
+--- PAGE 107 ---
+Relative color judgements
+•color constancy across broad range of illumination conditions
+107http://www.purveslab.net/seeforyourself/
+
+
