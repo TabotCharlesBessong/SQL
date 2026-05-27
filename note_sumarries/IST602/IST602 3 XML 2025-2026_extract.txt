@@ -1,0 +1,537 @@
+---PAGE 1---\n 3 XML (eXtensible Markup Language)
+• Also see
+◦ Chapter 15 of text
+◦ https://www.w3schools.com/xml
+ 3.1 Introduction/Basics
+• Widely supported open (i.e., non-proprietary) technology for describing data that has 
+become the standard format for data exchanged between applications over the Internet
+• Permits document authors to create markup for virtually any type of information
+• Can create entirely new markup languages that describe specific types of data, including 
+mathematical formulas, chemical molecular structures, music and recipes
+• Describes data in a way that human beings can understand and computers can process
+ 3.2 XML Basics
+ 3.2.1 XML documents
+• contain text that
+UB/CSC/IST602 Page 32 Web Technologies and Standards
+\n---PAGE 2---\n◦ represents content (i.e., data), such as John (line 5 above), and
+◦ elements that specify the document’s structure, such as firstName (line 5 above)
+• delimit elements with start tags and end tags
+◦ Start tag
+▪ Consists of the element name in angle brackets (e.g., <player> and <firstName>)
+◦ End tag
+▪ Consists of the element name preceded by a forward slash (/) in angle brackets (e.g., 
+</firstName> and </player>)
+◦ Empty XML elements
+▪ Have no content
+▪ Indicated like this
+• <element></element>
+▪ or you can use a self-closing tag
+• <element />
+• Every XML document must have exactly one root element that contains all the other 
+elements
+ 3.2.2 XML Vocabularies (i.e., XML-based markup languages)
+• Provide a means for describing particular types of data in standardized, structured ways. 
+• Examples: XHTML (Extensible HyperText Markup Language), MathML™ (for 
+mathematics), V oiceXML™ (for speech), CML (Chemical Markup Language – for 
+chemistry), XBRL (Extensible Business Reporting Language – for financial data exchange), 
+others
+• Much of the massive amounts of data that are currently stored on the Internet in various 
+formats (databases, web pages, text files, etc) are transformed into XML for the purpose of 
+transferring them between systems
+• Industry groups are developing custom XML vocabularies for most major industries that 
+will allow business applications to communicate in common languages, e.g., using web 
+servicess
+ 3.2.3 Viewing and Modifying XML Documents
+• An XML document is a text file that usually ends with the .xml filename extension
+• Does not require special software to view
+• Any text editor that supports ASCII/Unicode characters can open XML documents for 
+viewing and editing
+UB/CSC/IST602 Page 33 Web Technologies and Standards\n---PAGE 3---\n• Also, most web browsers can display XML documents in a formatted manner that shows the 
+XML’s structure
+ 3.2.4 Processing XML Documents
+• Requires software called an XML parser (or XML processor)
+• A parser makes the document’s data available to applications
+• XML parser: Identifies components of XML documents and stores them in a data structure 
+for manipulation
+• While reading an XML document’s contents, a parser checks that the document follows the 
+syntax rules specified by the W3C’s XML Recommendation (www.w3.org/XML)
+◦ Case sensitivity
+◦ Single root element, a start tag and end tag for each element, and properly nested tags
+• Well-formed XML document
+◦ A document that conforms to the syntax rules
+◦ Parsers can provide access to XML-encoded data in well-formed documents only
+ 3.2.5 Formatting and Manipulating XML Documents
+• Most XML documents contain only data, so applications that process XML documents must 
+decide how to manipulate or display the data
+◦ XSLT (eXtensible Stylesheet Language Transformations)
+▪ The recommended style sheet language for XML
+▪ Example below uses XSLT to transform the XML document into HTML, before it is 
+displayed in a browser
+UB/CSC/IST602 Page 34 Web Technologies and Standards\n---PAGE 4---\n◦ XPath (XML Path Language): A language for accessing parts of an XML document
+▪ Uses path expressions to select nodes or node-sets in an XML document
+◦ XQuery: The language for querying XML data
+▪ XQuery for XML is like SQL for databases
+UB/CSC/IST602 Page 35 Web Technologies and Standards
+\n---PAGE 5---\n 3.3 Structuring Data
+ 3.3.1 XML document
+• Begins with an optional XML declaration
+◦ Declaration identifies the document as an XML document, includes version attribute
+• Blank Space and Comments
+◦ Blank lines (normally ignored by XML parsers), white spaces and indentation help 
+improve readability
+◦ XML comments begin with <!-- and end with -->
+• Root Node and Prolog
+◦ Root element: Lines 5 – 14
+◦ Prolog
+▪ The lines that precede the root element (lines 1 – 4 ) 
+▪ The XML declaration must appear before the comments and any other markup
+• XML Element Names
+◦ (Invent and) use element names to mark up your data
+◦ XML element names can be of any length and may contain letters, digits, underscores, 
+hyphens and periods
+▪ But must begin with either a letter or an underscore, and they should not begin with 
+“xml” in any combination of uppercase and lowercase letters
+• Nesting XML Elements
+◦ XML elements are nested to form hierarchies, with the root element at the top of the 
+hierarchy
+UB/CSC/IST602 Page 36 Web Technologies and Standards
+\n---PAGE 6---\n◦ Nesting enables parent/child relationships between data items
+▪ Example: Elements title, date, author, summary and content are children of article
+◦ Any element that contains other elements is a container (or parent) element
+◦ Elements nested inside a container element are child elements (or children) of that 
+container element
+◦ A node can have multiple children, but only one parent
+◦ Nodes with the same parent node are referred to as siblings
+ 3.3.2 Viewing an XML Document in a Web Browser
+• XML is a technology for describing the structure (and not formatting) of data
+• Formatting and displaying of XML data are application-specific issues
+• Example
+◦ Display of XML above using the Mozilla and Chrome browsers are shown below
+◦ Each browser has a built-in style sheet to format the data
+• Each of these browsers provides a mechanism to expand or collapse a container node
+◦ Collapsing
+▪ The hyphen (-) in Mozilla, the down arrow in Chrome
+◦ Expanding
+▪ The plus (+) in Mozilla, the right arrow in Chrome
+UB/CSC/IST602 Page 37 Web Technologies and Standards\n---PAGE 7---\nMozilla
+Chrome
+ 3.3.3 XML Namespace
+• Given the following XML documents:
+UB/CSC/IST602 Page 38 Web Technologies and Standards
+\n---PAGE 8---\n• Note: Diferent concepts, but conflict in table element name
+• Solving the Name Conflict Using a Prefix
+◦ A namespace for the prefix must be defined, using the the xmlns attribute (see below)
+UB/CSC/IST602 Page 39 Web Technologies and Standards
+\n---PAGE 9---\n◦ Namespaces can also be declared in the XML root element
+• Default Namespaces
+◦  Save us from using prefixes in all the child elements
+UB/CSC/IST602 Page 40 Web Technologies and Standards
+\n---PAGE 10---\n 3.3.4 Well Formed and Valid XML Documents
+• An XML document with correct syntax is called "Well Formed".
+◦ XML documents must have a root element
+◦ XML elements must have a closing tag
+◦ XML tags are case sensitive
+◦ XML elements must be properly nested
+◦ XML attribute values must be quoted
+• Errors are not allowed in XML documents
+• Well-formed XML documents are not necessarily valid
+• A valid XML document must be
+◦ Well formed and
+◦ Must conform to a document type definition
+• Two different XML document type definitions
+◦ DTD - The original Document Type Definition
+◦ XML Schema - An XML-based alternative to DTD
+• Applications should use DTDs or schemas to confirm whether XML documents are valid 
+(i.e., its elements contain the proper attributes and appear in the proper sequence)
+ 3.3.5 XML DTD
+• A DTD can be declared inside the XML file (internal DTD), or as a separate file (external 
+DTD) that can be referred from an XML document
+• Internal DTD
+◦ The DTD must be wrapped inside the <!DOCTYPE> definition
+UB/CSC/IST602 Page 41 Web Technologies and Standards\n---PAGE 11---\n◦ !DOCTYPE note defines that the root element of this document is note
+◦ !ELEMENT note defines that the note element must contain four elements: 
+"to,from,heading,body"
+◦ !ELEMENT to defines the to element to be of type "#PCDATA"
+◦ !ELEMENT from defines the from element to be of type "#PCDATA"
+◦ !ELEMENT heading defines the heading element to be of type "#PCDATA"
+◦ !ELEMENT body defines the body element to be of type "#PCDATA"
+• Corresponding External DTD
+◦ <!ELEMENT note (to,from,heading,body)>
+◦ <!ELEMENT to (#PCDATA)>
+◦ <!ELEMENT from (#PCDATA)>
+◦ <!ELEMENT heading (#PCDATA)>
+◦ <!ELEMENT body (#PCDATA)>
+• XML document with a reference to the external DTD
+UB/CSC/IST602 Page 42 Web Technologies and Standards
+\n---PAGE 12---\n 3.3.5.1 DTD XML Building Blocks
+• Elements
+• Attributes
+• Entities
+• PCDATA
+• CDATA
+• Elements: Main building blocks, like in HTML
+• Attributes
+◦ Like in HTML, provide extra information about elements
+◦ Example: <img src="computer.gif" />
+• Entities
+◦ Like in HTML, these are characters with special meanings
+◦ Entities are expanded when a document is parsed by an XML parser
+UB/CSC/IST602 Page 43 Web Technologies and Standards
+\n---PAGE 13---\n• PCDATA (parsed character data)
+◦ Character data: the text found between the start tag and the end tag of an XML element
+▪ PCDATA WILL be parsed by a parser
+• Examined by the parser for entities and markup
+◦ Tags inside the text will be treated as markup and entities will be expanded
+◦ PCDATA should not contain any &, <, or > characters
+▪ These need to be represented by the &amp; &lt; and &gt; entities, 
+respectively
+• CDATA (character data)
+◦ Text that will NOT be parsed by a parser
+◦ Tags inside the text will NOT be treated as markup and entities will not be expanded
+ 3.3.5.2 DTD Elements
+• Syntax
+◦ <!ELEMENT element-name category>, or
+◦ <!ELEMENT element-name (element-content)>
+• Empty elements
+◦ Have category keyword EMPTY
+◦ Syntax: <!ELEMENT element-name EMPTY>
+◦ Example: <!ELEMENT br EMPTY>
+• Elements with Parsed Character Data
+◦ Declared with #PCDATA inside parentheses
+UB/CSC/IST602 Page 44 Web Technologies and Standards
+\n---PAGE 14---\n◦ Syntax: <!ELEMENT element-name (#PCDATA)>
+◦ Example: <!ELEMENT from (#PCDATA)>
+• Elements with any contents
+◦ Have category keyword ANY
+◦ Can contain any combination of parsable data 
+◦ Syntax: <!ELEMENT element-name ANY>
+◦ Example: <!ELEMENT note ANY>
+• Elements with Children (sequences)
+◦ Declared with the name of the children elements inside parentheses
+◦ Syntax: <!ELEMENT element-name (child1)> or 
+<!ELEMENT element-name (child1,child2,...)>
+◦ Example: <!ELEMENT note (to,from,heading,body)>
+• When children are declared in a sequence separated by commas, the children must appear in 
+the same sequence in the document
+◦ The full declaration of the "note" element
+• Declaring Only One Occurrence of an Element
+◦ Syntax: <!ELEMENT element-name (child-name)> 
+◦ Example: <!ELEMENT note (message)>
+▪ Child element "message" must occur once, and only once inside the "note" element
+• Declaring Minimum One Occurrence of an Element
+◦ Syntax: <!ELEMENT element-name (child-name+)>
+◦ Example: <!ELEMENT note (message+)>
+▪ The child element "message" must occur one or more times inside the "note" 
+element.
+• Declaring Zero or More Occurrences of an Element
+◦ Syntax: <!ELEMENT element-name (child-name*)>
+◦ Example: <!ELEMENT note (message*)>
+UB/CSC/IST602 Page 45 Web Technologies and Standards
+\n---PAGE 15---\n▪ The child element "message" can occur zero or more times inside the "note" element.
+• Declaring Zero or One Occurrence of an Element
+◦ Syntax: <!ELEMENT element-name (child-name?)>
+◦ Example: <!ELEMENT note (message?)>
+▪ The child element "message" can occur zero or one time inside the "note" element.
+• Declaring either/or Content
+◦ Example: <!ELEMENT note (to,from,header,(message|body))>
+▪  The "note" element must contain a "to" element, a "from" element, a "header" 
+element, and either a "message" or a "body" element
+• Declaring Mixed Content
+◦ Example: <!ELEMENT note (#PCDATA|to|from|header|message)*>
+▪ The "note" element can contain zero or more occurrences of parsed character data, 
+"to", "from", "header", or "message" elements
+ 3.3.5.3 DTD Attributes
+• Declared with an ATTLIST declaration
+◦ Syntax: <!ATTLIST element-name attribute-name attribute-type attribute-value>
+◦ DTD Example: <!ATTLIST payment type CDATA "check">
+◦ Corresponding XML Example: <payment type="check" />
+• Several attribute types: CDATA, ID, ENTITY , etc.
+• Attribute value can be one of the following:
+See https://www.w3schools.com/xml/xml_dtd_attributes.asp for usage
+UB/CSC/IST602 Page 46 Web Technologies and Standards
+\n---PAGE 16---\n 3.3.6 XML Schema
+• An XML Schema describes the structure of an XML document
+• The XML Schema language is also referred to as XML Schema Definition (XSD)
+• Below, an XML document followed by a possible schema (note.xsd)
+• The note element is a complex type because it contains other elements
+• The other elements (to, from, heading, body) are simple types because they do not contain 
+other elements
+• Validation
+• The XML document must refer to the schema that will be used to validate it
+UB/CSC/IST602 Page 47 Web Technologies and Standards
+\n---PAGE 17---\n• XSD <schema> element
+◦ xmlns:xs="http://www.w3.org/2001/XMLSchema" indicates that 
+▪ The elements and data types used in the schema come from the 
+"http://www.w3.org/2001/XMLSchema" namespace
+▪ The elements and data types that come from the 
+"http://www.w3.org/2001/XMLSchema" namespace should be prefixed with xs:
+◦ targetNamespace="https://www.w3schools.com" indicates that the elements defined 
+by this schema (note, to, from, heading, body) come from the 
+"https://www.w3schools.com" namespace
+◦ xmlns="https://www.w3schools.com" indicates that the default namespace is 
+"https://www.w3schools.com"
+◦ elementFormDefault="qualified"  indicates that any elements used by the XML 
+instance document which were declared in this schema must be namespace qualified
+• XSD Elements
+▪ Can be simple or complex
+• Simple: Can contain only “text” (boolean, string, date, etc.)
+UB/CSC/IST602 Page 48 Web Technologies and Standards
+\n---PAGE 18---\n• Custom (Complex): defined by you
+◦ SimplElements 
+• Syntax: <xs:element name="xxx" type="yyy"/>
+• Common types: xs:string, xs:decimal, xs:integer, xs:boolean, xs:date, xs:time
+• Example: an XML file and corresponding simple element definitions
+• Simple elements may have a
+◦ default value (automatically assigned to the element when no other value is 
+specified), or
+◦ fixed value (automatically assigned to the element, and you cannot specify 
+another value)
+◦ Examples
+▪ XSD Attributes
+• All attributes are simple types
+• Simple elements cannot have attributes
+• Only complex elements can have attributes; the attributes themselves must be 
+declared as a simple type
+• Syntax for defining XSD attribute: <xs:attribute name="xxx" type="yyy"/>
+• Example: XML with attribute, and corresponding attribute definition in XSD file
+UB/CSC/IST602 Page 49 Web Technologies and Standards
+\n---PAGE 19---\n• Like simple elements, attributes can have default or fixed values
+• Attributes can also be optional or required.
+• Attributes are optional by defaults
+▪ Restrictions on values
+• Example: minimum and maximul values for age
+• Example: restriction to set of values
+or equivalently,
+UB/CSC/IST602 Page 50 Web Technologies and Standards
+\n---PAGE 20---\n• Several other restrictions on values
+◦ See https://www.w3schools.com/xml/schema_facets.asp
+• Complex Elements
+◦  Contains other elements and/or attributes
+◦ Four kinds of complex elements
+▪ empty elements
+▪ elements that contain only other elements
+▪ elements that contain only text
+▪ elements that contain both other elements and text
+See https://www.w3schools.com/xml/schema_complex_elements.asp form further discussion of 
+complex type.
+UB/CSC/IST602 Page 51 Web Technologies and Standards
+\n---PAGE 21---\nXML Example Referencing a DTD
+DOCTYPE reference (Line 5)
+• Contains three items
+◦ The name of the root element that the DTD specifies (letter)
+◦ Keyword SYSTEM denoting an external DTD (a DTD declared in a separate file, as 
+opposed to a DTD declared locally in the same file)
+◦ DTD’s name and location (i.e., letter.dtd in the current directory)
+UB/CSC/IST602 Page 52 Web Technologies and Standards
+\n---PAGE 22---\nThe XML Document’s Contents
+• Root element: letter
+• Children of root element: contact, contact, salutation, paragraph, paragraph, closing and 
+signature
+• 2 ways to place data
+◦ Between an element’s tags
+◦ As attributes, i.e., name/value pairs that appear within the angle brackets of an element’s 
+start tag
+◦ (Elements can have any number of attributes (separated by spaces) in their start tags)
+• First contact element (lines 8–17) has an attribute named type with attribute value "sender"
+• Second contact element (lines 19–28) has attribute type with value "receiver"
+• A contact element stores various items of information about a contact, such as the contact’s 
+name (element name), address (elements address1, address2, city, state and zip), phone 
+number (element phone) and gender (represented by attribute gender of element flag)
+• Element salutation (line 30) marks up the letter’s salutation
+• Lines 32–39 mark up the letter’s body using two paragraph elements
+• Elements closing (line 41) and signature (line 42) mark up the closing sentence and the 
+author’s “signature,” respectively
+• Empty elements
+◦ Do not have any content
+◦ Instead, it sometimes places data in attributes
+• Two ways to handle empty elements
+◦ E.g., Line 16
+▪ Empty element flag
+▪ Has one attribute that indicates the gender of the contact element
+▪ This empty element is closed by placing a slash immediately preceding the right 
+angle bracket
+◦ Another way to handle empty elements
+▪ Explicitly write an end tag (e.g., Line 22): <address2></address2>
+▪ Note
+• We must include this element to conform to the structural rules specified in the 
+XML document’s DTD (see later), which states that each contact element must 
+have an address2 child element (even if it is empty)
+• Otherwise, we don’t have to include it
+UB/CSC/IST602 Page 53 Web Technologies and Standards\n---PAGE 23---\nDocument Type Definition
+A DTD expresses the set of rules for document structure using an EBNF (Extended Backus-Naur 
+Form) grammar
+• EBNF grammars are commonly used to define programming languages
+Defining Elements in a DTD
+• ELEMENT element type declaration is used to define the rules for an element
+• Example
+◦ Lines 4–5 defines the rules for element letter 
+◦ Letter contains one or more contact elements, one salutation element, one or more 
+paragraph elements, one closing element and one signature element, in that sequence
+▪ Plus sign (+) occurrence indicator specifies that the DTD requires one or more 
+occurrences of an element
+▪ Other occurrence indicators
+• Asterisk (*), which indicates an optional element that can occur zero or more 
+times
+• Question mark (?), which indicates an optional element that can occur at most 
+once (i.e., zero or one occurrence)
+• Absence of an occurrence indicator means that the DTD requires exactly one 
+occurrence
+UB/CSC/IST602 Page 54 Web Technologies and Standards
+\n---PAGE 24---\nDefining Attributes in a DTD
+• ATTLIST attribute-list declaration is used to define attributes of an element
+• Example
+◦ Line 9 defines an attribute named type for the contact element
+▪ Keyword #IMPLIED specifies that if the parser finds a contact element without a 
+type attribute, the parser can choose an arbitrary value for the attribute or can ignore 
+the attribute
+▪ Other possible keywords in an ATTLIST declaration include
+• #REQUIRED: specifies that the attribute must be present in the element
+• #fiXED: specifies that the attribute (if present) must have the given fixed value 
+• Example
+◦ <!ATTLIST address zip CDATA #fiXED "01757"> indicates that attribute zip 
+(if present in element address) must have the value 01757
+Character Data vs. Parsed Character Data
+• Keyword CDATA (e.g., Line 9)
+◦ Specifies that the attribute (type in this example) contains character data (i.e., a string)
+◦ A parser will pass such data to an application without modification
+• Keyword #PCDATA (e.g., Line 11)
+◦ Specifies that an element (name in this example) may contain parsed character data
+▪ i.e., data that’s processed by an XML parser
+◦ Elements with parsed character data cannot contain markup characters, such as <, > or &
+◦ Any markup character in a #PCDATA must be replaced with the character’s 
+corresponding character entity reference
+◦ Examples
+▪ Character entity reference &lt; should be used in place of the less-than symbol (<)
+▪ Character entity reference &gt; should be used in place of the greater-than symbol 
+(>)
+◦ Note
+▪ To use a literal ampersand, the corresponding entity reference &amp; should be 
+used instead
+• Parsed character data can contain ampersands (&) only for inserting entities
+Defining Empty Elements in a DTD
+• Keyword EMPTY specifies that the element does not contain any data between its start and 
+end tags
+◦ Example, Line 18 defines an empty element named flag
+• Empty elements commonly describe data via attributes
+◦ Example, flag’s data appears in its gender attribute (Line 19)
+◦ In this example
+▪ The gender attribute’s value must be one of the enumerated values (M or F), and
+▪ gender has a default value of M
+UB/CSC/IST602 Page 55 Web Technologies and Standards\n---PAGE 25---\nValidating Against an XML Schema Document
+Top figure: A schema-valid XML document named book.xml
+Bottom figure: XML Schema document (book.xsd) that defines the structure for book.xml
+UB/CSC/IST602 Page 56 Web Technologies and Standards
+\n---PAGE 26---\nCreating an XML Schema Document
+• book.xsd defines an XML-based language (i.e., a vocabulary) for writing XML documents 
+about collections of books
+◦ defines the elements, attributes and parent/child relationships that such a document can 
+(or must) include, and specifies the type of data that these elements and attributes may 
+contain
+• Root element: schema
+◦ Contains elements that define the structure of an XML document
+◦ Line 5: specifies as the default namespace, the standard W3C XML Schema namespace 
+URI – http://www.w3.org/2001/XMLSchema
+▪ This namespace contains predefined elements that comprise the XML Schema 
+vocabulary (i.e., the language used to write an XML Schema document)
+• Line 6
+◦ Binds the URI http://www.deitel.com/booklist to namespace prefix deitel
+▪ The schema uses this namespace to differentiate names created by us (deitel) from 
+names that are part of the XML Schema namespace
+• Line 7
+◦ Also specifies http://www.deitel.com/booklist as the targetNamespace of the schema
+▪ This attribute identifies the namespace of the XML vocabulary that this schema 
+defines
+▪ Note: this is same as the namespace referenced in line 5 of book.xml
+• This is what “connects” the XML document with the schema that defines its 
+structure
+Defining an Element in XML Schema
+• The element tag (e.g., Line 9)
+◦ defines an element to be included in an XML document that conforms to the schema
+▪ i.e., the actual elements that can be used to mark up data
+▪ books in this example, which we use as the root element in book.xml
+◦ Attributes name and type specify the element’s name and type, respectively
+▪ An element’s type indicates the data that the element may contain
+▪ Possible types include
+• XML Schema-defined types (e.g., string, double) and
+• User-defined types (e.g., BooksType, Lines 11–16)
+UB/CSC/IST602 Page 57 Web Technologies and Standards\n---PAGE 27---\n• Example, Element books (Line 9)
+◦ Type of element books is deitel:BooksType 
+◦ BooksType (Lines 11 - 16) is a user-defined type in the namespace 
+http://www.deitel.com/booklist and therefore must have the namespace prefix deitel
+◦ Two categories of type exist in XML Schema
+▪ Simple types: cannot contain attributes or child elements
+▪ Complex types can contain attributes and/or child elements
+◦ A user-defined type that contains attributes or child elements must be defined as a 
+complex type
+◦ Lines 11–16 use element complexType to define BooksType as a complex type that has a 
+child element named book
+▪ Element sequence (Lines 12–15) allows you to specify the sequential order in which 
+child elements must appear (in this example, there is only one element – book – in 
+the sequence)
+▪ Lines 13–14 indicates that a BooksType element (books in this example) can contain 
+child elements named book of type deitel:SingleBookType (defined in lines 18–22)
+• Attribute minOccurs in this example specifies that elements of type BooksType 
+must contain a minimum of one book element
+• Attribute maxOccurs in this example specifies that elements of type BooksType 
+may have any number of book child elements
+◦ SingleBookType (Lines 18–22)
+▪ define a complex type
+▪ An element of this type contains a child element named title 
+▪ Element title (Line 20) is defined to be of simple type string
+More on Types in XML Schema
+• Every element in XML Schema has a type, which may be the built-in or user-defined
+•  Simple types
+◦ Every simple type defines a restriction on an XML Schema-defined type or a restriction 
+on a user-defined type
+▪ Restrictions limit the possible values that an element can hold
+• Complex types
+◦ Divided into two groups: those with simple content and those with complex content
+UB/CSC/IST602 Page 58 Web Technologies and Standards\n---PAGE 28---\n◦ Both can contain attributes, but only complex content can contain child elements
+▪ Complex types with simple content must extend or restrict some other existing type
+▪ Complex types with complex content do not have this limitation
+UB/CSC/IST602 Page 59 Web Technologies and Standards
+\n---PAGE 29---\nExample above (computer.xsd) that describes parts of a laptop computer, demonstrates complex 
+types with each kind of content, followed by an XML document (laptop.xml) that follows the 
+structure defined in computer.xsd
+• Line 5
+◦ Declares the default namespace to be the standard XML Schema namespace
+▪ Any elements without a prefix are assumed to be in that namespace
+• Line 6
+◦ Binds the namespace prefix computer to the namespace http://www.deitel.com/computer
+◦ Line 7 identifies this namespace as the targetNamespace
+XML elements for describing laptop computers
+• simpleType element gigahertz (Lines 9-13)
+◦ Used here to describe the processor clock speed
+▪ Simple types are restrictions of a type typically called a base type (decimal in this 
+example), with value restricted to be at least 2.1 by using the minInclusive element
+• complexType CPU
+◦ Has simpleContent
+▪ i.e., can have attributes but not child elements, and must extend or restrict some 
+XML Schema type or user-defined type
+• Element extension with attribute base (Line 17) sets the base type to string
+• Element attribute (Line 18) gives the complexType an attribute named model of 
+type string
+• Hence, an element of type CPU must contain string text (the base type is string) 
+and may contain a model attribute that’s also of type string
+• complexType portable (Lines 23–31)
+◦ Can have child elements and attributes
+◦ Element all 
+▪ Encloses elements that must each be included (in any order) once in the 
+corresponding XML instance document
+▪ In this example, four elements – processor, monitor, CPUSpeed with types CPU, int, 
+gigahertz and int, respectively
+• Note: Must include namespace prefix computer for types CPU and gigahertz, 
+because these user-defined types are part of the computer namespace 
+(http://www.deitel.com/computer)
+UB/CSC/IST602 Page 60 Web Technologies and Standards\n---PAGE 30---\n◦ Also, portable contains an attribute (element attribute – Line 30) called manufacturer of 
+type string
+• Line 33
+◦ Declares the actual element that uses the types defined in the schema
+◦ Element name is laptop and is of type portable, i.e., contains child elements processor, 
+monitor, CPUSpeed and RAM, and an attribute manufacturer
+The XML file
+• Line 5 declares namespace prefix computer, required by the laptop element because it’s part 
+of the http://www.deitel.com/computer namespace
+• Line 6: the laptop’s manufacturer attribute
+• Lines 8–11: the elements defined in the schema to describe the laptop’s characteristics
+UB/CSC/IST602 Page 61 Web Technologies and Standards

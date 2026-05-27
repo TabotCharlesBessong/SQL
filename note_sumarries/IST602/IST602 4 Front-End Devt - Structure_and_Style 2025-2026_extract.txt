@@ -1,0 +1,314 @@
+---PAGE 1---\n 4 Front-End Development: Structure & Style
+• HTML5: Student should go through the material on HTML5
+• CSS3 (Cascading Style Sheets)
+• Framework: Introduction to Bootstrap for responsive front-end design
+ 4.1 Cascading Style Sheets (CSS)
+ 4.1.1 Intro to CSS
+• HTML was designed to specify the semantics (i.e., content and structure) of a document
+◦ e.g., which parts are elements of section headers, body text, links, lists, tables, etc.)
+◦ But HTML markup can also be used to indicate not only semantics of a document, but 
+also some presentation (fonts, spacing, sizes, colours, positioning, etc.)
+◦ It is  better though, not to mix presentation with content
+▪ Use markup predominantly for indicating the semantics of a document and use a 
+separate mechanism to determine exactly how information contained in the 
+document should be presented
+• CSS provide a mechanism to separate semantics form presentation
+• This separation of structure from presentation simplifies maintaining and modifying web 
+pages, especially on large-scale websites
+◦ If a website’s presentation is determined entirely by a style sheet, you can simply swap 
+in a new style sheet to completely change the site’s appearance
+ 4.1.2 CSS Rule (Syntax)
+• Comprises
+◦ A selector
+◦ The HTML element you want to style (or format)
+• A declaration block
+◦ One or more declarations separated by semicolons
+◦ Each declaration includes a property name and a value, separated by a colon
+◦ Declaration always ends with a semicolon, and declaration groups are surrounded by 
+curly braces
+UB/CSC/IST602 Page 62 Web Technologies and Standards
+\n---PAGE 2---\n• CSS comment
+◦ Starts with /* and ends with */
+• CSS Selectors
+◦ Used to select the elements to be styled
+◦ Select elements based on their names, id, class
+ 4.1.3 Declaring Document Styles
+• Three approaches
+◦ Inline styles
+◦ Embedded style sheets
+◦ External style sheets
+ 4.1.3.1 Inline Styles
+• Declare an individual element’s format using the HTML5 style attribute
+• Override any other styles applied using embedded styles sheets and external style sheets
+• Note: Inline styles do not truly separate presentation from content
+UB/CSC/IST602 Page 63 Web Technologies and Standards
+<!DOCTYPE html>
+<html>
+<head>
+<title>Inline Styles</title>
+</head>
+<body>
+<p>This text does not have any style applied to it.</p>
+<p style = "font-size: 20pt;">This text has the <em>font-size</em> style 
+applied to it, making it 20pt.</p>
+<p style = "font-size: 20pt; color: deepskyblue;">This text has the <em>font-
+size</em> and <em>color</em> styles applied to it, making it
+20pt and deep sky blue.</p>
+</body>
+</html>\n---PAGE 3---\n 4.1.3.2 Embedded style sheets
+• Embed a CSS3 document in an HTML document’s head section
+• Styles are placed in the head element and apply to matching elements wherever they appear 
+in the body
+• Some notes
+◦ font-family Property
+◦ Not all users have the same fonts 
+installed on their computers
+UB/CSC/IST602 Page 64 Web Technologies and Standards
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Embedded Style Sheet</title>
+   <style type = "text/css">
+      em { font-weight: bold;
+      color: black; }
+      h1 { font-family: tahoma, helvetica, sans-serif; }
+      p { font-size: 12pt;
+font-family: arial, sans-serif; }
+      .special { color: purple; }
+   </style>
+</head>
+<body>
+   <h1 class = "special">Deitel & Associates, Inc.</h1>
+   <p>Deitel & Associates, Inc. is an authoring and corporate training 
+organization specializing in programming languages, Internet and web 
+technology, iPhone and Android app development, and object technology 
+education.</p>
+   <h1>Clients</h1>
+   <p class = "special"> The company's clients include many <em>Fortune 1000 
+companies</em>, government agencies, branches of the military and business 
+organizations.</p>
+</body>
+</html>\n---PAGE 4---\n◦ You to specify a comma-separated list of fonts to use for a particular style
+▪ Browser attempts to use the fonts in the order in which they appear in the list
+▪ Advisable to end a font list with a generic font family name in case the other fonts 
+are not installed on the user’s computer
+ 4.1.3.3 External style sheets
+• Separate document that contain only CSS rules
+• Enables us provide a uniform look and feel to an entire website (or to a portion of one)
+• Can reuse the same external style sheet across multiple websites
+• Different pages on a site can all use the same style sheet
+• When changes to the styles are required, you need to modify only a single CSS file to make 
+style changes across all the pages that use those styles
+UB/CSC/IST602 Page 65 Web Technologies and Standards
+<!DOCTYPE html>
+<html>
+   <head>
+<title>Linking External Style Sheets</title>
+<link rel = "stylesheet" type = "text/css" href = "styles.css">
+   </head>
+   <body>
+<h1>Shopping list for <em>Monday</em>:</h1>
+<ul>
+   <li>Milk</li>
+   <li>Bread
+<ul>
+   <li>white bread</li>
+   <li>Rye bread</li>
+   <li>Whole wheat bread</li>
+</ul>
+   </li>
+  <li>Carrots</li>
+  <li>Yogurt</li>
+  <li>Pizza <em>with mushrooms</em></li>
+</ul>
+<p><em>Go to the</em>
+   <a class = "nodec" href = "http://www.deitel.com">Grocery store</a>
+</p>
+   </body>
+</html>
+styles.css
+body { font-family: arial, helvetica, sans-serif; }
+a.nodec { text-decoration: none; }
+a:hover { text-decoration: underline; }
+li em { font-weight: bold; }
+h1, em { text-decoration: underline; }
+ul { margin-left: 20px; }
+ul ul { font-size: .8em; }\n---PAGE 5---\nSome notes on the styling
+1. body { font-family: arial, helvetica, sans-serif; }
+2. a.nodec { text-decoration: none; }
+3. a:hover { text-decoration: underline; }
+4. li em { font-weight: bold; }
+5. h1, em { text-decoration: underline; }
+6. ul { margin-left: 20px; }
+7. ul ul { font-size: .8em; }
+Line 2
+• Applies property text-decoration to all a elements whose class attribute is set to nodec. 
+Consequently, the browser will not underline the hyperlink
+• Other possible values for text-decoration: overline, line-through, and underline. The .nodec 
+appended to a is a more specific class selector; this style in line
+Line 3
+• Specifies a style for hover, which is a pseudo-class
+◦ Pseudo-classes give you access to information that is not declared in the document, such 
+as whether the mouse is hovering over an element or whether the user has previously 
+clicked (visited) a particular hyperlink
+• The hover pseudo-class is activated dynamically when the user moves the mouse cursor 
+over (i.e., hovers over) an element
+• Pseudo-classes are separated by a colon (with no surrounding spaces) from the name of the 
+element to which they aree applied
+Line 4
+• Causes all em elements that are children of li elements to be bold
+◦ em elements that are not nested within li elements will be formatted using the style for 
+these em elements
+Line 5
+• Selectors separated with a comma to apply an underline style rule to all h1 and all em 
+elements
+UB/CSC/IST602 Page 66 Web Technologies and Standards
+\n---PAGE 6---\nLine 6: Assigns a 20-pixel left margin to all ul elements
+Line 7: Applies the font size to all unordered lists nested within an unordered list.
+ 4.1.4 CSS Tutorials and Readings
+• https://www.w3schools.com/css/default.asp
+• Web Technologies: A Computer Science Perspective
+◦ Chapter 3: Style Sheets - CSS
+• Internet & World Wide Web: How to Program
+◦ Introduction to Cascading Style Sheets (CSS): Part 1
+◦ Introduction to Cascading Style Sheets (CSS): Part 2 (assorted examples, inclulding, Fig 
+4.14 (borders), Fig 4.15 (box model and text flow), Fig 4.16 (media types), Fig 4.17 
+(Drop Down Menus)
+◦ If time permits, introduce CSS Flexbox and CSS Grid, CSS Responsive
+ 4.2 Introduction to Bootstrap for responsive front-end design
+See https://www.w3schools.com/bootstrap5/bootstrap_get_started.php
+What is Bootstrap?
+• An open-source front-end framework used to build responsive, mobile-first web applications
+• Provides a collection of pre-designed HTML and CSS templates for interface elements like 
+typography, forms, buttons, and navigation, along with optional JavaScript plugins for 
+interactive features. 
+• Core Features
+◦ Responsive Grid System: Uses a 12-column flexbox-based grid that automatically 
+reorders or resizes elements to fit desktops, tablets, and smartphones
+◦ Pre-built Components: Includes ready-to-use UI elements such as
+▪ Navigation: Navbars, breadcrumbs, and pagination
+▪ Forms: Styled input fields, checkboxes, and validation features
+▪ Interactivity: Modals, carousels, tooltips, and dropdowns powered by JavaScript
+◦ Mobile-First Approach: Styles are optimized for mobile devices by default and scaled up 
+for larger screens using CSS media queries
+Getting Bootstrap
+• Either download from getbootstrap.com or include it from a CDN (Content Delivery 
+Network) like jsDelivr
+• Including from a CDN is most common usage. Why?
+◦ Many users already have downloaded Bootstrap 5 from jsDelivr when visiting another 
+site
+UB/CSC/IST602 Page 67 Web Technologies and Standards\n---PAGE 7---\n◦ Hence,  Bootstrap 5  will be loaded from cache when users visit your site, which leads to 
+faster loading time
+◦ Also, most CDNs will make sure that once a user requests a file from it, it will be served 
+from the server closest to them, which also leads to faster loading time
+• How to include Bootstrap 5?
+Key steps in using Bootstrap
+• Add the HTML5 doctype
+• Mobile-first
+◦ To ensure proper rendering and touch zooming, add the following <meta> tag inside the 
+<head> element
+◦ width=device-width: Sets the width of the page to follow the screen-width of the device 
+(which will vary depending on the device)
+◦ initial-scale=1: sets the initial zoom level when the page is first loaded by the browser
+• Containers
+◦ A containing element is used to wrap site contents
+◦ 2 container classes to choose from
+▪ .container class provides a responsive fixed width container
+▪ .container-fluid class provides a full width container, spanning the entire width of the 
+viewport
+UB/CSC/IST602 Page 68 Web Technologies and Standards
+\n---PAGE 8---\nBootstrap examples
+• Bootstrap 5 Grid System
+◦ Built with flexbox and allows up to 12 columns across the page
+◦ If you do not want to use all 12 columns individually, you can group the columns 
+together to create wider columns
+◦ The grid system is responsive, and the columns will re-arrange automatically depending 
+on the screen size
+◦ Example
+◦ Note: mt-3 top margin of 3; p-3 padding of 3
+UB/CSC/IST602 Page 69 Web Technologies and Standards
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link 
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
+rel="stylesheet">
+  <script 
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"><
+/script>
+</head>
+<body>
+  
+<div class="container-fluid mt-3">
+  <h1>Three equal width columns</h1>
+  <p>Note: Try to add a new div with class="col" inside the row class - this will 
+create four equal-width columns.</p>
+  <div class="row">
+    <div class="col p-3 bg-primary text-white">.col</div>
+    <div class="col p-3 bg-dark text-white">.col</div>
+    <div class="col p-3 bg-primary text-white">.col</div>
+  </div>
+</div>
+\n---PAGE 9---\n◦ On mobile phones or screens that are less than 576px (“col-sm-3) wide, the columns will 
+automatically stack on top of each other
+UB/CSC/IST602 Page 70 Web Technologies and Standards
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link 
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
+rel="stylesheet">
+  <script 
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"><
+/script>
+</head>
+<body>
+  
+<div class="container-fluid mt-3">
+  <h1>Responsive Columns</h1>
+  <p>Resize the browser window to see the effect.</p>
+  <p>The columns will automatically stack on top of each other when the screen is 
+less than 576px wide.</p>
+  <div class="row">
+    <div class="col-sm-3 p-3 bg-primary text-white">.col</div>
+    <div class="col-sm-3 p-3 bg-dark text-white">.col</div>
+    <div class="col-sm-3 p-3 bg-primary text-white">.col</div>
+    <div class="col-sm-3 p-3 bg-dark text-white">.col</div>
+  </div>
+</div>
+</body>
+</html>
+\n---PAGE 10---\nUB/CSC/IST602 Page 71 Web Technologies and Standards
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link 
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
+rel="stylesheet">
+  <script 
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"><
+/script>
+</head>
+<body>
+  
+<div class="container-fluid mt-3">
+  <h1>Two Unequal Responsive Columns</h1>
+  <p>Resize the browser window to see the effect.</p>
+  <p>The columns will automatically stack on top of each other when the screen is 
+less than 576px wide.</p>
+  <div class="row">
+    <div class="col-sm-4 p-3 bg-primary text-white">.col</div>
+    <div class="col-sm-8 p-3 bg-dark text-white">.col</div>
+  </div>
+</div>
+</body>
+</html>
