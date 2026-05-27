@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table N, 10*N, 100*N</title>
+  <style type="text/css" >
+    body{
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .container{
+      /* i want to align every content of the body in the center */
+      display: block;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin: 0 auto;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: black;
+    }
+    table{
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td{
+      border: 1px solid black;
+      padding: 5px;
+      text-align: center;
+      color: red;
+    }
+    th{
+      background-color: #f0f0f0;
+    }
+  </style>
+  <script type="text/javascript" >
+    function generateTable() {
+      var tbody = ""
+      for (var i = 1; i <= 5; i++){
+        tbody += "<tr>";
+        tbody += "<td>" + i + "</td>";
+        tbody += "<td>" + 10 * i + "</td>";
+        tbody += "<td>" + 100 * i + "</td>";
+        tbody += "</tr>";
+      }
+      document.getElementById("tableBody").innerHTML = tbody;
+    }
+    window.onload = generateTable;
+  </script>
+</head>
+<body>
+  <div class="container">
+    <table border="1">
+      <thead>
+        <tr>
+          <th>N</th>
+          <th>10*N</th>
+          <th>100*N</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody" ></tbody>
+    </table>
+
+  </div>
+</body>
+</html>
